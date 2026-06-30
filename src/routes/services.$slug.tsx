@@ -77,11 +77,8 @@ function ServicePage() {
             </div>
             <div className="lg:col-span-5 animate-rise w-full" style={{ animationDelay: "120ms" }}>
               <Card className="w-full bg-black/[0.96] border-neutral-900 relative overflow-hidden flex flex-col sm:flex-row lg:flex-col justify-between rounded-[28px] shadow-elegant">
-                <Spotlight
-                  className="-top-40 left-0 md:left-60 md:-top-20"
-                  fill="white"
-                />
-                
+                <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
+
                 {/* Outcomes Section */}
                 <div className="flex-1 p-8 relative z-10 flex flex-col justify-center w-full">
                   <div className="size-14 rounded-xl bg-gradient-brand flex items-center justify-center text-white shadow-glow">
@@ -104,7 +101,7 @@ function ServicePage() {
 
                 {/* Interactive Spline 3D Scene */}
                 <div className="flex-1 relative min-h-[300px] sm:min-h-[350px] lg:min-h-[250px] w-full">
-                  <SplineScene 
+                  <SplineScene
                     scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                     className="w-full h-full absolute inset-0"
                   />

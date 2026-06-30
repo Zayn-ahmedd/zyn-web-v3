@@ -21,15 +21,31 @@ const globeMarkers = [
   { id: "canada", location: [43.6532, -79.3832] as [number, number], label: "Canada" },
   { id: "uk", location: [51.5074, -0.1278] as [number, number], label: "United Kingdom" },
   { id: "uae", location: [25.2048, 55.2708] as [number, number], label: "Dubai" },
-  { id: "india", location: [19.0760, 72.8777] as [number, number], label: "India" },
+  { id: "india", location: [19.076, 72.8777] as [number, number], label: "India" },
   { id: "australia", location: [-33.8688, 151.2093] as [number, number], label: "Australia" },
 ];
 
 const globeArcs = [
-  { id: "usa-uk", from: [37.7595, -122.4367] as [number, number], to: [51.5074, -0.1278] as [number, number] },
-  { id: "uk-uae", from: [51.5074, -0.1278] as [number, number], to: [25.2048, 55.2708] as [number, number] },
-  { id: "uae-india", from: [25.2048, 55.2708] as [number, number], to: [19.0760, 72.8777] as [number, number] },
-  { id: "india-australia", from: [19.0760, 72.8777] as [number, number], to: [-33.8688, 151.2093] as [number, number] },
+  {
+    id: "usa-uk",
+    from: [37.7595, -122.4367] as [number, number],
+    to: [51.5074, -0.1278] as [number, number],
+  },
+  {
+    id: "uk-uae",
+    from: [51.5074, -0.1278] as [number, number],
+    to: [25.2048, 55.2708] as [number, number],
+  },
+  {
+    id: "uae-india",
+    from: [25.2048, 55.2708] as [number, number],
+    to: [19.076, 72.8777] as [number, number],
+  },
+  {
+    id: "india-australia",
+    from: [19.076, 72.8777] as [number, number],
+    to: [-33.8688, 151.2093] as [number, number],
+  },
 ];
 
 export const Route = createFileRoute("/industry")({
@@ -127,8 +143,9 @@ function IndustryPage() {
                   </span>
                 </h1>
                 <p className="mt-7 max-w-2xl text-lg text-ink-soft leading-[1.55]">
-                  We adapt visual identity, social media presence, and performance ad accounts to your
-                  category constraints. Below: the industries where our systems compound fastest.
+                  We adapt visual identity, social media presence, and performance ad accounts to
+                  your category constraints. Below: the industries where our systems compound
+                  fastest.
                 </p>
               </div>
               <div className="lg:col-span-5 flex justify-center relative w-full max-w-[450px] lg:max-w-none mx-auto">

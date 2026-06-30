@@ -12,9 +12,16 @@ export const Route = createFileRoute("/insights")({
   head: () => ({
     meta: [
       { title: "Insights & Playbooks — White-Papers | Zynovax" },
-      { name: "description", content: "Download our creative branding manuals, performance marketing guides, and brand design white-papers built for ambitious founders." },
+      {
+        name: "description",
+        content:
+          "Download our creative branding manuals, performance marketing guides, and brand design white-papers built for ambitious founders.",
+      },
       { property: "og:title", content: "Zynovax Insights" },
-      { property: "og:description", content: "Download brand design white-papers and marketing playbook frameworks." },
+      {
+        property: "og:description",
+        content: "Download brand design white-papers and marketing playbook frameworks.",
+      },
     ],
   }),
   component: InsightsPage,
@@ -62,7 +69,7 @@ const playbooks: Playbook[] = [
     statLabel: "Recall Increase",
     category: "brand",
     categoryLabel: "Brand Strategy",
-    icon: Sparkles
+    icon: Sparkles,
   },
   {
     title: "Social Media Growth Manual",
@@ -74,7 +81,7 @@ const playbooks: Playbook[] = [
     statLabel: "Inbound DMs Lift",
     category: "social",
     categoryLabel: "Organic Content",
-    icon: Megaphone
+    icon: Megaphone,
   },
   {
     title: "Performance Scaling Engine",
@@ -86,8 +93,8 @@ const playbooks: Playbook[] = [
     statLabel: "Blended ROAS",
     category: "performance",
     categoryLabel: "Paid Acquisition",
-    icon: Target
-  }
+    icon: Target,
+  },
 ];
 
 function InsightsPage() {
@@ -113,10 +120,13 @@ function InsightsPage() {
             <Eyebrow>Knowledge Base</Eyebrow>
             <h1 className="mt-7 max-w-4xl text-4xl sm:text-5xl lg:text-[80px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
               Playbooks &{" "}
-              <span className="font-display italic font-normal text-gradient-brand">growth systems playbooks.</span>
+              <span className="font-display italic font-normal text-gradient-brand">
+                growth systems playbooks.
+              </span>
             </h1>
             <p className="mt-7 max-w-2xl text-lg text-ink-soft leading-[1.55]">
-              Download high-value research docs, strategy guidelines, and technical attribution setups compiled by senior operators.
+              Download high-value research docs, strategy guidelines, and technical attribution
+              setups compiled by senior operators.
             </p>
           </Container>
         </section>
@@ -137,10 +147,12 @@ function InsightsPage() {
                       <div className="flex justify-center py-6 mb-6 bg-surface rounded-2xl border border-border/50 relative overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/[0.01]" />
                         <PerspectiveBook size="default" textured>
-                          <div className={cn(
-                            "w-full h-full flex flex-col justify-between p-5 text-white select-none relative overflow-hidden",
-                            categoryStyles[p.category].bg
-                          )}>
+                          <div
+                            className={cn(
+                              "w-full h-full flex flex-col justify-between p-5 text-white select-none relative overflow-hidden",
+                              categoryStyles[p.category].bg,
+                            )}
+                          >
                             {/* Subtle texture lines */}
                             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:100%_4px] opacity-10 pointer-events-none" />
 
@@ -149,17 +161,17 @@ function InsightsPage() {
                               <span className="text-[7px] font-bold uppercase tracking-[0.2em] font-mono">
                                 Zynovax Framework
                               </span>
-                              <span className="text-[7px] font-bold font-mono">
-                                v2.5
-                              </span>
+                              <span className="text-[7px] font-bold font-mono">v2.5</span>
                             </div>
 
                             {/* Middle Icon artwork */}
                             <div className="flex flex-col items-center justify-center my-auto py-2 relative z-10">
-                              <div className={cn(
-                                "size-11 rounded-full flex items-center justify-center mb-1 shadow-[0_4px_12px_rgba(0,0,0,0.3)]",
-                                categoryStyles[p.category].glow
-                              )}>
+                              <div
+                                className={cn(
+                                  "size-11 rounded-full flex items-center justify-center mb-1 shadow-[0_4px_12px_rgba(0,0,0,0.3)]",
+                                  categoryStyles[p.category].glow,
+                                )}
+                              >
                                 <Icon className="size-5" />
                               </div>
                               <div className="h-px w-8 bg-white/20 my-1" />
@@ -184,12 +196,16 @@ function InsightsPage() {
                       </div>
 
                       <div className="flex items-center justify-between">
-                        <span className={cn(
-                          "text-[9px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full border",
-                          p.category === "brand" ? "text-purple-600 bg-purple-50/50 border-purple-100" :
-                          p.category === "social" ? "text-pink-600 bg-pink-50/50 border-pink-100" :
-                          "text-teal-600 bg-teal-50/50 border-teal-100"
-                        )}>
+                        <span
+                          className={cn(
+                            "text-[9px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full border",
+                            p.category === "brand"
+                              ? "text-purple-600 bg-purple-50/50 border-purple-100"
+                              : p.category === "social"
+                                ? "text-pink-600 bg-pink-50/50 border-pink-100"
+                                : "text-teal-600 bg-teal-50/50 border-teal-100",
+                          )}
+                        >
                           {p.categoryLabel}
                         </span>
                       </div>
@@ -197,16 +213,20 @@ function InsightsPage() {
                       <h3 className="mt-4 text-xl sm:text-2xl font-semibold text-ink leading-tight">
                         {p.title}
                       </h3>
-                      <p className="mt-3 text-sm text-ink-soft leading-relaxed">
-                        {p.subtitle}
-                      </p>
+                      <p className="mt-3 text-sm text-ink-soft leading-relaxed">{p.subtitle}</p>
 
                       {/* Performance Metric Block */}
                       <div className="mt-6 p-4 rounded-2xl bg-surface border border-border flex items-baseline justify-between">
-                        <span className="text-xs text-ink-soft font-semibold">Projected Impact</span>
+                        <span className="text-xs text-ink-soft font-semibold">
+                          Projected Impact
+                        </span>
                         <div className="text-right">
-                          <div className="text-xl font-bold text-gradient-brand leading-none">{p.stat}</div>
-                          <div className="text-[9px] uppercase tracking-wider text-ink-soft mt-0.5">{p.statLabel}</div>
+                          <div className="text-xl font-bold text-gradient-brand leading-none">
+                            {p.stat}
+                          </div>
+                          <div className="text-[9px] uppercase tracking-wider text-ink-soft mt-0.5">
+                            {p.statLabel}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -250,21 +270,29 @@ function InsightsPage() {
                   Get full access to all Zynovax manuals.
                 </h2>
                 <p className="mt-6 text-base text-ink-soft leading-relaxed">
-                  Enter your details to generate custom download links. Select your primary target market region to receive localized compliance frameworks and ROAS benchmarks tailored to USA, Canada, Australia, UK, UAE, and India.
+                  Enter your details to generate custom download links. Select your primary target
+                  market region to receive localized compliance frameworks and ROAS benchmarks
+                  tailored to USA, Canada, Australia, UK, UAE, and India.
                 </p>
 
                 <div className="mt-10 grid grid-cols-3 gap-6 pt-8 border-t border-border/80">
                   <div>
                     <div className="text-3xl font-bold text-ink">12K+</div>
-                    <div className="text-[10px] text-ink-soft mt-1 uppercase tracking-wider">Downloads Deployed</div>
+                    <div className="text-[10px] text-ink-soft mt-1 uppercase tracking-wider">
+                      Downloads Deployed
+                    </div>
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-ink">6</div>
-                    <div className="text-[10px] text-ink-soft mt-1 uppercase tracking-wider">Regions Benchmarked</div>
+                    <div className="text-[10px] text-ink-soft mt-1 uppercase tracking-wider">
+                      Regions Benchmarked
+                    </div>
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-ink">4.9/5</div>
-                    <div className="text-[10px] text-ink-soft mt-1 uppercase tracking-wider">Operator Rating</div>
+                    <div className="text-[10px] text-ink-soft mt-1 uppercase tracking-wider">
+                      Operator Rating
+                    </div>
                   </div>
                 </div>
               </div>
@@ -276,9 +304,12 @@ function InsightsPage() {
                       <div className="inline-flex size-14 rounded-full bg-gradient-brand-soft flex items-center justify-center mb-6">
                         <CheckCircle2 className="size-7 text-ink" />
                       </div>
-                      <h3 className="text-2xl font-semibold text-ink leading-tight">Access Link Dispatched</h3>
+                      <h3 className="text-2xl font-semibold text-ink leading-tight">
+                        Access Link Dispatched
+                      </h3>
                       <p className="mt-3 text-sm text-ink-soft leading-relaxed max-w-sm mx-auto">
-                        We have sent the PDF download links and custom data audits for **{formData.market}** to **{formData.email}**. Check your inbox.
+                        We have sent the PDF download links and custom data audits for **
+                        {formData.market}** to **{formData.email}**. Check your inbox.
                       </p>
                     </div>
                   ) : (

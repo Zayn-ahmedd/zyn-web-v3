@@ -1,5 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Globe, TrendingUp, ArrowUpRight, BarChart3, Activity, Sparkles, Landmark, MessageSquare } from "lucide-react";
+import {
+  Globe,
+  TrendingUp,
+  ArrowUpRight,
+  BarChart3,
+  Activity,
+  Sparkles,
+  Landmark,
+  MessageSquare,
+} from "lucide-react";
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { Container, Eyebrow, SectionLabel } from "@/components/site/primitives";
@@ -11,24 +20,47 @@ const globeMarkers = [
   { id: "canada", location: [43.6532, -79.3832] as [number, number], label: "Canada" },
   { id: "uk", location: [51.5074, -0.1278] as [number, number], label: "United Kingdom" },
   { id: "uae", location: [25.2048, 55.2708] as [number, number], label: "Dubai" },
-  { id: "india", location: [19.0760, 72.8777] as [number, number], label: "India" },
+  { id: "india", location: [19.076, 72.8777] as [number, number], label: "India" },
   { id: "australia", location: [-33.8688, 151.2093] as [number, number], label: "Australia" },
 ];
 
 const globeArcs = [
-  { id: "usa-uk", from: [37.7595, -122.4367] as [number, number], to: [51.5074, -0.1278] as [number, number] },
-  { id: "uk-uae", from: [51.5074, -0.1278] as [number, number], to: [25.2048, 55.2708] as [number, number] },
-  { id: "uae-india", from: [25.2048, 55.2708] as [number, number], to: [19.0760, 72.8777] as [number, number] },
-  { id: "india-australia", from: [19.0760, 72.8777] as [number, number], to: [-33.8688, 151.2093] as [number, number] },
+  {
+    id: "usa-uk",
+    from: [37.7595, -122.4367] as [number, number],
+    to: [51.5074, -0.1278] as [number, number],
+  },
+  {
+    id: "uk-uae",
+    from: [51.5074, -0.1278] as [number, number],
+    to: [25.2048, 55.2708] as [number, number],
+  },
+  {
+    id: "uae-india",
+    from: [25.2048, 55.2708] as [number, number],
+    to: [19.076, 72.8777] as [number, number],
+  },
+  {
+    id: "india-australia",
+    from: [19.076, 72.8777] as [number, number],
+    to: [-33.8688, 151.2093] as [number, number],
+  },
 ];
 
 export const Route = createFileRoute("/markets")({
   head: () => ({
     meta: [
       { title: "Global Target Markets — Analytics & Hub Performance | Zynovax" },
-      { name: "description", content: "Growth metrics, active hub channels, and ROI charts across our primary target markets: USA, Canada, Australia, UK, UAE, and India." },
+      {
+        name: "description",
+        content:
+          "Growth metrics, active hub channels, and ROI charts across our primary target markets: USA, Canada, Australia, UK, UAE, and India.",
+      },
       { property: "og:title", content: "Global Target Markets | Zynovax" },
-      { property: "og:description", content: "Compounding scale systems operating in 6 international regions." },
+      {
+        property: "og:description",
+        content: "Compounding scale systems operating in 6 international regions.",
+      },
     ],
   }),
   component: MarketsPage,
@@ -135,10 +167,13 @@ function MarketsPage() {
                 <Eyebrow>Global Cross-Sections</Eyebrow>
                 <h1 className="mt-7 text-4xl sm:text-5xl lg:text-[80px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
                   Target markets.{" "}
-                  <span className="font-display italic font-normal text-gradient-brand">Engineered to scale.</span>
+                  <span className="font-display italic font-normal text-gradient-brand">
+                    Engineered to scale.
+                  </span>
                 </h1>
                 <p className="mt-7 max-w-2xl text-lg text-ink-soft leading-[1.55]">
-                  We run customized direct-response ad accounts, premium local brand rests, and social media networks across six key geopolitical hubs.
+                  We run customized direct-response ad accounts, premium local brand rests, and
+                  social media networks across six key geopolitical hubs.
                 </p>
               </div>
               <div className="lg:col-span-5 flex justify-center relative w-full max-w-[450px] lg:max-w-none mx-auto">
@@ -193,7 +228,11 @@ function MarketsPage() {
 
                     {/* Custom SVG Trend Graph */}
                     <div className="mt-5 h-[100px] w-full rounded-2xl bg-surface border border-border/60 overflow-hidden relative flex items-end">
-                      <svg className="w-full h-[90px]" viewBox="0 0 200 90" preserveAspectRatio="none">
+                      <svg
+                        className="w-full h-[90px]"
+                        viewBox="0 0 200 90"
+                        preserveAspectRatio="none"
+                      >
                         <defs>
                           <linearGradient id={m.gradientId} x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0%" stopColor={m.fromColor} stopOpacity="0.45" />
@@ -215,8 +254,21 @@ function MarketsPage() {
                           strokeLinejoin="round"
                         />
                         {/* Interactive glow point */}
-                        <circle cx="190" cy="12" r="4.5" fill={m.toColor} className="animate-pulse" />
-                        <circle cx="190" cy="12" r="8" fill={m.toColor} fillOpacity="0.3" className="animate-ping" />
+                        <circle
+                          cx="190"
+                          cy="12"
+                          r="4.5"
+                          fill={m.toColor}
+                          className="animate-pulse"
+                        />
+                        <circle
+                          cx="190"
+                          cy="12"
+                          r="8"
+                          fill={m.toColor}
+                          fillOpacity="0.3"
+                          className="animate-ping"
+                        />
                       </svg>
                       <div className="absolute top-2.5 left-3 text-[10px] text-ink-soft/75 font-mono">
                         REAL-TIME AD PERFORMANCE
@@ -232,11 +284,15 @@ function MarketsPage() {
                     </div>
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-ink-soft">Active Channels</span>
-                      <span className="font-medium text-ink truncate max-w-[170px]">{m.channel}</span>
+                      <span className="font-medium text-ink truncate max-w-[170px]">
+                        {m.channel}
+                      </span>
                     </div>
                     <div className="flex justify-between items-center text-sm border-t border-dashed border-border/80 pt-2 text-[11px]">
                       <span className="text-ink-soft/80">Attribution Model</span>
-                      <span className="text-ink-soft font-mono truncate max-w-[160px]">{m.attribution}</span>
+                      <span className="text-ink-soft font-mono truncate max-w-[160px]">
+                        {m.attribution}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -253,29 +309,39 @@ function MarketsPage() {
                 <SectionLabel no="·" label="Operational Footprint" />
                 <h2 className="mt-5 text-4xl lg:text-5xl font-semibold leading-[1.05] tracking-tight text-balance">
                   Managing cross-border accounts with{" "}
-                  <span className="font-display italic font-normal text-gradient-brand">absolute fidelity.</span>
+                  <span className="font-display italic font-normal text-gradient-brand">
+                    absolute fidelity.
+                  </span>
                 </h2>
                 <p className="mt-6 text-base text-ink-soft leading-relaxed">
-                  Different tax rules, specific regional privacy constraints (CCPA, GDPR, India IT Rules), and cultural layout defaults mean a single marketing playbook fails. We deploy specialized localized variants under a central brand framework.
+                  Different tax rules, specific regional privacy constraints (CCPA, GDPR, India IT
+                  Rules), and cultural layout defaults mean a single marketing playbook fails. We
+                  deploy specialized localized variants under a central brand framework.
                 </p>
                 <div className="mt-8 flex flex-col gap-3">
                   <div className="flex items-center gap-3">
                     <div className="size-5 rounded-full bg-gradient-brand flex items-center justify-center">
                       <Sparkles className="size-2.5 text-white" />
                     </div>
-                    <span className="text-sm font-medium text-ink">Localized creative setups for higher CTR</span>
+                    <span className="text-sm font-medium text-ink">
+                      Localized creative setups for higher CTR
+                    </span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="size-5 rounded-full bg-gradient-brand flex items-center justify-center">
                       <Landmark className="size-2.5 text-white" />
                     </div>
-                    <span className="text-sm font-medium text-ink">Multi-currency financial attribution mapping</span>
+                    <span className="text-sm font-medium text-ink">
+                      Multi-currency financial attribution mapping
+                    </span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="size-5 rounded-full bg-gradient-brand flex items-center justify-center">
                       <MessageSquare className="size-2.5 text-white" />
                     </div>
-                    <span className="text-sm font-medium text-ink">Local community response agents in target timezones</span>
+                    <span className="text-sm font-medium text-ink">
+                      Local community response agents in target timezones
+                    </span>
                   </div>
                 </div>
               </div>
@@ -285,7 +351,8 @@ function MarketsPage() {
                     <Activity className="size-4 text-ink-soft" /> Attributed Revenue Growth
                   </h3>
                   <p className="text-sm text-ink-soft leading-relaxed mb-6">
-                    Weekly compound run-rate of client revenue processed across international channels.
+                    Weekly compound run-rate of client revenue processed across international
+                    channels.
                   </p>
                   <div className="space-y-4">
                     <div>
@@ -294,7 +361,10 @@ function MarketsPage() {
                         <span className="text-ink-soft">$4.2M/mo (+28%)</span>
                       </div>
                       <div className="h-2 w-full bg-surface rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-brand rounded-full" style={{ width: "85%" }} />
+                        <div
+                          className="h-full bg-gradient-brand rounded-full"
+                          style={{ width: "85%" }}
+                        />
                       </div>
                     </div>
                     <div>
@@ -303,7 +373,10 @@ function MarketsPage() {
                         <span className="text-ink-soft">$2.1M/mo (+35%)</span>
                       </div>
                       <div className="h-2 w-full bg-surface rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-brand rounded-full" style={{ width: "65%" }} />
+                        <div
+                          className="h-full bg-gradient-brand rounded-full"
+                          style={{ width: "65%" }}
+                        />
                       </div>
                     </div>
                     <div>
@@ -312,7 +385,10 @@ function MarketsPage() {
                         <span className="text-ink-soft">$1.8M/mo (+42%)</span>
                       </div>
                       <div className="h-2 w-full bg-surface rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-brand rounded-full" style={{ width: "55%" }} />
+                        <div
+                          className="h-full bg-gradient-brand rounded-full"
+                          style={{ width: "55%" }}
+                        />
                       </div>
                     </div>
                   </div>
@@ -320,7 +396,9 @@ function MarketsPage() {
                     <LiquidMetalButton
                       label="Audit your market viability"
                       width={212}
-                      onClick={() => { window.location.href = "/contact"; }}
+                      onClick={() => {
+                        window.location.href = "/contact";
+                      }}
                     />
                   </div>
                 </div>

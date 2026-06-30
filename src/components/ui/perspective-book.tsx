@@ -26,9 +26,7 @@ export function PerspectiveBook({
     'bg-neutral-100 dark:bg-[#1f1f1f] dark:before:content-[""] dark:before:bg-gradient-to-b dark:before:from-[#ffffff1a] dark:before:to-transparent dark:before:absolute dark:before:inset-0 dark:before:rounded-[inherit] text-primary';
 
   return (
-    <div
-      className={`z-10 group [perspective:900px] w-min h-min`}
-    >
+    <div className={`z-10 group [perspective:900px] w-min h-min`}>
       <div
         style={{
           width: sizeMap[size].width,
@@ -54,11 +52,8 @@ export function PerspectiveBook({
               background:
                 "linear-gradient(90deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0) 12%, hsla(0, 0%, 100%, .25) 29.25%, hsla(0, 0%, 100%, 0) 50.5%, hsla(0, 0%, 100%, 0) 75.25%, hsla(0, 0%, 100%, .25) 91%, hsla(0, 0%, 100%, 0)), linear-gradient(90deg, rgba(0, 0, 0, .03), rgba(0, 0, 0, .1) 12%, transparent 30%, rgba(0, 0, 0, .02) 50%, rgba(0, 0, 0, .2) 73.5%, rgba(0, 0, 0, .5) 75.25%, rgba(0, 0, 0, .15) 85.25%, transparent)",
             }}
-          >
-          </div>
-          <div className="pl-1 h-full">
-            {children}
-          </div>
+          ></div>
+          <div className="pl-1 h-full">{children}</div>
           {textured && (
             <div
               className="absolute inset-0 mix-blend-hard-light rotate-180 opacity-50 brightness-110 bg-no-repeat bg-cover pointer-events-none"

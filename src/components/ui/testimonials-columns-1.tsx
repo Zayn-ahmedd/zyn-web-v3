@@ -64,7 +64,9 @@ export const TestimonialsColumn = ({
 
                   {/* Profile block */}
                   <div className="flex items-center gap-3 pt-6 border-t border-border/80">
-                    <div className={`size-11 rounded-full bg-gradient-to-tr ${r.avatarGradient} flex items-center justify-center text-white font-semibold text-xs tracking-tight shadow-elegant`}>
+                    <div
+                      className={`size-11 rounded-full bg-gradient-to-tr ${r.avatarGradient} flex items-center justify-center text-white font-semibold text-xs tracking-tight shadow-elegant`}
+                    >
                       {r.avatarText}
                     </div>
                     <div>

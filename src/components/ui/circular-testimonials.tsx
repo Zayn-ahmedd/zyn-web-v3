@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -41,8 +35,7 @@ function calculateGap(width: number) {
   const minGap = 60;
   const maxGap = 86;
   if (width <= minWidth) return minGap;
-  if (width >= maxWidth)
-    return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
+  if (width >= maxWidth) return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth));
   return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
 }
 
@@ -74,10 +67,7 @@ export const CircularTestimonials = ({
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const testimonialsLength = useMemo(() => testimonials.length, [testimonials]);
-  const activeTestimonial = useMemo(
-    () => testimonials[activeIndex],
-    [activeIndex, testimonials]
-  );
+  const activeTestimonial = useMemo(() => testimonials[activeIndex], [activeIndex, testimonials]);
 
   // Responsive gap and mount detection
   useEffect(() => {
@@ -219,10 +209,7 @@ export const CircularTestimonials = ({
               exit="exit"
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <h3
-                className="font-bold mb-1"
-                style={{ color: colorName, fontSize: fontSizeName }}
-              >
+              <h3 className="font-bold mb-1" style={{ color: colorName, fontSize: fontSizeName }}>
                 {activeTestimonial.name}
               </h3>
               <p

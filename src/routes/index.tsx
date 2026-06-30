@@ -47,7 +47,13 @@ import ahmedRashmi from "@/assets/ahmed-rashmi.jpg";
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
-import { Container, Eyebrow, SectionLabel, PrimaryButton, GhostButton } from "@/components/site/primitives";
+import {
+  Container,
+  Eyebrow,
+  SectionLabel,
+  PrimaryButton,
+  GhostButton,
+} from "@/components/site/primitives";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -203,11 +209,7 @@ function TrustedBy() {
         </p>
       </Container>
       <div className="relative w-full h-[60px] overflow-hidden flex items-center">
-        <InfiniteSlider
-          className="flex h-full w-full items-center"
-          duration={35}
-          gap={80}
-        >
+        <InfiniteSlider className="flex h-full w-full items-center" duration={35} gap={80}>
           {logos.map((n, i) => (
             <span
               key={i}
@@ -348,10 +350,11 @@ function Challenges() {
                 <button
                   key={it.t}
                   onClick={() => setActive(i)}
-                  className={`group text-left rounded-2xl border p-5 transition-all duration-300 cursor-pointer ${on
-                    ? "bg-white border-ink shadow-elegant"
-                    : "bg-white/50 border-border hover:bg-white"
-                    }`}
+                  className={`group text-left rounded-2xl border p-5 transition-all duration-300 cursor-pointer ${
+                    on
+                      ? "bg-white border-ink shadow-elegant"
+                      : "bg-white/50 border-border hover:bg-white"
+                  }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -477,12 +480,13 @@ function GrowthEngine() {
                   className="group text-left cursor-pointer"
                 >
                   <div
-                    className={`size-14 rounded-full flex items-center justify-center transition-all duration-500 ${on
-                      ? "bg-gradient-brand text-white shadow-glow scale-110"
-                      : done
-                        ? "bg-ink text-white"
-                        : "bg-white border border-border text-ink-soft group-hover:border-ink/30"
-                      }`}
+                    className={`size-14 rounded-full flex items-center justify-center transition-all duration-500 ${
+                      on
+                        ? "bg-gradient-brand text-white shadow-glow scale-110"
+                        : done
+                          ? "bg-ink text-white"
+                          : "bg-white border border-border text-ink-soft group-hover:border-ink/30"
+                    }`}
                   >
                     <s.icon className="size-5" />
                   </div>
@@ -619,10 +623,11 @@ function Results() {
               <button
                 key={t}
                 onClick={() => setTab(t)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-all cursor-pointer ${tab === t
-                  ? "bg-ink text-white"
-                  : "bg-white border border-border text-ink-soft hover:text-ink"
-                  }`}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-all cursor-pointer ${
+                  tab === t
+                    ? "bg-ink text-white"
+                    : "bg-white border border-border text-ink-soft hover:text-ink"
+                }`}
               >
                 {t}
               </button>
@@ -815,10 +820,11 @@ function Stories() {
                 <button
                   key={cc.client}
                   onClick={() => setActive(i)}
-                  className={`group text-left rounded-2xl p-6 border transition-all duration-300 cursor-pointer ${on
-                    ? "bg-white text-ink border-white shadow-glow"
-                    : "bg-white/[0.04] border-white/10 hover:bg-white/[0.08]"
-                    }`}
+                  className={`group text-left rounded-2xl p-6 border transition-all duration-300 cursor-pointer ${
+                    on
+                      ? "bg-white text-ink border-white shadow-glow"
+                      : "bg-white/[0.04] border-white/10 hover:bg-white/[0.08]"
+                  }`}
                 >
                   <div
                     className={`text-[11px] uppercase tracking-wider ${on ? "text-ink-soft" : "text-white/50"}`}
@@ -1087,12 +1093,13 @@ function Process() {
               return (
                 <li key={s.n} onMouseEnter={() => setActive(i)} className="cursor-pointer group">
                   <div
-                    className={`size-14 rounded-full flex items-center justify-center border transition-all duration-500 ${on
-                      ? "bg-ink text-white border-ink scale-110"
-                      : done
-                        ? "bg-ink text-white border-ink"
-                        : "bg-white border-border text-ink-soft group-hover:border-ink/40"
-                      }`}
+                    className={`size-14 rounded-full flex items-center justify-center border transition-all duration-500 ${
+                      on
+                        ? "bg-ink text-white border-ink scale-110"
+                        : done
+                          ? "bg-ink text-white border-ink"
+                          : "bg-white border-border text-ink-soft group-hover:border-ink/40"
+                    }`}
                   >
                     <s.icon className="size-5" />
                   </div>

@@ -28,7 +28,7 @@ interface SubLink {
   subtitle: string;
   to: string;
   params?: Record<string, string>;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 interface NavItem {

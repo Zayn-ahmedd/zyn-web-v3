@@ -10,9 +10,16 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Book a Strategy Call | Zynovax" },
-      { name: "description", content: "Book a 30-minute strategy call with the Zynovax team. We'll audit your funnel, identify your highest-leverage move, and outline what an engagement could look like." },
+      {
+        name: "description",
+        content:
+          "Book a 30-minute strategy call with the Zynovax team. We'll audit your funnel, identify your highest-leverage move, and outline what an engagement could look like.",
+      },
       { property: "og:title", content: "Book a Strategy Call | Zynovax" },
-      { property: "og:description", content: "30-minute no-cost strategy call. Senior team, real audit." },
+      {
+        property: "og:description",
+        content: "30-minute no-cost strategy call. Senior team, real audit.",
+      },
     ],
   }),
   component: ContactPage,
@@ -32,10 +39,15 @@ function ContactPage() {
               <Eyebrow>Start the conversation</Eyebrow>
               <h1 className="mt-7 text-4xl sm:text-5xl lg:text-[72px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
                 Let's engineer your{" "}
-                <span className="font-display italic font-normal text-gradient-brand">next chapter</span> of growth.
+                <span className="font-display italic font-normal text-gradient-brand">
+                  next chapter
+                </span>{" "}
+                of growth.
               </h1>
               <p className="mt-7 max-w-xl text-lg text-ink-soft leading-[1.55]">
-                Book a 30-minute strategy call. We'll audit your positioning, organic channels, or paid acquisition funnels, identify your single highest-leverage move, and outline what a Zynovax engagement could look like.
+                Book a 30-minute strategy call. We'll audit your positioning, organic channels, or
+                paid acquisition funnels, identify your single highest-leverage move, and outline
+                what a Zynovax engagement could look like.
               </p>
 
               <div className="mt-10 grid sm:grid-cols-2 gap-5">
@@ -47,18 +59,32 @@ function ContactPage() {
                 <div className="rounded-2xl border border-border p-5 bg-white">
                   <Mail className="size-5 text-ink" />
                   <div className="mt-3 text-sm font-medium text-ink">Email Us</div>
-                  <a href="mailto:info@zynovax.in" className="mt-1 text-sm text-ink-soft hover:text-ink block">info@zynovax.in</a>
+                  <a
+                    href="mailto:info@zynovax.in"
+                    className="mt-1 text-sm text-ink-soft hover:text-ink block"
+                  >
+                    info@zynovax.in
+                  </a>
                 </div>
                 <div className="rounded-2xl border border-border p-5 bg-white">
                   <MessageCircle className="size-5 text-ink" />
                   <div className="mt-3 text-sm font-medium text-ink">WhatsApp the Team</div>
-                  <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="mt-1 text-sm text-ink-soft hover:text-ink block">+91 98765 43210</a>
+                  <a
+                    href="https://wa.me/919876543210"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 text-sm text-ink-soft hover:text-ink block"
+                  >
+                    +91 98765 43210
+                  </a>
                 </div>
                 <div className="rounded-2xl border border-border p-5 bg-white">
                   <MapPin className="size-5 text-ink" />
                   <div className="mt-3 text-sm font-medium text-ink">Origin & Global Footprint</div>
                   <div className="mt-1 text-sm text-ink-soft">Chennai, India (HQ)</div>
-                  <div className="mt-1 text-xs text-ink-soft/80">Serving USA, CAN, AUS, UK, UAE & IND</div>
+                  <div className="mt-1 text-xs text-ink-soft/80">
+                    Serving USA, CAN, AUS, UK, UAE & IND
+                  </div>
                 </div>
               </div>
             </div>
@@ -71,19 +97,36 @@ function ContactPage() {
                     <div className="size-14 rounded-full bg-gradient-brand mx-auto flex items-center justify-center text-white">
                       <ArrowRight className="size-6" />
                     </div>
-                    <h3 className="mt-6 text-2xl font-semibold text-ink">We'll be in touch within 24 hours.</h3>
+                    <h3 className="mt-6 text-2xl font-semibold text-ink">
+                      We'll be in touch within 24 hours.
+                    </h3>
                     <p className="mt-3 text-sm text-ink-soft max-w-sm mx-auto">
-                      A senior growth strategist will review your goals and reach out to schedule your funnel audit.
+                      A senior growth strategist will review your goals and reach out to schedule
+                      your funnel audit.
                     </p>
                   </div>
                 ) : (
                   <form
-                    onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      setSubmitted(true);
+                    }}
                     className="mt-8 space-y-5"
                   >
-                    <Field label="Full name"><input required className="input" placeholder="Jane Doe" /></Field>
-                    <Field label="Work email"><input required type="email" className="input" placeholder="jane@company.com" /></Field>
-                    <Field label="Company"><input required className="input" placeholder="Acme Inc." /></Field>
+                    <Field label="Full name">
+                      <input required className="input" placeholder="Jane Doe" />
+                    </Field>
+                    <Field label="Work email">
+                      <input
+                        required
+                        type="email"
+                        className="input"
+                        placeholder="jane@company.com"
+                      />
+                    </Field>
+                    <Field label="Company">
+                      <input required className="input" placeholder="Acme Inc." />
+                    </Field>
                     <Field label="Revenue range">
                       <select className="input">
                         <option>$1M – $10M ARR</option>
@@ -93,7 +136,12 @@ function ContactPage() {
                       </select>
                     </Field>
                     <Field label="What's the highest-leverage growth question on your mind?">
-                      <textarea required rows={4} className="input resize-none" placeholder="Visual identity, social media management, performance marketing, conversion optimization…" />
+                      <textarea
+                        required
+                        rows={4}
+                        className="input resize-none"
+                        placeholder="Visual identity, social media management, performance marketing, conversion optimization…"
+                      />
                     </Field>
                     {/* Full-width premium liquid metal submit */}
                     <div className="flex justify-center">
@@ -103,7 +151,9 @@ function ContactPage() {
                         onClick={() => setSubmitted(true)}
                       />
                     </div>
-                    <p className="text-xs text-ink-soft text-center">No commitment. No sales pitch. Just a real audit.</p>
+                    <p className="text-xs text-ink-soft text-center">
+                      No commitment. No sales pitch. Just a real audit.
+                    </p>
                   </form>
                 )}
               </div>
@@ -135,7 +185,9 @@ function ContactPage() {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink-soft">{label}</span>
+      <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink-soft">
+        {label}
+      </span>
       <div className="mt-2">{children}</div>
     </label>
   );

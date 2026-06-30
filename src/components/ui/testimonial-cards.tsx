@@ -44,8 +44,16 @@ export function TestimonialCard({
   }, []);
 
   const xOffset = isMobile
-    ? position === "front" ? 0 : position === "middle" ? 15 : 30
-    : position === "front" ? 0 : position === "middle" ? 90 : 180;
+    ? position === "front"
+      ? 0
+      : position === "middle"
+        ? 15
+        : 30
+    : position === "front"
+      ? 0
+      : position === "middle"
+        ? 90
+        : 180;
 
   return (
     <motion.div
@@ -66,12 +74,11 @@ export function TestimonialCard({
         right: 0,
         bottom: 0,
       }}
-      onDragStart={(e: any) => {
-        dragRef.current = e.clientX || (e.touches && e.touches[0]?.clientX) || 0;
+      onDragStart={(_, info) => {
+        dragRef.current = info.point.x;
       }}
-      onDragEnd={(e: any) => {
-        const clientX = e.clientX || (e.changedTouches && e.changedTouches[0]?.clientX) || 0;
-        if (dragRef.current - clientX > 120) {
+      onDragEnd={(_, info) => {
+        if (dragRef.current - info.point.x > 120) {
           handleShuffle();
         }
         dragRef.current = 0;
@@ -98,7 +105,9 @@ export function TestimonialCard({
 
       {/* Profile Info */}
       <div className="flex items-center gap-3 pt-5 border-t border-border/80">
-        <div className={`size-11 rounded-full bg-gradient-to-tr ${avatarGradient} flex items-center justify-center text-white font-semibold text-xs tracking-tight shadow-elegant`}>
+        <div
+          className={`size-11 rounded-full bg-gradient-to-tr ${avatarGradient} flex items-center justify-center text-white font-semibold text-xs tracking-tight shadow-elegant`}
+        >
           {avatarText}
         </div>
         <div className="min-w-0 flex-1">

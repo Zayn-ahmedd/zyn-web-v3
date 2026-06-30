@@ -1,6 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowUpRight, Sparkles, Megaphone, Target, Award, ArrowRight, Globe, TrendingUp, Users } from "lucide-react";
+import {
+  ArrowUpRight,
+  Sparkles,
+  Megaphone,
+  Target,
+  Award,
+  ArrowRight,
+  Globe,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
@@ -12,9 +22,16 @@ export const Route = createFileRoute("/works")({
   head: () => ({
     meta: [
       { title: "Works & Case Studies — Portfolio | Zynovax" },
-      { name: "description", content: "Proof over promises. Explore our latest global client rollouts across visual identity, social media management, and performance marketing." },
+      {
+        name: "description",
+        content:
+          "Proof over promises. Explore our latest global client rollouts across visual identity, social media management, and performance marketing.",
+      },
       { property: "og:title", content: "Zynovax Works" },
-      { property: "og:description", content: "High-ticket global client case studies and growth metrics." },
+      {
+        property: "og:description",
+        content: "High-ticket global client case studies and growth metrics.",
+      },
     ],
   }),
   component: WorksPage,
@@ -39,14 +56,16 @@ const projects: Project[] = [
     category: "performance-marketing",
     categoryLabel: "Performance Marketing",
     headline: "Scaling acquisition channels & attribution structure.",
-    challenge: "High customer acquisition costs and lack of clear attribution modeling across paid media.",
-    strategy: "Structured custom Meta & Google Ad campaigns targeting high-net-worth operators with clean server-side tracking.",
+    challenge:
+      "High customer acquisition costs and lack of clear attribution modeling across paid media.",
+    strategy:
+      "Structured custom Meta & Google Ad campaigns targeting high-net-worth operators with clean server-side tracking.",
     metrics: [
       { value: "5.2x", label: "Blended ROAS" },
       { value: "+220%", label: "Pipeline Velocity" },
-      { value: "-42%", label: "CPA Reduction" }
+      { value: "-42%", label: "CPA Reduction" },
     ],
-    location: "UAE"
+    location: "UAE",
   },
   {
     client: "Lumina Skin",
@@ -54,14 +73,16 @@ const projects: Project[] = [
     category: "visual-identity",
     categoryLabel: "Visual Identity",
     headline: "Overhauling premium market perception via visual standards.",
-    challenge: "Outgrown startup branding templates that failed to command premium pricing or retain trust.",
-    strategy: "Developed an entirely new logo system, high-end typography sheets, and cohesive product packaging guides.",
+    challenge:
+      "Outgrown startup branding templates that failed to command premium pricing or retain trust.",
+    strategy:
+      "Developed an entirely new logo system, high-end typography sheets, and cohesive product packaging guides.",
     metrics: [
       { value: "+58%", label: "Brand Recall" },
       { value: "4.8/5", label: "Perceived Premium Score" },
-      { value: "+27%", label: "AOV Lift" }
+      { value: "+27%", label: "AOV Lift" },
     ],
-    location: "Canada"
+    location: "Canada",
   },
   {
     client: "Vercel Pro",
@@ -70,13 +91,14 @@ const projects: Project[] = [
     categoryLabel: "Social Media Management",
     headline: "Authority thought leadership loops that generate inbound pipeline.",
     challenge: "Stagnant follower count and low lead conversion rates from organic channels.",
-    strategy: "Introduced high-value written carousels and executive thought leadership programs built around technical insights.",
+    strategy:
+      "Introduced high-value written carousels and executive thought leadership programs built around technical insights.",
     metrics: [
       { value: "+310%", label: "Follower Reach" },
       { value: "+180%", label: "Inbound DMs" },
-      { value: "4.2x", label: "Social Lead Pipeline" }
+      { value: "4.2x", label: "Social Lead Pipeline" },
     ],
-    location: "USA"
+    location: "USA",
   },
   {
     client: "Aura Living",
@@ -84,14 +106,16 @@ const projects: Project[] = [
     category: "performance-marketing",
     categoryLabel: "Performance Marketing",
     headline: "Scaling revenue predictably from ground up.",
-    challenge: "Low repeat customer rate, high dependency on seasonal sales, and stagnant ad performance.",
-    strategy: "Engineered high-converting landing pages integrated with structured Google Performance Max and Meta workflows.",
+    challenge:
+      "Low repeat customer rate, high dependency on seasonal sales, and stagnant ad performance.",
+    strategy:
+      "Engineered high-converting landing pages integrated with structured Google Performance Max and Meta workflows.",
     metrics: [
       { value: "$50k+/mo", label: "Scaled from $0" },
       { value: "4.3x", label: "Ad Return Spend" },
-      { value: "+61%", label: "Repeat Purchase Rate" }
+      { value: "+61%", label: "Repeat Purchase Rate" },
     ],
-    location: "Australia"
+    location: "Australia",
   },
   {
     client: "Zenith Capital",
@@ -99,14 +123,16 @@ const projects: Project[] = [
     category: "visual-identity",
     categoryLabel: "Visual Identity",
     headline: "Forging institutional trust for high-ticket capital.",
-    challenge: "Branding failed to reflect the ultra-high-net-worth scale of newly raised capital pools.",
-    strategy: "Created an elegant crest logo system, curated HSL tailored color palette, and premium investor presentation decks.",
+    challenge:
+      "Branding failed to reflect the ultra-high-net-worth scale of newly raised capital pools.",
+    strategy:
+      "Created an elegant crest logo system, curated HSL tailored color palette, and premium investor presentation decks.",
     metrics: [
       { value: "100%", label: "Institutional Trust Score" },
       { value: "£140M+", label: "Capital Influenced" },
-      { value: "3 weeks", label: "System Rollout" }
+      { value: "3 weeks", label: "System Rollout" },
     ],
-    location: "UK"
+    location: "UK",
   },
   {
     client: "Riva Health",
@@ -115,29 +141,29 @@ const projects: Project[] = [
     categoryLabel: "Social Media Management",
     headline: "Creating clinical authority through organic content distribution.",
     challenge: "Low brand awareness in a crowded market and friction in patient booking workflows.",
-    strategy: "Constructed monthly interactive content calendars highlighting medical breakthroughs and case reviews.",
+    strategy:
+      "Constructed monthly interactive content calendars highlighting medical breakthroughs and case reviews.",
     metrics: [
       { value: "+260%", label: "Engagement Scale" },
       { value: "+180%", label: "Direct Consults Booked" },
-      { value: "4.6/5", label: "Patient Retention Rating" }
+      { value: "4.6/5", label: "Patient Retention Rating" },
     ],
-    location: "India"
-  }
+    location: "India",
+  },
 ];
 
 const filters = [
   { id: "all", label: "All Works", icon: null },
   { id: "visual-identity", label: "Visual Identity", icon: Sparkles },
   { id: "social-media-management", label: "Social Media", icon: Megaphone },
-  { id: "performance-marketing", label: "Performance Marketing", icon: Target }
+  { id: "performance-marketing", label: "Performance Marketing", icon: Target },
 ];
 
 function WorksPage() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
 
-  const filteredProjects = activeFilter === "all"
-    ? projects
-    : projects.filter(p => p.category === activeFilter);
+  const filteredProjects =
+    activeFilter === "all" ? projects : projects.filter((p) => p.category === activeFilter);
 
   return (
     <div className="bg-white">
@@ -146,7 +172,6 @@ function WorksPage() {
       <div className="animate-slide-down-page">
         {/* ─────────────── HERO — Premium Elite ─────────────── */}
         <section className="relative overflow-hidden min-h-[88vh] sm:min-h-[82vh] lg:min-h-[78vh] flex flex-col">
-
           {/* Layer 1 — animated dot grid */}
           <DottedSurface className="absolute inset-0 size-full z-0 opacity-40" />
 
@@ -173,7 +198,6 @@ function WorksPage() {
           {/* ── Foreground content ── */}
           <div className="relative z-10 flex-1 flex flex-col justify-center">
             <Container className="pt-28 pb-14 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20">
-
               {/* Eyebrow */}
               <motion.div
                 initial={{ opacity: 0, y: 14 }}
@@ -238,9 +262,9 @@ function WorksPage() {
                 className="mt-12 inline-flex flex-wrap gap-px rounded-2xl border border-border/60 bg-white/60 backdrop-blur-md shadow-elegant overflow-hidden"
               >
                 {[
-                  { icon: Globe,       value: "6",     label: "Active Markets"   },
-                  { icon: TrendingUp,  value: "5.2×",  label: "Avg. Blended ROAS"},
-                  { icon: Users,       value: "100%",  label: "Client Retention" },
+                  { icon: Globe, value: "6", label: "Active Markets" },
+                  { icon: TrendingUp, value: "5.2×", label: "Avg. Blended ROAS" },
+                  { icon: Users, value: "100%", label: "Client Retention" },
                 ].map(({ icon: Icon, value, label }, i) => (
                   <div
                     key={label}
@@ -282,7 +306,6 @@ function WorksPage() {
                   </span>
                 ))}
               </motion.div>
-
             </Container>
           </div>
         </section>
@@ -300,12 +323,17 @@ function WorksPage() {
                   <button
                     key={f.id}
                     onClick={() => setActiveFilter(f.id)}
-                    className={`group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer ${isActive
-                      ? "bg-ink text-white shadow-elegant"
-                      : "bg-surface text-ink-soft hover:bg-border/40 hover:text-ink border border-border/40"
-                      }`}
+                    className={`group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                      isActive
+                        ? "bg-ink text-white shadow-elegant"
+                        : "bg-surface text-ink-soft hover:bg-border/40 hover:text-ink border border-border/40"
+                    }`}
                   >
-                    {Icon && <Icon className={`size-3.5 ${isActive ? "text-white" : "text-ink-soft group-hover:text-ink"}`} />}
+                    {Icon && (
+                      <Icon
+                        className={`size-3.5 ${isActive ? "text-white" : "text-ink-soft group-hover:text-ink"}`}
+                      />
+                    )}
                     {f.label}
                   </button>
                 );
@@ -321,7 +349,9 @@ function WorksPage() {
                 >
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] uppercase tracking-[0.22em] text-ink-soft font-semibold">{p.industry}</span>
+                      <span className="text-[11px] uppercase tracking-[0.22em] text-ink-soft font-semibold">
+                        {p.industry}
+                      </span>
                       <span className="text-xs font-medium text-gradient-brand font-semibold px-3 py-1 bg-gradient-brand-soft rounded-full border border-border/10">
                         {p.categoryLabel}
                       </span>
@@ -333,11 +363,15 @@ function WorksPage() {
 
                     <div className="mt-8 space-y-4 text-sm text-ink-soft">
                       <div>
-                        <span className="text-[10px] uppercase font-semibold tracking-wider text-ink block mb-1">Challenge</span>
+                        <span className="text-[10px] uppercase font-semibold tracking-wider text-ink block mb-1">
+                          Challenge
+                        </span>
                         <p className="leading-relaxed">{p.challenge}</p>
                       </div>
                       <div>
-                        <span className="text-[10px] uppercase font-semibold tracking-wider text-ink block mb-1">Strategy</span>
+                        <span className="text-[10px] uppercase font-semibold tracking-wider text-ink block mb-1">
+                          Strategy
+                        </span>
                         <p className="leading-relaxed">{p.strategy}</p>
                       </div>
                     </div>
@@ -346,14 +380,20 @@ function WorksPage() {
                     {p.category === "visual-identity" && (
                       <div className="mt-8 rounded-2xl bg-surface border border-border p-5 flex items-center justify-between gap-4">
                         <div className="flex gap-2">
-                          <div className="size-10 rounded-full bg-ink flex items-center justify-center text-xs font-semibold text-white shadow-elegant">Aa</div>
+                          <div className="size-10 rounded-full bg-ink flex items-center justify-center text-xs font-semibold text-white shadow-elegant">
+                            Aa
+                          </div>
                           <div className="size-10 rounded-full bg-brand-pink border border-white/20 shadow-elegant" />
                           <div className="size-10 rounded-full bg-brand-orange border border-white/20 shadow-elegant" />
                           <div className="size-10 rounded-full bg-brand-violet border border-white/20 shadow-elegant" />
                         </div>
                         <div className="text-right">
-                          <div className="text-[9px] uppercase tracking-wider text-ink-soft font-semibold">Primary Font</div>
-                          <div className="text-sm font-semibold text-ink font-display italic">Instrument Serif</div>
+                          <div className="text-[9px] uppercase tracking-wider text-ink-soft font-semibold">
+                            Primary Font
+                          </div>
+                          <div className="text-sm font-semibold text-ink font-display italic">
+                            Instrument Serif
+                          </div>
                         </div>
                       </div>
                     )}
@@ -389,7 +429,9 @@ function WorksPage() {
                         </div>
                         <div className="flex justify-between text-xs">
                           <span className="text-ink-soft">Attribution Framework</span>
-                          <span className="font-semibold text-gradient-brand">Server-Side Cloud</span>
+                          <span className="font-semibold text-gradient-brand">
+                            Server-Side Cloud
+                          </span>
                         </div>
                       </div>
                     )}
@@ -399,8 +441,12 @@ function WorksPage() {
                     <div className="grid grid-cols-3 gap-6 flex-1">
                       {p.metrics.map((m, i) => (
                         <div key={i}>
-                          <div className="text-2xl font-bold text-gradient-brand tracking-tight">{m.value}</div>
-                          <div className="text-[10px] text-ink-soft mt-1 uppercase tracking-wider">{m.label}</div>
+                          <div className="text-2xl font-bold text-gradient-brand tracking-tight">
+                            {m.value}
+                          </div>
+                          <div className="text-[10px] text-ink-soft mt-1 uppercase tracking-wider">
+                            {m.label}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -420,18 +466,23 @@ function WorksPage() {
             <div className="mt-20 rounded-[32px] bg-ink text-white p-8 lg:p-16 text-center relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-brand opacity-15" />
               <div className="relative z-10 max-w-2xl mx-auto">
-                <span className="text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">Apply For Partnership</span>
+                <span className="text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">
+                  Apply For Partnership
+                </span>
                 <h2 className="mt-4 text-3xl sm:text-5xl font-semibold leading-[1.05] tracking-tight">
                   Ready to engineer your custom growth system?
                 </h2>
                 <p className="mt-6 text-white/70 leading-relaxed text-sm sm:text-base">
-                  We design, manage, and scale the operational growth engine for high-ticket market players globally. Book a strategy audit today.
+                  We design, manage, and scale the operational growth engine for high-ticket market
+                  players globally. Book a strategy audit today.
                 </p>
                 <div className="mt-8 flex justify-center">
                   <LiquidMetalButton
                     label="Book Strategy Call"
                     width={162}
-                    onClick={() => { window.location.href = "/contact"; }}
+                    onClick={() => {
+                      window.location.href = "/contact";
+                    }}
                   />
                 </div>
               </div>

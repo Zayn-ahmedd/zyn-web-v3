@@ -19,9 +19,7 @@ export function LiquidMetalButton({
 }: LiquidMetalButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
-  const [ripples, setRipples] = useState<
-    Array<{ x: number; y: number; id: number }>
-  >([]);
+  const [ripples, setRipples] = useState<Array<{ x: number; y: number; id: number }>>([]);
   const shaderRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const shaderMount = useRef<any>(null);

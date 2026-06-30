@@ -79,10 +79,11 @@ export function SiteFooter() {
                   />
                 </button>
                 <div
-                  className={`transition-all duration-300 ease-in-out overflow-hidden flex flex-col items-start gap-3 w-full pl-4 border-l border-border/40 ${footerShowcaseOpen
-                    ? "max-h-[200px] opacity-100 mt-2.5"
-                    : "max-h-0 opacity-0 pointer-events-none"
-                    }`}
+                  className={`transition-all duration-300 ease-in-out overflow-hidden flex flex-col items-start gap-3 w-full pl-4 border-l border-border/40 ${
+                    footerShowcaseOpen
+                      ? "max-h-[200px] opacity-100 mt-2.5"
+                      : "max-h-0 opacity-0 pointer-events-none"
+                  }`}
                 >
                   <Link
                     to="/success-stories"
@@ -116,10 +117,11 @@ export function SiteFooter() {
                   />
                 </button>
                 <div
-                  className={`transition-all duration-300 ease-in-out overflow-hidden flex flex-col items-start gap-3 w-full pl-4 border-l border-border/40 ${footerFrontierOpen
-                    ? "max-h-[200px] opacity-100 mt-2.5"
-                    : "max-h-0 opacity-0 pointer-events-none"
-                    }`}
+                  className={`transition-all duration-300 ease-in-out overflow-hidden flex flex-col items-start gap-3 w-full pl-4 border-l border-border/40 ${
+                    footerFrontierOpen
+                      ? "max-h-[200px] opacity-100 mt-2.5"
+                      : "max-h-0 opacity-0 pointer-events-none"
+                  }`}
                 >
                   <Link
                     to="/industry"
@@ -153,10 +155,11 @@ export function SiteFooter() {
                   />
                 </button>
                 <div
-                  className={`transition-all duration-300 ease-in-out overflow-hidden flex flex-col items-start gap-3 w-full pl-4 border-l border-border/40 ${footerResourcesOpen
-                    ? "max-h-[200px] opacity-100 mt-2.5"
-                    : "max-h-0 opacity-0 pointer-events-none"
-                    }`}
+                  className={`transition-all duration-300 ease-in-out overflow-hidden flex flex-col items-start gap-3 w-full pl-4 border-l border-border/40 ${
+                    footerResourcesOpen
+                      ? "max-h-[200px] opacity-100 mt-2.5"
+                      : "max-h-0 opacity-0 pointer-events-none"
+                  }`}
                 >
                   <Link
                     to="/blogs"

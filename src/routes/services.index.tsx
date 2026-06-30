@@ -10,9 +10,19 @@ export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
       { title: "Services — Visual Identity, Social Media & Paid Acquisition | Zynovax" },
-      { name: "description", content: "Three core capabilities engineered into one connected growth system: visual identity, social media management, and performance marketing." },
-      { property: "og:title", content: "Services — Visual Identity, Social Media & Paid Acquisition | Zynovax" },
-      { property: "og:description", content: "Three core capabilities engineered into one connected growth system." },
+      {
+        name: "description",
+        content:
+          "Three core capabilities engineered into one connected growth system: visual identity, social media management, and performance marketing.",
+      },
+      {
+        property: "og:title",
+        content: "Services — Visual Identity, Social Media & Paid Acquisition | Zynovax",
+      },
+      {
+        property: "og:description",
+        content: "Three core capabilities engineered into one connected growth system.",
+      },
     ],
   }),
   component: ServicesIndex,
@@ -29,16 +39,21 @@ function ServicesIndex() {
           <Eyebrow>Capabilities</Eyebrow>
           <h1 className="mt-7 max-w-4xl text-4xl sm:text-5xl lg:text-[80px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
             Three capabilities.{" "}
-            <span className="font-display italic font-normal text-gradient-brand">One connected system.</span>
+            <span className="font-display italic font-normal text-gradient-brand">
+              One connected system.
+            </span>
           </h1>
           <p className="mt-7 max-w-2xl text-lg text-ink-soft leading-[1.55]">
-            We don't sell disconnected services. We engineer integrated outcomes — and every capability below feeds the same premium growth engine.
+            We don't sell disconnected services. We engineer integrated outcomes — and every
+            capability below feeds the same premium growth engine.
           </p>
           <div className="mt-9">
             <LiquidMetalButton
               label="Book Strategy Call"
               width={162}
-              onClick={() => { window.location.href = "/contact"; }}
+              onClick={() => {
+                window.location.href = "/contact";
+              }}
             />
           </div>
         </Container>
@@ -63,21 +78,30 @@ function ServicesIndex() {
                       </div>
                       <ArrowUpRight className="size-5 text-ink-soft group-hover:text-ink transition-colors" />
                     </div>
-                    <div className="mt-7 text-[11px] uppercase tracking-[0.22em] text-ink-soft">{s.tagline}</div>
-                    <h3 className="mt-2 text-2xl lg:text-3xl font-semibold text-ink leading-tight">{s.name}</h3>
-                    <p className="mt-3 text-[15px] text-ink-soft leading-relaxed">{s.subheadline}</p>
+                    <div className="mt-7 text-[11px] uppercase tracking-[0.22em] text-ink-soft">
+                      {s.tagline}
+                    </div>
+                    <h3 className="mt-2 text-2xl lg:text-3xl font-semibold text-ink leading-tight">
+                      {s.name}
+                    </h3>
+                    <p className="mt-3 text-[15px] text-ink-soft leading-relaxed">
+                      {s.subheadline}
+                    </p>
                   </div>
                   <div>
                     <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 pt-6 border-t border-border">
                       {s.outcomes.slice(0, 3).map((o) => (
                         <div key={o.l}>
-                          <div className="text-2xl font-semibold text-gradient-brand tracking-tight">{o.v}</div>
+                          <div className="text-2xl font-semibold text-gradient-brand tracking-tight">
+                            {o.v}
+                          </div>
                           <div className="text-[11px] text-ink-soft mt-0.5">{o.l}</div>
                         </div>
                       ))}
                     </div>
                     <div className="mt-7 inline-flex items-center gap-1.5 text-sm font-medium text-ink">
-                      Explore {s.name.toLowerCase()} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                      Explore {s.name.toLowerCase()}{" "}
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
                 </Link>
