@@ -292,7 +292,7 @@ export function SiteNav() {
         staggerChildren: 0.05,
       },
     },
-  };
+  } as const;
 
   const itemVariants = {
     hidden: { opacity: 0, x: 15 },
@@ -301,7 +301,7 @@ export function SiteNav() {
       x: 0,
       transition: { type: "spring", stiffness: 300, damping: 26 },
     },
-  };
+  } as const;
 
   // Helper check if root item is active based on path
   const isRootLinkActive = (item: NavItem) => {

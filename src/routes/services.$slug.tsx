@@ -16,15 +16,17 @@ export const Route = createFileRoute("/services/$slug")({
     return { service: { slug: service.slug } }; // Only serialize the slug to avoid function serialization issues
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return [];
+    if (!loaderData) return {};
     const service = getService(loaderData.service.slug);
-    if (!service) return [];
-    return [
-      { title: service.metaTitle },
-      { name: "description", content: service.metaDescription },
-      { property: "og:title", content: service.metaTitle },
-      { property: "og:description", content: service.metaDescription },
-    ];
+    if (!service) return {};
+    return {
+      meta: [
+        { title: service.metaTitle },
+        { name: "description", content: service.metaDescription },
+        { property: "og:title", content: service.metaTitle },
+        { property: "og:description", content: service.metaDescription },
+      ],
+    };
   },
   component: ServicePage,
   notFoundComponent: () => (
