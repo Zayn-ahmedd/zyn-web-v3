@@ -101,6 +101,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Great+Vibes&family=Signika:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap",
       },
+      {
+        rel: "preload",
+        as: "image",
+        href: "/hero-visual.webp",
+        type: "image/webp",
+        // @ts-ignore - fetchpriority is valid HTML but might not be in the types yet
+        fetchpriority: "high",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -125,6 +133,21 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    // Defer Google Analytics/Tag Manager loading
+    const loadAnalytics = () => {
+      // Analytics script injection (placeholder)
+      // e.g. const script = document.createElement("script"); ...
+    };
+
+    if ("requestIdleCallback" in window) {
+      // @ts-ignore
+      requestIdleCallback(loadAnalytics);
+    } else {
+      setTimeout(loadAnalytics, 2000);
+    }
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

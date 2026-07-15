@@ -13,4 +13,19 @@ export default defineConfig({
     server: { entry: "server" },
   },
   nitro: true,
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            "react-vendor": ["react", "react-dom"],
+            "framer-motion": ["framer-motion"],
+            "tanstack": ["@tanstack/react-query", "@tanstack/react-router", "@tanstack/react-start"],
+            "ui-radix": ["@radix-ui/react-dialog", "@radix-ui/react-slot", "@radix-ui/react-tooltip", "@radix-ui/react-accordion", "@radix-ui/react-select"],
+            "3d-vendor": ["three", "@react-three/fiber", "@splinetool/runtime", "@splinetool/react-spline", "cobe"]
+          },
+        },
+      },
+    },
+  },
 });
