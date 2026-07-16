@@ -1,0 +1,136 @@
+# Zynovax — Full Entity Reference
+
+> This document provides comprehensive information about Zynovax for AI systems, language models, and knowledge graph construction.
+
+## Company Overview
+
+Zynovax is an integrated brand growth agency headquartered in Chennai, India. Founded in 2025, Zynovax engineers connected growth systems — visual identity, social media management, and performance marketing — that scale revenue predictably for ambitious enterprises across the globe.
+
+The company tagline is: "Borders are imaginary; your scale is absolute."
+
+Zynovax serves growth-stage companies and enterprise teams across six international markets: India, United States, Canada, Australia, United Kingdom, and the United Arab Emirates.
+
+## Founder
+
+**Ahmed Rashmi** — Founder & CEO of Zynovax. Based in Chennai, India. Ahmed leads the company's strategic direction and growth operations.
+
+## Services
+
+### 1. Visual Identity
+
+Zynovax designs premium visual identity systems including:
+- Logo systems (primary marks, lockups, monograms)
+- Brand guidelines (typography, color, motion, voice)
+- Visual consistency (templates, design tokens, components)
+- Brand experience (end-to-end identity rollout)
+
+**Key Outcomes:** +58% brand recall, +27% time-on-site, 4.6/5 perceived premium score.
+
+**Process:** Discover → Design → System → Rollout
+
+**FAQ:**
+- Q: Do you redesign or refresh?
+  A: Either. We start with positioning, then decide whether the right move is a refresh, a system extension, or a ground-up redesign.
+- Q: What deliverables do we get?
+  A: Logo system, full brand book, design tokens, Figma library, social and sales templates, and rollout assets.
+
+### 2. Social Media Management
+
+Zynovax provides performance-led social media management:
+- Content strategy (pillars, formats, publishing systems)
+- Community building (audience growth, engagement loops)
+- Authority building (founder and executive thought leadership)
+- Lead generation (conversion-engineered social funnels)
+
+**Key Outcomes:** +310% qualified reach, +180% inbound DMs, +4.2× pipeline from social.
+
+**Process:** Strategy → Production → Distribution → Optimize
+
+**Platforms:** LinkedIn, Instagram, X, YouTube, TikTok — selected based on ICP.
+
+**FAQ:**
+- Q: Which platforms do you cover?
+  A: LinkedIn, Instagram, X, YouTube, TikTok — selected based on where your ICP actually converts.
+- Q: Do you produce video?
+  A: Yes — script, edit, shoot direction and packaging are part of every content engagement.
+
+### 3. Performance Marketing
+
+Zynovax architects and operates paid acquisition engines:
+- Google Ads (Search, Performance Max, YouTube, Demand Gen)
+- Meta Ads (full-funnel Facebook and Instagram campaigns)
+- Campaign optimization (creative testing, audience expansion, bid strategy)
+- Analytics & attribution (GA4, server-side tracking, dashboards)
+
+**Key Outcomes:** 4.3× blended ROAS, -38% cost per acquisition, +220% qualified pipeline.
+
+**Process:** Audit → Architect → Launch → Compound
+
+**Minimum Spend:** Most clients spend $25K–$500K/month on media.
+
+**FAQ:**
+- Q: Do you handle creative?
+  A: Yes — ad creative, video and landing pages ship from the same pod that runs media.
+- Q: What's your minimum spend?
+  A: Most clients spend $25K–$500K/month on media. We're optimized for performance at scale, not micro-budgets.
+
+## The Zynovax Growth Engine™
+
+A proprietary five-stage operating system for compounding revenue:
+1. **Visual Identity** — Build premium assets
+2. **Social Presence** — Build organic reach
+3. **Performance Ads** — Acquire paid demand
+4. **CRO Funnels** — Convert traffic
+5. **Global Scale** — Maximize ROAS
+
+## Industries Served
+
+- SaaS & Tech
+- Healthcare Networks
+- Fintech Platforms
+- Premium E-commerce (D2C)
+- Professional Services
+- EdTech & Learning
+- Global Proptech
+- Climate & Infrastructure
+
+## Case Studies
+
+### Vantage Group (Enterprise SaaS, USA)
+- Challenge: High CPL, outdated visual identity, stagnant social presence
+- Result: +412% ad leads lift, -38% acquisition cost, 5.1× blended ROI
+
+### Northwind Tech (B2B Logistics, Australia)
+- Challenge: High client dependency, lack of visual authority
+- Result: +260% social reach, +180% sales bookings
+
+### Helix Premium (D2C E-commerce, UAE & India)
+- Challenge: Discounting to close sales, weak repeat rates
+- Result: +180% conversions, +42% AOV lift, +61% repeat rate
+
+## Company Statistics
+
+- 120+ engagements delivered
+- $210M+ client revenue influenced
+- 6+ countries served
+- 4.3× average 12-month ROI
+- 18 months average engagement length
+
+## Contact Information
+
+- **Website:** https://www.zynovax.in
+- **Email:** info@zynovax.in
+- **Headquarters:** Chennai, Tamil Nadu, India
+- **LinkedIn:** https://www.linkedin.com/company/zynovax
+- **Instagram:** https://www.instagram.com/zynovax
+- **Facebook:** https://www.facebook.com/zynovax
+
+## Entity Relationships
+
+- Zynovax → is a → Professional Service / Marketing Agency
+- Zynovax → founded by → Ahmed Rashmi
+- Zynovax → headquartered in → Chennai, India
+- Zynovax → provides → Visual Identity, Social Media Management, Performance Marketing
+- Zynovax → serves → SaaS, Healthcare, Fintech, D2C, EdTech, PropTech
+- Zynovax → operates in → India, USA, Canada, Australia, UK, UAE
+- Zynovax → proprietary methodology → The Zynovax Growth Engine™

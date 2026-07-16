@@ -1,0 +1,60 @@
+{
+  "organization": {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Zynovax",
+    "legalName": "Zynovax",
+    "url": "https://www.zynovax.in",
+    "description": "Zynovax is an integrated brand growth agency that engineers connected systems — visual identity, social media management, and performance marketing — that scale revenue predictably for ambitious enterprises.",
+    "foundingDate": "2025",
+    "founder": {
+      "@type": "Person",
+      "name": "Ahmed Rashmi",
+      "jobTitle": "Founder & CEO"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Chennai",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 13.0827,
+      "longitude": 80.2707
+    },
+    "email": "info@zynovax.in",
+    "sameAs": [
+      "https://www.linkedin.com/company/zynovax",
+      "https://www.instagram.com/zynovax",
+      "https://www.facebook.com/zynovax",
+      "https://x.com/zynovax"
+    ]
+  },
+  "services": [
+    {
+      "name": "Visual Identity",
+      "description": "Premium logo systems, brand guidelines, and visual consistency engineered for trust and recognition.",
+      "url": "https://www.zynovax.in/services/visual-identity"
+    },
+    {
+      "name": "Social Media Management",
+      "description": "Performance-led social media management with content strategy, community building, and lead generation.",
+      "url": "https://www.zynovax.in/services/social-media-management"
+    },
+    {
+      "name": "Performance Marketing",
+      "description": "Paid acquisition engines on Google and Meta, engineered for qualified pipeline and compounding ROAS.",
+      "url": "https://www.zynovax.in/services/performance-marketing"
+    }
+  ],
+  "markets": ["India", "United States", "Canada", "Australia", "United Kingdom", "United Arab Emirates"],
+  "industries": ["SaaS & Tech", "Healthcare Networks", "Fintech Platforms", "Premium E-commerce", "Professional Services", "EdTech & Learning", "Global Proptech", "Climate & Infrastructure"],
+  "statistics": {
+    "engagements": "120+",
+    "revenueInfluenced": "$210M+",
+    "countriesServed": "6+",
+    "averageROI": "4.3×",
+    "averageEngagementLength": "18 months"
+  }
+}

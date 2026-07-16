@@ -17,12 +17,24 @@ export default defineConfig({
     build: {
       rollupOptions: {
         output: {
-          manualChunks: {
-            "react-vendor": ["react", "react-dom"],
-            "framer-motion": ["framer-motion"],
-            "tanstack": ["@tanstack/react-query", "@tanstack/react-router", "@tanstack/react-start"],
-            "ui-radix": ["@radix-ui/react-dialog", "@radix-ui/react-slot", "@radix-ui/react-tooltip", "@radix-ui/react-accordion", "@radix-ui/react-select"],
-            "3d-vendor": ["three", "@react-three/fiber", "@splinetool/runtime", "@splinetool/react-spline", "cobe"]
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              if (id.includes("react-dom") || id.includes("react/")) {
+                return "react-vendor";
+              }
+              if (id.includes("framer-motion")) {
+                return "framer-motion";
+              }
+              if (id.includes("@tanstack")) {
+                return "tanstack";
+              }
+              if (id.includes("@radix-ui")) {
+                return "ui-radix";
+              }
+              if (id.includes("three") || id.includes("@react-three") || id.includes("splinetool") || id.includes("cobe")) {
+                return "3d-vendor";
+              }
+            }
           },
         },
       },

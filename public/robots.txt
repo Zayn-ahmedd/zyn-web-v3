@@ -1,0 +1,13 @@
+# Zynovax — robots.txt
+# https://www.zynovax.in/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_build/
+
+# Sitemap
+Sitemap: https://www.zynovax.in/sitemap.xml
+
+# Host
+Host: https://www.zynovax.in

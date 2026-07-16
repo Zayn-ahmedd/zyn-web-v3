@@ -12,6 +12,14 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { NotFound } from "@/components/ui/ghost-404-page";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { organizationSchema, websiteSchema, localBusinessSchema } from "@/lib/seo/schemas";
+import { SITE_CONFIG } from "@/lib/seo/seo-config";
+import { initGTM } from "@/lib/analytics/gtm";
+import { initGA4 } from "@/lib/analytics/ga4";
+import { setDefaultConsent } from "@/lib/analytics/consent";
+import { useRouteTracking } from "@/hooks/useRouteTracking";
+import { CookieConsent } from "@/components/site/CookieConsent";
 
 function NotFoundComponent() {
   return (
@@ -81,12 +89,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Zynovax — Creative Branding & Digital Marketing" },
       {
         name: "description",
-        content:
-          "Zynovax is a global creative branding and digital marketing firm. Borders are imaginary; your scale is absolute.",
+        content: SITE_CONFIG.description,
       },
+      { name: "robots", content: "index, follow" },
+      { name: "theme-color", content: SITE_CONFIG.brand.themeColor },
+      { name: "application-name", content: SITE_CONFIG.name },
+      { name: "author", content: SITE_CONFIG.name },
+      { name: "publisher", content: SITE_CONFIG.name },
+      { name: "format-detection", content: "telephone=no" },
       { property: "og:title", content: "Zynovax — Creative Branding & Digital Marketing" },
-      { property: "og:description", content: "Borders are imaginary; your scale is absolute." },
+      { property: "og:description", content: SITE_CONFIG.description },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: SITE_CONFIG.name },
+      { property: "og:locale", content: SITE_CONFIG.locale },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -94,6 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/png", href: "/favicon-192x192.png", sizes: "192x192" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
       { rel: "icon", type: "image/png", href: "/favicon.png", sizes: "48x48" },
+      { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
@@ -109,6 +125,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         // @ts-ignore - fetchpriority is valid HTML but might not be in the types yet
         fetchpriority: "high",
       },
+      { rel: "dns-prefetch", href: "https://www.googletagmanager.com" },
+      { rel: "dns-prefetch", href: "https://www.google-analytics.com" },
     ],
   }),
   shellComponent: RootShell,
@@ -119,11 +137,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" dir="ltr">
       <head>
         <HeadContent />
       </head>
       <body>
+        {/* Skip to main content — accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99999] focus:rounded-md focus:bg-ink focus:text-white focus:px-4 focus:py-2 focus:text-sm"
+        >
+          Skip to main content
+        </a>
         {children}
         <Scripts />
       </body>
@@ -134,16 +159,21 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  // SPA route tracking
+  useRouteTracking();
+
   useEffect(() => {
-    // Defer Google Analytics/Tag Manager loading
+    // Set consent defaults before any tags fire
+    setDefaultConsent();
+
+    // Defer analytics loading until after hydration
     const loadAnalytics = () => {
-      // Analytics script injection (placeholder)
-      // e.g. const script = document.createElement("script"); ...
+      initGTM();
+      initGA4();
     };
 
     if ("requestIdleCallback" in window) {
-      // @ts-ignore
-      requestIdleCallback(loadAnalytics);
+      (window as Window & { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(loadAnalytics);
     } else {
       setTimeout(loadAnalytics, 2000);
     }
@@ -151,8 +181,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      {/* Global structured data — Organization + WebSite + LocalBusiness */}
+      <JsonLd data={[organizationSchema(), websiteSchema(), localBusinessSchema()]} />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      {/* GDPR Cookie Consent Banner */}
+      <CookieConsent />
     </QueryClientProvider>
   );
 }

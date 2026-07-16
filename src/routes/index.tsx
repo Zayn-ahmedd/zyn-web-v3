@@ -58,7 +58,7 @@ import {
 
 import { lazy, Suspense } from 'react';
 
-const LazySections = lazy(() => import('./index-lazy'));
+const LazySections = lazy(() => import('./-index-lazy'));
 
 export const Route = createFileRoute("/")({
   head: () => ({

@@ -1,0 +1,15 @@
+/* TEAM */
+Company: Zynovax
+Role: Integrated Brand Growth Agency
+Location: Chennai, India
+Contact: info@zynovax.in
+Website: https://www.zynovax.in
+
+/* SITE */
+Standards: HTML5, CSS3, ES2022
+Framework: React 19, TanStack Router, TanStack Start
+Bundler: Vite 8
+Styling: Tailwind CSS 4
+Hosting: Vercel + Cloudflare DNS
+Language: TypeScript 5
+Last Updated: 2026-07-16

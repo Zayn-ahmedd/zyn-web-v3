@@ -1,0 +1,3 @@
+Contact: mailto:info@zynovax.in
+Preferred-Languages: en
+Canonical: https://www.zynovax.in/.well-known/security.txt

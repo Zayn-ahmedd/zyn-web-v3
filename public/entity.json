@@ -1,0 +1,69 @@
+{
+  "entities": [
+    {
+      "id": "zynovax",
+      "type": "Organization",
+      "name": "Zynovax",
+      "description": "Integrated Brand Growth Agency",
+      "url": "https://www.zynovax.in",
+      "relationships": [
+        { "type": "foundedBy", "target": "ahmed-rashmi" },
+        { "type": "headquarteredIn", "target": "chennai-india" },
+        { "type": "provides", "target": "visual-identity" },
+        { "type": "provides", "target": "social-media-management" },
+        { "type": "provides", "target": "performance-marketing" },
+        { "type": "operatesIn", "target": "india" },
+        { "type": "operatesIn", "target": "usa" },
+        { "type": "operatesIn", "target": "canada" },
+        { "type": "operatesIn", "target": "australia" },
+        { "type": "operatesIn", "target": "uk" },
+        { "type": "operatesIn", "target": "uae" },
+        { "type": "hasMethodology", "target": "growth-engine" }
+      ]
+    },
+    {
+      "id": "ahmed-rashmi",
+      "type": "Person",
+      "name": "Ahmed Rashmi",
+      "jobTitle": "Founder & CEO",
+      "relationships": [
+        { "type": "founded", "target": "zynovax" },
+        { "type": "basedIn", "target": "chennai-india" }
+      ]
+    },
+    {
+      "id": "chennai-india",
+      "type": "Place",
+      "name": "Chennai, Tamil Nadu, India",
+      "geo": { "latitude": 13.0827, "longitude": 80.2707 }
+    },
+    {
+      "id": "visual-identity",
+      "type": "Service",
+      "name": "Visual Identity",
+      "description": "Premium logo systems, brand guidelines, and visual consistency engineered for trust and recognition.",
+      "url": "https://www.zynovax.in/services/visual-identity"
+    },
+    {
+      "id": "social-media-management",
+      "type": "Service",
+      "name": "Social Media Management",
+      "description": "Performance-led social media management with content strategy, community building, and lead generation.",
+      "url": "https://www.zynovax.in/services/social-media-management"
+    },
+    {
+      "id": "performance-marketing",
+      "type": "Service",
+      "name": "Performance Marketing",
+      "description": "Paid acquisition engines on Google and Meta, engineered for qualified pipeline and compounding ROAS.",
+      "url": "https://www.zynovax.in/services/performance-marketing"
+    },
+    {
+      "id": "growth-engine",
+      "type": "Methodology",
+      "name": "The Zynovax Growth Engine™",
+      "description": "A proprietary five-stage operating system for compounding revenue: Visual Identity, Social Presence, Performance Ads, CRO Funnels, and Global Scale.",
+      "url": "https://www.zynovax.in/growth-engine"
+    }
+  ]
+}
