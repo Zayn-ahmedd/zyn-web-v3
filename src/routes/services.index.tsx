@@ -5,37 +5,51 @@ import { SiteFooter } from "@/components/site/footer";
 import { Container, Eyebrow } from "@/components/site/primitives";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { services } from "@/data/services";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { collectionPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
 
 export const Route = createFileRoute("/services/")({
-  head: () => ({
-    meta: [
-      { title: "Services — Visual Identity, Social Media & Paid Acquisition | Zynovax" },
-      {
-        name: "description",
-        content:
-          "Three core capabilities engineered into one connected growth system: visual identity, social media management, and performance marketing.",
-      },
-      {
-        property: "og:title",
-        content: "Services — Visual Identity, Social Media & Paid Acquisition | Zynovax",
-      },
-      {
-        property: "og:description",
-        content: "Three core capabilities engineered into one connected growth system.",
-      },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "Services — Visual Identity, Social Media & Paid Acquisition | Zynovax",
+      description:
+        "Three core capabilities engineered into one connected growth system: visual identity design, social media management, and paid performance marketing campaigns.",
+      path: "/services",
+    }),
   component: ServicesIndex,
 });
 
 function ServicesIndex() {
+  const collectionItems = services.map((s) => ({
+    name: s.name,
+    url: `https://www.zynovax.in/services/${s.slug}`,
+    description: s.tagline,
+  }));
+
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={collectionPageSchema(
+          "Services — Visual Identity, Social Media & Paid Acquisition",
+          "Three core capabilities engineered into one connected growth system.",
+          "/services",
+          collectionItems,
+        )}
+      />
       <SiteNav />
 
       <section className="relative overflow-hidden bg-white">
         <div className="absolute inset-x-0 -top-40 -z-10 h-[520px] bg-gradient-brand-soft opacity-70 blur-3xl" />
         <Container className="pt-20 pb-16 lg:pt-28 lg:pb-20">
+          <Breadcrumbs
+            items={[
+              { name: "Home", path: "/" },
+              { name: "Services", path: "/services" },
+            ]}
+            className="mb-8"
+          />
           <Eyebrow>Capabilities</Eyebrow>
           <h1 className="mt-7 max-w-4xl text-4xl sm:text-5xl lg:text-[80px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
             Three capabilities.{" "}
@@ -112,6 +126,6 @@ function ServicesIndex() {
       </section>
 
       <SiteFooter />
-    </div>
+    </main>
   );
 }

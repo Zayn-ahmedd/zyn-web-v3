@@ -14,20 +14,29 @@ import { SiteFooter } from "@/components/site/footer";
 import { Container, Eyebrow, SectionLabel } from "@/components/site/primitives";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { Globe as CobeGlobe } from "@/components/ui/cobe-globe";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { webPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
 
 const globeMarkers = [
   { id: "usa", location: [37.7595, -122.4367] as [number, number], label: "United States" },
   { id: "canada", location: [43.6532, -79.3832] as [number, number], label: "Canada" },
   { id: "uk", location: [51.5074, -0.1278] as [number, number], label: "United Kingdom" },
-  { id: "uae", location: [25.2048, 55.2708] as [number, number], label: "Dubai" },
-  { id: "india", location: [19.076, 72.8777] as [number, number], label: "India" },
+  { id: "uae", location: [25.2048, 55.2708] as [number, number], label: "UAE" },
+  { id: "india", location: [13.0827, 80.2707] as [number, number], label: "India" },
   { id: "australia", location: [-33.8688, 151.2093] as [number, number], label: "Australia" },
 ];
 
 const globeArcs = [
   {
-    id: "usa-uk",
+    id: "usa-canada",
     from: [37.7595, -122.4367] as [number, number],
+    to: [43.6532, -79.3832] as [number, number],
+  },
+  {
+    id: "canada-uk",
+    from: [43.6532, -79.3832] as [number, number],
     to: [51.5074, -0.1278] as [number, number],
   },
   {
@@ -38,31 +47,23 @@ const globeArcs = [
   {
     id: "uae-india",
     from: [25.2048, 55.2708] as [number, number],
-    to: [19.076, 72.8777] as [number, number],
+    to: [13.0827, 80.2707] as [number, number],
   },
   {
     id: "india-australia",
-    from: [19.076, 72.8777] as [number, number],
+    from: [13.0827, 80.2707] as [number, number],
     to: [-33.8688, 151.2093] as [number, number],
   },
 ];
 
 export const Route = createFileRoute("/markets")({
-  head: () => ({
-    meta: [
-      { title: "Global Target Markets — Analytics & Hub Performance | Zynovax" },
-      {
-        name: "description",
-        content:
-          "Growth metrics, active hub channels, and ROI charts across our primary target markets: USA, Canada, Australia, UK, UAE, and India.",
-      },
-      { property: "og:title", content: "Global Target Markets | Zynovax" },
-      {
-        property: "og:description",
-        content: "Compounding scale systems operating in 6 international regions.",
-      },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "Global Target Markets — Analytics & Hub Performance | Zynovax",
+      description:
+        "Growth metrics, active hub channels, and ROI charts across our primary target markets: USA, Canada, Australia, UK, UAE, and India.",
+      path: "/markets",
+    }),
   component: MarketsPage,
 });
 
@@ -155,13 +156,28 @@ const markets = [
 
 function MarketsPage() {
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={webPageSchema({
+          title: "Global Target Markets — Analytics & Hub Performance | Zynovax",
+          description:
+            "Growth metrics, active hub channels, and ROI charts across our primary target markets: USA, Canada, Australia, UK, UAE, and India.",
+          path: "/markets",
+        })}
+      />
       <SiteNav />
 
       <div className="animate-slide-down-page">
         <section className="relative overflow-hidden bg-white">
           <div className="absolute inset-x-0 -top-40 -z-10 h-[480px] bg-gradient-brand-soft opacity-70 blur-3xl" />
           <Container className="pt-20 pb-16 lg:pt-28 lg:pb-20">
+            <Breadcrumbs
+              items={[
+                { name: "Home", path: "/" },
+                { name: "Markets", path: "/markets" },
+              ]}
+              className="mb-8"
+            />
             <div className="grid lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-7">
                 <Eyebrow>Global Cross-Sections</Eyebrow>
@@ -409,6 +425,6 @@ function MarketsPage() {
 
         <SiteFooter />
       </div>
-    </div>
+    </main>
   );
 }

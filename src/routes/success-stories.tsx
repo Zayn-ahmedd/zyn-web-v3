@@ -3,24 +3,19 @@ import { ArrowUpRight, Quote, Star, Award } from "lucide-react";
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { Container, Eyebrow } from "@/components/site/primitives";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { collectionPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
 
 export const Route = createFileRoute("/success-stories")({
-  head: () => ({
-    meta: [
-      { title: "Success Stories — Client Outcomes & Case Studies | Zynovax" },
-      {
-        name: "description",
-        content:
-          "Real creative branding & digital marketing outcomes. Case studies from Visual Identity, Social Media, and Performance Marketing clients — challenge, strategy, execution and measurable results.",
-      },
-      { property: "og:title", content: "Zynovax Success Stories" },
-      {
-        property: "og:description",
-        content:
-          "Borders are imaginary; your scale is absolute. Real systems, measurable outcomes.",
-      },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "Success Stories — Client Outcomes & Case Studies | Zynovax",
+      description:
+        "Real creative branding & digital marketing outcomes. Case studies from Visual Identity, Social Media, and Performance Marketing clients — challenge, strategy, execution and measurable results.",
+      path: "/success-stories",
+    }),
   component: StoriesPage,
 });
 
@@ -98,14 +93,35 @@ const stories = [
 ];
 
 function StoriesPage() {
+  const collectionItems = stories.map((s) => ({
+    name: `${s.client} — ${s.headline}`,
+    url: `https://www.zynovax.in/success-stories`,
+    description: `Challenge: ${s.challenge} Execution: ${s.execution}`,
+  }));
+
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={collectionPageSchema(
+          "Success Stories — Client Outcomes & Case Studies",
+          "Real creative branding & digital marketing outcomes. Case studies from Zynovax clients.",
+          "/success-stories",
+          collectionItems,
+        )}
+      />
       <SiteNav />
 
       <div className="animate-slide-down-page">
         <section className="relative overflow-hidden bg-white">
           <div className="absolute inset-x-0 -top-40 -z-10 h-[480px] bg-gradient-brand-soft opacity-70 blur-3xl" />
           <Container className="pt-20 pb-16 lg:pt-28 lg:pb-20">
+            <Breadcrumbs
+              items={[
+                { name: "Home", path: "/" },
+                { name: "Success Stories", path: "/success-stories" },
+              ]}
+              className="mb-8"
+            />
             <Eyebrow>Success Stories</Eyebrow>
             <h1 className="mt-7 max-w-4xl text-4xl sm:text-5xl lg:text-[80px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
               Real systems.{" "}
@@ -218,6 +234,6 @@ function StoriesPage() {
 
         <SiteFooter />
       </div>
-    </div>
+    </main>
   );
 }

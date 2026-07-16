@@ -7,23 +7,19 @@ import { Container, Eyebrow } from "@/components/site/primitives";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { PerspectiveBook } from "@/components/ui/perspective-book";
 import { cn } from "@/lib/utils";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { collectionPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
 
 export const Route = createFileRoute("/insights")({
-  head: () => ({
-    meta: [
-      { title: "Insights & Playbooks — White-Papers | Zynovax" },
-      {
-        name: "description",
-        content:
-          "Download our creative branding manuals, performance marketing guides, and brand design white-papers built for ambitious founders.",
-      },
-      { property: "og:title", content: "Zynovax Insights" },
-      {
-        property: "og:description",
-        content: "Download brand design white-papers and marketing playbook frameworks.",
-      },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "Insights & Playbooks — White-Papers | Zynovax",
+      description:
+        "Download our creative branding manuals, performance marketing guides, and brand design white-papers built for ambitious founders.",
+      path: "/insights",
+    }),
   component: InsightsPage,
 });
 
@@ -108,8 +104,22 @@ function InsightsPage() {
     }
   };
 
+  const collectionItems = playbooks.map((p) => ({
+    name: `${p.title} — ${p.subtitle}`,
+    url: `https://www.zynovax.in/insights`,
+    description: `Category: ${p.categoryLabel}. Stat: ${p.stat} (${p.statLabel})`,
+  }));
+
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={collectionPageSchema(
+          "Insights & Playbooks — White-Papers | Zynovax",
+          "Download our creative branding manuals, performance marketing guides, and brand design white-papers.",
+          "/insights",
+          collectionItems,
+        )}
+      />
       <SiteNav />
 
       <div className="animate-slide-down-page">
@@ -117,6 +127,13 @@ function InsightsPage() {
         <section className="relative overflow-hidden bg-white">
           <div className="absolute inset-x-0 -top-40 -z-10 h-[480px] bg-gradient-brand-soft opacity-70 blur-3xl" />
           <Container className="pt-20 pb-12 lg:pt-28 lg:pb-16">
+            <Breadcrumbs
+              items={[
+                { name: "Home", path: "/" },
+                { name: "Insights", path: "/insights" },
+              ]}
+              className="mb-8"
+            />
             <Eyebrow>Knowledge Base</Eyebrow>
             <h1 className="mt-7 max-w-4xl text-4xl sm:text-5xl lg:text-[80px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
               Playbooks &{" "}
@@ -380,6 +397,6 @@ function InsightsPage() {
 
         <SiteFooter />
       </div>
-    </div>
+    </main>
   );
 }

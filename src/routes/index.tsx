@@ -60,19 +60,18 @@ import { lazy, Suspense } from 'react';
 
 const LazySections = lazy(() => import('./-index-lazy'));
 
+import { generatePageHead } from "@/lib/seo/metadata";
+import { webPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Zynovax — Creative Branding & Digital Marketing" },
-      {
-        name: "description",
-        content:
-          "Zynovax is a global creative branding and digital marketing firm. Borders are imaginary; your scale is absolute.",
-      },
-      { property: "og:title", content: "Zynovax — Creative Branding & Digital Marketing" },
-      { property: "og:description", content: "Borders are imaginary; your scale is absolute." },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "Zynovax — Creative Branding & Digital Marketing",
+      description:
+        "Zynovax is a global creative branding and digital marketing firm. Borders are imaginary; your scale is absolute. We build visual identity, social media, and performance ads that predictably scale enterprise revenue.",
+      path: "/",
+    }),
   component: Index,
 });
 
@@ -194,7 +193,15 @@ function Hero() {
 
 function Index() {
   return (
-    <main className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={webPageSchema({
+          title: "Zynovax — Creative Branding & Digital Marketing",
+          description:
+            "Zynovax is a global creative branding and digital marketing firm. Borders are imaginary; your scale is absolute. We build visual identity, social media, and performance ads that predictably scale enterprise revenue.",
+          path: "/",
+        })}
+      />
       <SiteNav />
       <Hero />
       <Suspense fallback={<div className="h-[50vh] w-full flex items-center justify-center"><div className="size-8 rounded-full border-4 border-border border-t-ink animate-spin" /></div>}>

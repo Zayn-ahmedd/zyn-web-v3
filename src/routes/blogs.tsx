@@ -3,23 +3,19 @@ import { ArrowUpRight } from "lucide-react";
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { Container, Eyebrow, SectionLabel } from "@/components/site/primitives";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { collectionPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
 
 export const Route = createFileRoute("/blogs")({
-  head: () => ({
-    meta: [
-      { title: "Blogs — Creative Branding & Marketing Insights | Zynovax" },
-      {
-        name: "description",
-        content:
-          "Insights, teardowns and frameworks on brand strategy, performance marketing, SEO, CRO, content and AI automation from the Zynovax team.",
-      },
-      { property: "og:title", content: "Zynovax Blogs" },
-      {
-        property: "og:description",
-        content: "Branding and marketing insights from senior operators.",
-      },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "Blogs — Creative Branding & Marketing Insights | Zynovax",
+      description:
+        "Insights, teardowns and frameworks on brand strategy, performance marketing, SEO, CRO, content and AI automation from the Zynovax team.",
+      path: "/blogs",
+    }),
   component: BlogsPage,
 });
 
@@ -70,8 +66,23 @@ const posts = [
 
 function BlogsPage() {
   const [hero, ...rest] = posts;
+
+  const collectionItems = posts.map((post) => ({
+    name: post.t,
+    url: `https://www.zynovax.in/blogs`, // Currently they list all on one route
+    description: post.d,
+  }));
+
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={collectionPageSchema(
+          "Blogs — Creative Branding & Marketing Insights",
+          "Insights, teardowns and frameworks on brand strategy, performance marketing, SEO, CRO, content and AI automation.",
+          "/blogs",
+          collectionItems,
+        )}
+      />
       <SiteNav />
 
       <div className="animate-slide-down-page">
@@ -79,6 +90,13 @@ function BlogsPage() {
         <section className="relative overflow-hidden bg-white">
           <div className="absolute inset-x-0 -top-40 -z-10 h-[480px] bg-gradient-brand-soft opacity-70 blur-3xl" />
           <Container className="pt-20 pb-12 lg:pt-28 lg:pb-16">
+            <Breadcrumbs
+              items={[
+                { name: "Home", path: "/" },
+                { name: "Blogs", path: "/blogs" },
+              ]}
+              className="mb-8"
+            />
             <Eyebrow>Editorial</Eyebrow>
             <h1 className="mt-7 max-w-4xl text-4xl sm:text-5xl lg:text-[80px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
               Branding and marketing,{" "}
@@ -154,6 +172,6 @@ function BlogsPage() {
 
         <SiteFooter />
       </div>
-    </div>
+    </main>
   );
 }

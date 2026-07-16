@@ -3,23 +3,19 @@ import { ArrowUpRight, BookOpen, FileText, PlayCircle, Download } from "lucide-r
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { Container, Eyebrow, SectionLabel } from "@/components/site/primitives";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { collectionPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
 
 export const Route = createFileRoute("/resources")({
-  head: () => ({
-    meta: [
-      { title: "Resources — Playbooks, Frameworks & Guides | Zynovax" },
-      {
-        name: "description",
-        content:
-          "Frameworks, playbooks and branding & marketing guides from the Zynovax team. Built for operators serious about compounding revenue.",
-      },
-      { property: "og:title", content: "Zynovax Resources" },
-      {
-        property: "og:description",
-        content: "Playbooks and frameworks from the creative branding and digital marketing team.",
-      },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "Resources — Playbooks, Frameworks & Guides | Zynovax",
+      description:
+        "Frameworks, playbooks and branding & marketing guides from the Zynovax team. Built for operators serious about compounding revenue.",
+      path: "/resources",
+    }),
   component: ResourcesPage,
 });
 
@@ -69,14 +65,38 @@ const items = [
 ];
 
 function ResourcesPage() {
+  const collectionItems = [
+    { name: featured.title, url: "https://www.zynovax.in/resources", description: featured.desc },
+    ...items.map((item) => ({
+      name: item.t,
+      url: "https://www.zynovax.in/resources",
+      description: item.d,
+    })),
+  ];
+
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={collectionPageSchema(
+          "Resources — Playbooks, Frameworks & Guides | Zynovax",
+          "Frameworks, playbooks and branding & marketing guides from the Zynovax team.",
+          "/resources",
+          collectionItems,
+        )}
+      />
       <SiteNav />
 
       <div className="animate-slide-down-page">
         <section className="relative overflow-hidden bg-white">
           <div className="absolute inset-x-0 -top-40 -z-10 h-[480px] bg-gradient-brand-soft opacity-70 blur-3xl" />
           <Container className="pt-20 pb-16 lg:pt-28 lg:pb-20">
+            <Breadcrumbs
+              items={[
+                { name: "Home", path: "/" },
+                { name: "Resources", path: "/resources" },
+              ]}
+              className="mb-8"
+            />
             <Eyebrow>Resources</Eyebrow>
             <h1 className="mt-7 max-w-4xl text-4xl sm:text-5xl lg:text-[80px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
               Frameworks, playbooks and{" "}
@@ -163,6 +183,6 @@ function ResourcesPage() {
 
         <SiteFooter />
       </div>
-    </div>
+    </main>
   );
 }

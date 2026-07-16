@@ -4,20 +4,19 @@ import { Shield, FileCheck, Landmark, Scale, Cpu } from "lucide-react";
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { Container, Eyebrow } from "@/components/site/primitives";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { webPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
 
 export const Route = createFileRoute("/legal")({
-  head: () => ({
-    meta: [
-      { title: "Legal & Compliance Frameworks | Zynovax" },
-      {
-        name: "description",
-        content:
-          "Terms of engagement, global privacy standards, and cross-border client compliance frameworks for Zynovax operations.",
-      },
-      { property: "og:title", content: "Zynovax Legal & Compliance" },
-      { property: "og:description", content: "Premium terms and compliance manuals." },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "Legal & Compliance Frameworks | Zynovax",
+      description:
+        "Terms of engagement, global privacy standards, and cross-border client compliance frameworks for Zynovax operations.",
+      path: "/legal",
+    }),
   component: LegalPage,
 });
 
@@ -93,7 +92,15 @@ function LegalPage() {
   const activeContent = sections.find((s) => s.id === activeSec) || sections[0];
 
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={webPageSchema({
+          title: "Legal & Compliance Frameworks | Zynovax",
+          description:
+            "Terms of engagement, global privacy standards, and cross-border client compliance frameworks for Zynovax operations.",
+          path: "/legal",
+        })}
+      />
       <SiteNav />
 
       <div className="animate-slide-down-page">
@@ -101,6 +108,13 @@ function LegalPage() {
         <section className="relative overflow-hidden bg-white">
           <div className="absolute inset-x-0 -top-40 -z-10 h-[480px] bg-gradient-brand-soft opacity-70 blur-3xl" />
           <Container className="pt-20 pb-12 lg:pt-28 lg:pb-16">
+            <Breadcrumbs
+              items={[
+                { name: "Home", path: "/" },
+                { name: "Legal", path: "/legal" },
+              ]}
+              className="mb-8"
+            />
             <Eyebrow>Compliance</Eyebrow>
             <h1 className="mt-7 max-w-4xl text-4xl sm:text-5xl lg:text-[80px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
               Legal{" "}
@@ -182,6 +196,6 @@ function LegalPage() {
 
         <SiteFooter />
       </div>
-    </div>
+    </main>
   );
 }

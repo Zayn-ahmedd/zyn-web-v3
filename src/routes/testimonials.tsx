@@ -8,23 +8,19 @@ import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { TestimonialCard } from "@/components/ui/testimonial-cards";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { webPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
 
 export const Route = createFileRoute("/testimonials")({
-  head: () => ({
-    meta: [
-      { title: "Client Testimonials & Reviews | Zynovax" },
-      {
-        name: "description",
-        content:
-          "What founders from USA, UK, UAE, Canada, Australia & India say about us. Real trust, proven results, and global growth outcomes.",
-      },
-      { property: "og:title", content: "Zynovax Testimonials" },
-      {
-        property: "og:description",
-        content: "Hear from ambitious operators and founders globally.",
-      },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "Client Testimonials & Reviews | Zynovax",
+      description:
+        "What founders from USA, UK, UAE, Canada, Australia & India say about Zynovax. Real trust, proven results, and global growth outcomes.",
+      path: "/testimonials",
+    }),
   component: TestimonialsPage,
 });
 
@@ -182,7 +178,15 @@ function VideoTestimonialCard({
 
 function TestimonialsPage() {
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={webPageSchema({
+          title: "Client Testimonials & Reviews | Zynovax",
+          description:
+            "What founders from USA, UK, UAE, Canada, Australia & India say about Zynovax. Real trust, proven results, and global growth outcomes.",
+          path: "/testimonials",
+        })}
+      />
       <SiteNav />
 
       <div className="animate-slide-down-page">
@@ -190,6 +194,13 @@ function TestimonialsPage() {
         <section className="relative overflow-hidden bg-white">
           <div className="absolute inset-x-0 -top-40 -z-10 h-[480px] bg-gradient-brand-soft opacity-70 blur-3xl" />
           <Container className="pt-20 pb-16 lg:pt-28 lg:pb-20">
+            <Breadcrumbs
+              items={[
+                { name: "Home", path: "/" },
+                { name: "Testimonials", path: "/testimonials" },
+              ]}
+              className="mb-8"
+            />
             <div className="grid lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-6">
                 <Eyebrow>Client Proof</Eyebrow>
@@ -339,6 +350,6 @@ function TestimonialsPage() {
 
         <SiteFooter />
       </div>
-    </div>
+    </main>
   );
 }

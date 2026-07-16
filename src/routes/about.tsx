@@ -1,22 +1,21 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router';
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { Container, Eyebrow, SectionLabel } from "@/components/site/primitives";
 import ahmedRashmi from "@/assets/ahmed-rashmi.jpg";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { personSchema, webPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Zynovax — Creative Branding & Digital Marketing" },
-      {
-        name: "description",
-        content:
-          "Zynovax is a global creative branding and digital marketing firm. Borders are imaginary; your scale is absolute.",
-      },
-      { property: "og:title", content: "About Zynovax" },
-      { property: "og:description", content: "Borders are imaginary; your scale is absolute." },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "About Zynovax — Creative Branding & Digital Marketing",
+      description:
+        "Zynovax is a global creative branding and digital marketing firm built by senior operators. Learn about our principles, global scale, and operations center in Chennai.",
+      path: "/about",
+    }),
   component: AboutPage,
 });
 
@@ -49,12 +48,30 @@ const principles = [
 
 function AboutPage() {
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={[
+          webPageSchema({
+            title: "About Zynovax — Creative Branding & Digital Marketing",
+            description:
+              "Zynovax is a global creative branding and digital marketing firm built by senior operators. Learn about our principles, global scale, and operations center in Chennai.",
+            path: "/about",
+          }),
+          personSchema(),
+        ]}
+      />
       <SiteNav />
 
       <section className="relative overflow-hidden bg-white">
         <div className="absolute inset-x-0 -top-40 -z-10 h-[480px] bg-gradient-brand-soft opacity-70 blur-3xl" />
         <Container className="pt-20 pb-16 lg:pt-28 lg:pb-20">
+          <Breadcrumbs
+            items={[
+              { name: "Home", path: "/" },
+              { name: "About", path: "/about" },
+            ]}
+            className="mb-8 animate-rise"
+          />
           <Eyebrow>About Zynovax · Est. 2025</Eyebrow>
           <h1 className="mt-7 max-w-5xl text-4xl sm:text-5xl lg:text-[80px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
             We design branding and digital marketing for{" "}
@@ -172,6 +189,6 @@ function AboutPage() {
       </section>
 
       <SiteFooter />
-    </div>
+    </main>
   );
 }

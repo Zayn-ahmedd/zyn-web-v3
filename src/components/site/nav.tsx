@@ -357,12 +357,14 @@ export function SiteNav() {
             {/* SECTION B: Centered Navigation */}
             <div className="flex-shrink-0 flex items-center justify-center">
               <div className="relative">
-                <div
+                <nav
+                  aria-label="Main"
                   className="flex items-center gap-x-5 lg:gap-x-6 bg-white/70 dark:bg-zinc-900/70 border border-border/40 backdrop-blur-md py-1.5 px-3 rounded-full shadow-elegant hover:shadow-glow transition-shadow duration-300"
                   onMouseLeave={handleMouseLeave}
                 >
                   {navigationData.map((item) => {
                     const isActive = activeTab === item.name;
+                    const isCurrent = isRootLinkActive(item);
 
                     return (
                       <div
@@ -372,6 +374,8 @@ export function SiteNav() {
                       >
                         {item.hasDropdown ? (
                           <button
+                            aria-haspopup="true"
+                            aria-expanded={openDropdown === item.name}
                             className={cn(
                               "relative cursor-pointer whitespace-nowrap text-[13px] font-medium tracking-wide text-neutral-800 dark:text-neutral-200 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1 focus:outline-none",
                               "hover:text-black dark:hover:text-white",
@@ -407,6 +411,7 @@ export function SiteNav() {
                         ) : (
                           <Link
                             to={item.to!}
+                            aria-current={isCurrent ? "page" : undefined}
                             className={cn(
                               "relative cursor-pointer whitespace-nowrap text-[13px] font-medium tracking-wide text-neutral-800 dark:text-neutral-200 px-3 py-1.5 rounded-full transition-colors block",
                               "hover:text-black dark:hover:text-white",
@@ -436,7 +441,7 @@ export function SiteNav() {
                       </div>
                     );
                   })}
-                </div>
+                </nav>
 
                 <AnimatePresence>
                   {openDropdown && (

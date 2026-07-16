@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import { GooeyText } from "@/components/ui/gooey-text-morphing";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { faqSchema } from "@/lib/seo/schemas";
+import { trackFAQExpand } from "@/lib/analytics/events";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -1124,6 +1127,7 @@ function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section id="faq" className="bg-white py-24 lg:py-32">
+      <JsonLd data={faqSchema(qs.map((it) => ({ question: it.q, answer: it.a })))} />
       <Container>
         <div className="max-w-3xl mb-14">
           <SectionLabel no="11" label="Questions, answered" />
@@ -1138,7 +1142,13 @@ function FAQ() {
             return (
               <div key={it.q}>
                 <button
-                  onClick={() => setOpen(isOpen ? null : i)}
+                  onClick={() => {
+                    const nextOpen = isOpen ? null : i;
+                    setOpen(nextOpen);
+                    if (nextOpen !== null) {
+                      trackFAQExpand(it.q);
+                    }
+                  }}
                   className="w-full flex items-center justify-between gap-6 py-7 text-left cursor-pointer"
                 >
                   <span className="text-lg font-medium text-ink">{it.q}</span>

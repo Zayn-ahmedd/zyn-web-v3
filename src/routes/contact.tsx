@@ -5,35 +5,50 @@ import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { Container, Eyebrow, SectionLabel } from "@/components/site/primitives";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { localBusinessSchema, webPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
+import { trackContactFormSubmit, trackBookStrategyCall } from "@/lib/analytics/events";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Book a Strategy Call | Zynovax" },
-      {
-        name: "description",
-        content:
-          "Book a 30-minute strategy call with the Zynovax team. We'll audit your funnel, identify your highest-leverage move, and outline what an engagement could look like.",
-      },
-      { property: "og:title", content: "Book a Strategy Call | Zynovax" },
-      {
-        property: "og:description",
-        content: "30-minute no-cost strategy call. Senior team, real audit.",
-      },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "Book a Strategy Call | Zynovax",
+      description:
+        "Book a 30-minute strategy call with the Zynovax team. We'll audit your funnel, identify your highest-leverage move, and outline what an engagement could look like.",
+      path: "/contact",
+    }),
   component: ContactPage,
 });
 
 function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={[
+          webPageSchema({
+            title: "Book a Strategy Call | Zynovax",
+            description:
+              "Book a 30-minute strategy call with the Zynovax team. We'll audit your funnel, identify your highest-leverage move, and outline what an engagement could look like.",
+            path: "/contact",
+          }),
+          localBusinessSchema(),
+        ]}
+      />
       <SiteNav />
 
       <section className="relative overflow-hidden bg-white">
         <div className="absolute inset-x-0 -top-40 -z-10 h-[520px] bg-gradient-brand-soft opacity-70 blur-3xl" />
         <Container className="pt-20 pb-24 lg:pt-28 lg:pb-32">
+          <Breadcrumbs
+            items={[
+              { name: "Home", path: "/" },
+              { name: "Contact", path: "/contact" },
+            ]}
+            className="mb-8"
+          />
           <div className="grid lg:grid-cols-12 gap-12">
             <div className="lg:col-span-6">
               <Eyebrow>Start the conversation</Eyebrow>
@@ -110,6 +125,8 @@ function ContactPage() {
                     onSubmit={(e) => {
                       e.preventDefault();
                       setSubmitted(true);
+                      trackContactFormSubmit("contact_strategy_call");
+                      trackBookStrategyCall("contact_page");
                     }}
                     className="mt-8 space-y-5"
                   >
@@ -148,7 +165,10 @@ function ContactPage() {
                       <LiquidMetalButton
                         label="Request strategy call"
                         width={210}
-                        onClick={() => setSubmitted(true)}
+                        onClick={() => {
+                          // Button click will validate via HTML5 constraint and trigger form submit
+                          // We only set submitted inside the onSubmit form handler to ensure validation runs
+                        }}
                       />
                     </div>
                     <p className="text-xs text-ink-soft text-center">
@@ -178,7 +198,7 @@ function ContactPage() {
         }
         .input:focus { border-color: var(--ink); background: white; }
       `}</style>
-    </div>
+    </main>
   );
 }
 

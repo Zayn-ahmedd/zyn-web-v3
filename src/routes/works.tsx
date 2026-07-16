@@ -17,23 +17,19 @@ import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { Container, Eyebrow } from "@/components/site/primitives";
 import { DottedSurface } from "@/components/ui/dotted-surface";
 import { motion } from "framer-motion";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { collectionPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
 
 export const Route = createFileRoute("/works")({
-  head: () => ({
-    meta: [
-      { title: "Works & Case Studies — Portfolio | Zynovax" },
-      {
-        name: "description",
-        content:
-          "Proof over promises. Explore our latest global client rollouts across visual identity, social media management, and performance marketing.",
-      },
-      { property: "og:title", content: "Zynovax Works" },
-      {
-        property: "og:description",
-        content: "High-ticket global client case studies and growth metrics.",
-      },
-    ],
-  }),
+  head: () =>
+    generatePageHead({
+      title: "Works & Case Studies — Portfolio | Zynovax",
+      description:
+        "Proof over promises. Explore our latest global client rollouts across visual identity, social media management, and performance marketing.",
+      path: "/works",
+    }),
   component: WorksPage,
 });
 
@@ -165,8 +161,22 @@ function WorksPage() {
   const filteredProjects =
     activeFilter === "all" ? projects : projects.filter((p) => p.category === activeFilter);
 
+  const collectionItems = projects.map((p) => ({
+    name: `${p.client} — ${p.headline}`,
+    url: `https://www.zynovax.in/works`, // they list all works on this page
+    description: `${p.challenge} Strategy: ${p.strategy}`,
+  }));
+
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={collectionPageSchema(
+          "Works & Case Studies — Portfolio | Zynovax",
+          "Proof over promises. Explore our latest global client rollouts.",
+          "/works",
+          collectionItems,
+        )}
+      />
       <SiteNav />
 
       <div className="animate-slide-down-page">
@@ -204,6 +214,13 @@ function WorksPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
               >
+                <Breadcrumbs
+                  items={[
+                    { name: "Home", path: "/" },
+                    { name: "Works", path: "/works" },
+                  ]}
+                  className="mb-8"
+                />
                 <Eyebrow>Our Portfolio</Eyebrow>
               </motion.div>
 
@@ -492,6 +509,6 @@ function WorksPage() {
 
         <SiteFooter />
       </div>
-    </div>
+    </main>
   );
 }

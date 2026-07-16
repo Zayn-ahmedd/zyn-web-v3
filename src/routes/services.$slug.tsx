@@ -8,6 +8,10 @@ import { Card } from "@/components/ui/card";
 import { SplineScene } from "@/components/ui/splite";
 import { Spotlight } from "@/components/ui/spotlight";
 import { getService, services, type Service } from "@/data/services";
+import { generatePageHead } from "@/lib/seo/metadata";
+import { serviceSchema, faqSchema, webPageSchema } from "@/lib/seo/schemas";
+import { JsonLd } from "@/lib/seo/JsonLd";
+import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
@@ -19,14 +23,11 @@ export const Route = createFileRoute("/services/$slug")({
     if (!loaderData) return {};
     const service = getService(loaderData.service.slug);
     if (!service) return {};
-    return {
-      meta: [
-        { title: service.metaTitle },
-        { name: "description", content: service.metaDescription },
-        { property: "og:title", content: service.metaTitle },
-        { property: "og:description", content: service.metaDescription },
-      ],
-    };
+    return generatePageHead({
+      title: service.metaTitle,
+      description: service.metaDescription,
+      path: `/services/${service.slug}`,
+    });
   },
   component: ServicePage,
   notFoundComponent: () => (
@@ -48,13 +49,36 @@ function ServicePage() {
   const Icon = s.icon;
 
   return (
-    <div className="bg-white">
+    <main className="bg-white" id="main-content">
+      <JsonLd
+        data={[
+          webPageSchema({
+            title: s.metaTitle,
+            description: s.metaDescription,
+            path: `/services/${s.slug}`,
+          }),
+          serviceSchema({
+            name: s.name,
+            description: s.tagline,
+            slug: s.slug,
+          }),
+          faqSchema(s.faqs.map((f) => ({ question: f.q, answer: f.a }))),
+        ]}
+      />
       <SiteNav />
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-white">
         <div className="absolute inset-x-0 -top-40 -z-10 h-[520px] bg-gradient-brand-soft opacity-70 blur-3xl" />
         <Container className="pt-20 pb-20 lg:pt-28 lg:pb-28">
+          <Breadcrumbs
+            items={[
+              { name: "Home", path: "/" },
+              { name: "Services", path: "/services" },
+              { name: s.name, path: `/services/${s.slug}` },
+            ]}
+            className="mb-8"
+          />
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-7 animate-rise">
               <Eyebrow>Service · {s.name}</Eyebrow>
@@ -320,10 +344,9 @@ function ServicePage() {
         </Container>
       </section>
 
-      {/* CTA */}
       <FinalCTA cta={s.cta} />
       <SiteFooter />
-    </div>
+    </main>
   );
 }
 
