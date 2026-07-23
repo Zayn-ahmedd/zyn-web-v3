@@ -1,11 +1,7 @@
 /**
- * LeadCaptureModal — Mobile-Optimized 2-Column Grid Lead Capture Modal
- *
- * 2-Column Mobile Grid:
- * Row 1: Full Name (col-span-2 / 100%)
- * Row 2: Business Email (col-span-1 / 50%) | WhatsApp / Phone (col-span-1 / 50%)
- * Row 3: Service Required (col-span-1 / 50%) | Monthly Budget Range (col-span-1 / 50%)
- * Row 4: Continue CTA Button (col-span-2 / 100%)
+ * LeadCaptureModal — Centered Vertical Stack Glassmorphic Modal
+ * Top Section: Brand Poster Image Banner (/Lead popup image 2.png) with glass badges & social links
+ * Bottom Section: Form (Name 100%, Email 50% | Phone 50%, Service 50% | Budget 50%, CTA Button)
  */
 
 import { useState } from "react";
@@ -105,17 +101,17 @@ const SOCIAL_LINKS = [
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
 
-const sheetVariants = {
-  hidden: { y: "100%", opacity: 0 },
+const modalVariants = {
+  hidden: { opacity: 0, scale: 0.93 },
   visible: {
-    y: 0,
     opacity: 1,
-    transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] as const },
+    scale: 1,
+    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const },
   },
   exit: {
-    y: "100%",
     opacity: 0,
-    transition: { duration: 0.25, ease: "easeIn" as const },
+    scale: 0.94,
+    transition: { duration: 0.2, ease: "easeIn" as const },
   },
 };
 
@@ -167,7 +163,7 @@ export function LeadCaptureModal() {
           phone: data.phone,
           services: [data.service],
           budget: data.budget,
-          source: "lead-modal-2col-grid",
+          source: "lead-modal-centered",
           submittedAt: new Date().toISOString(),
         },
       });
@@ -209,92 +205,86 @@ export function LeadCaptureModal() {
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogContent
         className={cn(
-          "fixed left-0 bottom-0 top-auto translate-x-0 translate-y-0",
-          "w-full max-h-[92vh] rounded-t-3xl rounded-b-none border-t border-white/20",
-          "bg-slate-950/90 backdrop-blur-3xl shadow-[0_-10px_50px_rgba(0,0,0,0.9)]",
-          "md:left-[50%] md:top-[50%] md:bottom-auto md:translate-x-[-50%] md:translate-y-[-50%]",
-          "md:max-w-4xl md:max-h-[85vh] md:rounded-3xl md:border md:border-white/20",
-          "md:bg-slate-950/40 md:shadow-[0_0_140px_rgba(168,85,247,0.25),0_30px_90px_rgba(0,0,0,0.8)]",
-          "p-0 border-0 overflow-hidden text-white font-sans transition-all duration-300",
+          /* ── Centered Modal Popup on all screens ── */
+          "fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]",
+          "w-[92vw] max-w-lg max-h-[90vh] overflow-y-auto rounded-3xl border border-white/20",
+          "bg-slate-950/90 backdrop-blur-3xl shadow-[0_0_100px_rgba(168,85,247,0.3),0_25px_80px_rgba(0,0,0,0.9)]",
+          "p-0 border-0 text-white font-sans transition-all duration-300",
         )}
         aria-label="Accelerate Your Brand Growth"
       >
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/60 to-transparent z-30 hidden md:block" />
+        {/* Top Edge Specular Highlight Line */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/60 to-transparent z-30" />
 
-        <div className="pointer-events-none absolute -top-32 -left-32 size-80 rounded-full bg-purple-500/20 blur-[100px] z-0" />
-        <div className="pointer-events-none absolute -bottom-32 -right-32 size-80 rounded-full bg-pink-500/20 blur-[100px] z-0" />
-        <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 size-96 rounded-full bg-indigo-500/15 blur-[120px] z-0" />
+        {/* Ambient Glow Flares */}
+        <div className="pointer-events-none absolute -top-32 -left-32 size-72 rounded-full bg-purple-500/20 blur-[100px] z-0" />
+        <div className="pointer-events-none absolute -bottom-32 -right-32 size-72 rounded-full bg-pink-500/20 blur-[100px] z-0" />
 
         <motion.div
-          variants={sheetVariants}
+          variants={modalVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="relative z-10 flex flex-col md:flex-row w-full h-full max-h-[92vh] md:max-h-[85vh] md:min-h-[540px] overflow-y-auto md:overflow-hidden"
+          className="relative z-10 flex flex-col w-full h-full overflow-hidden"
         >
-          {/* Mobile Top Drag Handle */}
-          <div className="w-10 h-1 bg-white/40 rounded-full absolute top-2 inset-x-0 mx-auto z-20 md:hidden" />
-
           {/* ══════════════════════════════════════════════════════════════════
-              DESKTOP LEFT SIDE: Poster Presentation (4:5 Ratio, ~42% Desktop)
-              Scaled cleanly using object-cover and object-top
+              TOP SECTION: Featured Brand Image Banner (/Lead popup image 2.png)
              ══════════════════════════════════════════════════════════════════ */}
-          <div className="relative hidden md:flex md:w-[42%] flex-col justify-between p-6 overflow-hidden border-r border-white/15 bg-white/[0.02] backdrop-blur-md">
-            <div className="absolute inset-0 z-0">
-              <img
-                src="/Lead popup image 2.png"
-                alt="Partner with Zynovax"
-                className="w-full h-full object-cover object-top filter brightness-[1.03] contrast-[1.02]"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = "/lead-popup-image-2.png";
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent" />
+          <div className="relative w-full h-44 sm:h-52 rounded-t-3xl overflow-hidden shrink-0">
+            {/* Poster Image */}
+            <img
+              src="/Lead popup image 2.png"
+              alt="Zynovax Agency"
+              className="w-full h-full object-cover object-top filter brightness-[1.03] contrast-[1.02]"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = "/lead-popup-image-2.png";
+              }}
+            />
+
+            {/* Dark Gradient Overlay for Seamless Transition */}
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/50 to-slate-950" />
+
+            {/* Top-Left High-Contrast Glass Badge */}
+            <div className="absolute top-3.5 left-3.5 z-20 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/85 border border-purple-500/30 backdrop-blur-2xl shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+              <Sparkles className="size-3 text-purple-400 animate-pulse shrink-0" />
+              <span className="text-[10px] font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-pink-300 uppercase">
+                Zynovax Agency
+              </span>
             </div>
 
-            {/* High-Contrast Dark Glass Badge */}
-            <div className="relative z-10 flex items-center justify-between">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-950/85 border border-purple-500/30 backdrop-blur-2xl shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-                <Sparkles className="size-3 text-purple-400 animate-pulse shrink-0" />
-                <span className="text-[11px] font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-pink-300 uppercase">
-                  Zynovax Agency
-                </span>
-              </div>
+            {/* Bottom-Left Guarantee Badge */}
+            <div className="absolute bottom-3 left-3.5 z-20 hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/50 border border-white/10 backdrop-blur-md text-[10px] text-zinc-300">
+              <ShieldCheck className="size-3.5 text-emerald-400 shrink-0" />
+              <span>Verified Brand Partner</span>
             </div>
 
-            <div className="relative z-10 space-y-3">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/40 border border-white/10 backdrop-blur-md text-[10px] text-zinc-300">
-                <ShieldCheck className="size-3.5 text-emerald-400 shrink-0" />
-                <span>Verified Brand Partner & Growth Studio</span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                {SOCIAL_LINKS.map((social) => {
-                  const Icon = social.icon;
-                  return (
-                    <a
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title={social.name}
-                      aria-label={`Zynovax on ${social.name}`}
-                      className="p-2.5 rounded-full bg-white/10 hover:bg-white/25 text-white border border-white/20 hover:border-white/40 shadow-lg backdrop-blur-xl transition-all duration-200 cursor-pointer hover:scale-110 active:scale-95"
-                    >
-                      <Icon className="size-4" />
-                    </a>
-                  );
-                })}
-              </div>
+            {/* Bottom-Right Social Media Glass Icons */}
+            <div className="absolute bottom-3 right-3.5 z-20 flex items-center gap-1.5">
+              {SOCIAL_LINKS.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Zynovax on ${social.name}`}
+                    className="p-1.5 sm:p-2 rounded-full bg-white/15 hover:bg-white/30 text-white border border-white/20 backdrop-blur-md shadow-md transition-all active:scale-95"
+                  >
+                    <Icon className="size-3.5" />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
           {/* ══════════════════════════════════════════════════════════════════
-              RIGHT SIDE / MAIN FORM CONTENT (~58% Desktop)
+              BOTTOM SECTION: Form & Step Content (Down below image)
              ══════════════════════════════════════════════════════════════════ */}
-          <div className="w-full md:w-[58%] flex flex-col justify-between p-5 sm:p-8 bg-white/[0.03] backdrop-blur-2xl">
+          <div className="w-full p-5 sm:p-6 bg-white/[0.03] backdrop-blur-2xl">
+            {/* Header */}
             <div>
-              <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-1.5">
                   <div
                     className={cn(
@@ -332,10 +322,11 @@ export function LeadCaptureModal() {
               </DialogDescription>
             </div>
 
-            <div className="my-3 sm:my-4 flex-1">
+            {/* Step Content */}
+            <div className="my-3 flex-1">
               <AnimatePresence mode="wait" custom={direction}>
                 {step === 1 ? (
-                  /* ─── STEP 1: 2-Column Mobile-Optimized Grid Layout Form ─── */
+                  /* ─── STEP 1: Form ─── */
                   <motion.div
                     key="step-1"
                     custom={direction}
@@ -344,15 +335,15 @@ export function LeadCaptureModal() {
                     animate="center"
                     exit="exit"
                     transition={{ duration: 0.25, ease: "easeInOut" }}
-                    className="space-y-3.5"
+                    className="space-y-3"
                   >
                     <form
                       onSubmit={form.handleSubmit(onSubmit)}
-                      className="space-y-3.5"
+                      className="space-y-3"
                     >
-                      {/* 2-Column Mobile Grid Container */}
+                      {/* 2-Column Grid Layout */}
                       <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
-                        {/* Row 1: Full Name (col-span-2 / 100% full width) */}
+                        {/* Row 1: Full Name (col-span-2 / 100%) */}
                         <div className="col-span-2 space-y-1">
                           <Label
                             htmlFor="modal-fullName"
@@ -512,7 +503,7 @@ export function LeadCaptureModal() {
                       </div>
 
                       {/* Row 4: Submit Liquid Glass CTA Button (col-span-2 / 100%) */}
-                      <div className="pt-2">
+                      <div className="pt-1.5">
                         <button
                           type="submit"
                           disabled={isSubmitting}
