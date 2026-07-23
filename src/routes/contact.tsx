@@ -1,24 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { getCalApi } from "@calcom/embed-react";
 import {
-  Palette,
-  Code2,
-  Share2,
-  Target,
-  Megaphone,
   ArrowRight,
-  Loader2,
-  Sparkles,
-  Check,
-  User,
   Mail,
-  Phone,
-  DollarSign,
-  Calendar,
   MessageCircle,
+  Calendar,
   MapPin,
   CheckCircle2,
+  Loader2,
+  Sparkles,
+  User,
+  Phone,
+  DollarSign,
+  ChevronDown,
 } from "lucide-react";
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
@@ -31,23 +26,21 @@ import { trackContactFormSubmit, trackBookStrategyCall } from "@/lib/analytics/e
 import { submitLead } from "@/lib/api/lead.functions";
 import { cn } from "@/lib/utils";
 
-// ─── Services Data ────────────────────────────────────────────────────────────
+// ─── Dropdown Options Data ────────────────────────────────────────────────────
 
-const SERVICES = [
-  { id: "visual-identity", label: "Visual Identity", icon: Palette },
-  { id: "web-design", label: "Web Design & Development", icon: Code2 },
-  { id: "social-media", label: "Social Media Management", icon: Share2 },
-  { id: "meta-ads", label: "Meta Ads", icon: Target },
-  { id: "google-ads", label: "Google Ads", icon: Megaphone },
+const SERVICES_OPTIONS = [
+  "Visual Identity",
+  "Web Design & Development",
+  "Social Media Management",
+  "Meta Ads",
+  "Google Ads",
 ] as const;
 
-// ─── Budget Options ───────────────────────────────────────────────────────────
-
 const BUDGET_OPTIONS = [
-  { value: "under-1k", label: "< $1k" },
-  { value: "1k-3k", label: "$1k – $3k" },
-  { value: "3k-5k", label: "$3k – $5k" },
-  { value: "5k-plus", label: "$5k+" },
+  "< $1k",
+  "$1k – $3k",
+  "$3k – $5k",
+  "$5k+",
 ] as const;
 
 export const Route = createFileRoute("/contact")({
@@ -65,8 +58,8 @@ export function ContactPage() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const [selectedBudget, setSelectedBudget] = useState("");
+  const [service, setService] = useState("");
+  const [budget, setBudget] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -88,16 +81,8 @@ export function ContactPage() {
     })();
   }, []);
 
-  const toggleService = useCallback((serviceId: string) => {
-    setSelectedServices((prev) =>
-      prev.includes(serviceId)
-        ? prev.filter((s) => s !== serviceId)
-        : [...prev, serviceId],
-    );
-  }, []);
-
-  const launchCalModal = async (nameVal: string, emailVal: string, phoneVal: string, servicesVal: string[], budgetVal: string) => {
-    const notesStr = `WhatsApp: ${phoneVal} | Services: ${servicesVal.join(", ")} | Budget: ${budgetVal}`;
+  const launchCalModal = async (nameVal: string, emailVal: string, phoneVal: string, serviceVal: string, budgetVal: string) => {
+    const notesStr = `WhatsApp: ${phoneVal} | Services: ${serviceVal} | Budget: ${budgetVal}`;
 
     try {
       const cal = await getCalApi({ namespace: "book-strategy-call" });
@@ -128,30 +113,30 @@ export function ContactPage() {
       setErrorMsg("Please fill in all required contact fields.");
       return;
     }
-    if (selectedServices.length === 0) {
-      setErrorMsg("Please select at least one service required.");
+    if (!service) {
+      setErrorMsg("Please select a required service.");
       return;
     }
-    if (!selectedBudget) {
+    if (!budget) {
       setErrorMsg("Please select a monthly budget range.");
       return;
     }
 
     setIsSubmitting(true);
 
-    // Track Analytics Event
+    // Track Analytics Events
     trackContactFormSubmit("contact_strategy_call");
     trackBookStrategyCall("contact_page");
 
-    // 1. Send Lead Data to Server Action / Resend Email API
+    // 1. Send Lead Data via Resend API
     try {
       await submitLead({
         data: {
           fullName,
           email,
           phone,
-          services: selectedServices,
-          budget: selectedBudget,
+          services: [service],
+          budget,
           source: "Contact Page Form",
           submittedAt: new Date().toISOString(),
         },
@@ -164,7 +149,7 @@ export function ContactPage() {
     }
 
     // 2. Open Cal.com Modal Widget Pre-filled with User Data
-    await launchCalModal(fullName, email, phone, selectedServices, selectedBudget);
+    await launchCalModal(fullName, email, phone, service, budget);
   };
 
   return (
@@ -256,20 +241,19 @@ export function ContactPage() {
               </div>
             </div>
 
-            {/* ── Right Column: Synchronized Dark Glass Lead Capture Form ── */}
+            {/* ── Right Column: Synchronized Shared Lead Capture Form ── */}
             <div className="lg:col-span-6">
               <div className="relative rounded-[28px] border border-white/20 bg-slate-950/90 backdrop-blur-3xl shadow-[0_0_80px_rgba(168,85,247,0.2),0_30px_90px_rgba(0,0,0,0.8)] p-6 sm:p-8 lg:p-10 text-white overflow-hidden">
-                {/* ── Top Edge Specular Reflection Line ── */}
+                {/* Top Edge Specular Highlight Line */}
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent z-10" />
 
-                {/* ── Ambient Floating Mesh Light Flares ── */}
+                {/* Ambient Light Flares */}
                 <div className="pointer-events-none absolute -top-32 -left-32 size-72 rounded-full bg-purple-500/20 blur-[100px] z-0" />
                 <div className="pointer-events-none absolute -bottom-32 -right-32 size-72 rounded-full bg-pink-500/20 blur-[100px] z-0" />
 
                 <div className="relative z-10">
                   <SectionLabel no="·" label="Book strategy call" />
 
-                  {/* Header Titles matching Modal Popup */}
                   <div className="mt-4 mb-6">
                     <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-purple-200 font-[family-name:var(--font-display)]">
                       Accelerate Your Brand Growth 🚀
@@ -280,7 +264,6 @@ export function ContactPage() {
                   </div>
 
                   {submitted ? (
-                    /* ── Success State ── */
                     <div className="py-10 text-center space-y-4">
                       <div className="size-16 rounded-full bg-purple-500/20 border border-purple-400/40 mx-auto flex items-center justify-center text-purple-300 shadow-lg backdrop-blur-md">
                         <CheckCircle2 className="size-8" />
@@ -294,7 +277,7 @@ export function ContactPage() {
                       <div className="pt-3">
                         <button
                           type="button"
-                          onClick={() => launchCalModal(fullName, email, phone, selectedServices, selectedBudget)}
+                          onClick={() => launchCalModal(fullName, email, phone, service, budget)}
                           className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 text-white px-7 py-3.5 text-sm font-semibold shadow-lg hover:shadow-purple-500/30 transition-all cursor-pointer"
                         >
                           <Sparkles className="size-4 text-purple-200 animate-pulse" />
@@ -304,12 +287,10 @@ export function ContactPage() {
                       </div>
                     </div>
                   ) : (
-                    /* ── Synchronized Lead Capture Form ── */
                     <form onSubmit={handleSubmit} className="space-y-4">
-                      {/* Name, Email, Phone Inputs */}
-                      <div className="space-y-3">
-                        {/* Full Name */}
-                        <div className="space-y-1">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {/* Row 1: Full Name (Full width / sm:col-span-2) */}
+                        <div className="space-y-1 sm:col-span-2">
                           <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
                             Full Name
                           </label>
@@ -329,130 +310,113 @@ export function ContactPage() {
                           </div>
                         </div>
 
-                        {/* Email & Phone Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          {/* Business Email */}
-                          <div className="space-y-1">
-                            <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
-                              Business Email
-                            </label>
-                            <div className="relative flex items-center">
-                              <Mail className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
-                              <input
-                                required
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="sarah@company.com"
-                                className={cn(
-                                  "w-full pl-10 pr-4 h-11 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-sm placeholder:text-zinc-400",
-                                  "focus:border-purple-400 focus:bg-white/[0.09] focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200",
-                                )}
-                              />
-                            </div>
-                          </div>
-
-                          {/* WhatsApp / Phone */}
-                          <div className="space-y-1">
-                            <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
-                              WhatsApp / Phone
-                            </label>
-                            <div className="relative flex items-center">
-                              <Phone className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
-                              <input
-                                required
-                                type="tel"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                placeholder="+1 (555) 000-0000"
-                                className={cn(
-                                  "w-full pl-10 pr-4 h-11 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-sm placeholder:text-zinc-400",
-                                  "focus:border-purple-400 focus:bg-white/[0.09] focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200",
-                                )}
-                              />
-                            </div>
+                        {/* Row 2: Business Email (50%) */}
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
+                            Business Email
+                          </label>
+                          <div className="relative flex items-center">
+                            <Mail className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <input
+                              required
+                              type="email"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                              placeholder="sarah@company.com"
+                              className={cn(
+                                "w-full pl-10 pr-4 h-11 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-sm placeholder:text-zinc-400",
+                                "focus:border-purple-400 focus:bg-white/[0.09] focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200",
+                              )}
+                            />
                           </div>
                         </div>
-                      </div>
 
-                      {/* Service Required (Multi-select pill chips) */}
-                      <div className="space-y-1.5 pt-1">
-                        <label className="text-[11px] font-medium text-zinc-200 tracking-wide flex items-center justify-between">
-                          <span>Service Required</span>
-                          <span className="text-[10px] text-purple-300 font-normal">
-                            (select all that apply)
-                          </span>
-                        </label>
-                        <div className="flex flex-wrap gap-2">
-                          {SERVICES.map((service) => {
-                            const isSelected = selectedServices.includes(service.id);
-                            const Icon = service.icon;
-                            return (
-                              <button
-                                key={service.id}
-                                type="button"
-                                onClick={() => toggleService(service.id)}
-                                className={cn(
-                                  "inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-medium cursor-pointer transition-all duration-200 backdrop-blur-md border",
-                                  "hover:-translate-y-0.5 active:translate-y-0",
-                                  isSelected
-                                    ? "bg-gradient-to-r from-purple-600/40 to-pink-600/40 border-purple-400 text-white shadow-[0_0_20px_rgba(168,85,247,0.4)] ring-1 ring-purple-300/50 font-semibold"
-                                    : "bg-white/[0.06] border-white/15 text-zinc-200 hover:bg-white/15 hover:border-white/30 hover:text-white",
-                                )}
-                              >
-                                {isSelected ? (
-                                  <span className="size-1.5 rounded-full bg-purple-300 animate-pulse shrink-0" />
-                                ) : (
-                                  <Icon className="size-3.5 text-zinc-300 shrink-0" />
-                                )}
-                                <span>{service.label}</span>
-                                {isSelected && (
-                                  <Check className="size-3 text-purple-300 ml-0.5 shrink-0" />
-                                )}
-                              </button>
-                            );
-                          })}
+                        {/* Row 2: WhatsApp / Phone (50%) */}
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
+                            WhatsApp / Phone
+                          </label>
+                          <div className="relative flex items-center">
+                            <Phone className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <input
+                              required
+                              type="tel"
+                              value={phone}
+                              onChange={(e) => setPhone(e.target.value)}
+                              placeholder="+1 (555) 000-0000"
+                              className={cn(
+                                "w-full pl-10 pr-4 h-11 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-sm placeholder:text-zinc-400",
+                                "focus:border-purple-400 focus:bg-white/[0.09] focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200",
+                              )}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Row 3: Service Required Dropdown (50%) */}
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
+                            Service Required
+                          </label>
+                          <div className="relative flex items-center">
+                            <Sparkles className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <select
+                              required
+                              value={service}
+                              onChange={(e) => setService(e.target.value)}
+                              className={cn(
+                                "w-full pl-10 pr-8 h-11 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/20 text-white text-sm focus:border-purple-400 focus:bg-slate-900 focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer",
+                              )}
+                            >
+                              <option value="" disabled className="bg-slate-900 text-zinc-400">
+                                Select service
+                              </option>
+                              {SERVICES_OPTIONS.map((opt) => (
+                                <option key={opt} value={opt} className="bg-slate-900 text-white">
+                                  {opt}
+                                </option>
+                              ))}
+                            </select>
+                            <ChevronDown className="absolute right-3 size-4 text-zinc-400 pointer-events-none" />
+                          </div>
+                        </div>
+
+                        {/* Row 3: Monthly Budget Dropdown (50%) */}
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
+                            Monthly Budget Range
+                          </label>
+                          <div className="relative flex items-center">
+                            <DollarSign className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <select
+                              required
+                              value={budget}
+                              onChange={(e) => setBudget(e.target.value)}
+                              className={cn(
+                                "w-full pl-10 pr-8 h-11 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/20 text-white text-sm focus:border-purple-400 focus:bg-slate-900 focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer",
+                              )}
+                            >
+                              <option value="" disabled className="bg-slate-900 text-zinc-400">
+                                Select budget
+                              </option>
+                              {BUDGET_OPTIONS.map((opt) => (
+                                <option key={opt} value={opt} className="bg-slate-900 text-white">
+                                  {opt}
+                                </option>
+                              ))}
+                            </select>
+                            <ChevronDown className="absolute right-3 size-4 text-zinc-400 pointer-events-none" />
+                          </div>
                         </div>
                       </div>
 
-                      {/* Monthly Budget Selector (Single-select pill chips) */}
-                      <div className="space-y-1.5 pt-1">
-                        <label className="text-[11px] font-medium text-zinc-200 tracking-wide flex items-center justify-between">
-                          <span>Monthly Budget Range</span>
-                          <DollarSign className="size-3 text-purple-300/70" />
-                        </label>
-                        <div className="grid grid-cols-4 gap-2">
-                          {BUDGET_OPTIONS.map((opt) => {
-                            const isSelected = selectedBudget === opt.value;
-                            return (
-                              <button
-                                key={opt.value}
-                                type="button"
-                                onClick={() => setSelectedBudget(opt.value)}
-                                className={cn(
-                                  "py-2 px-2 rounded-xl text-center text-xs font-medium cursor-pointer transition-all duration-200 border backdrop-blur-md",
-                                  "hover:-translate-y-0.5 active:translate-y-0",
-                                  isSelected
-                                    ? "bg-gradient-to-r from-purple-500/40 via-pink-500/40 to-indigo-500/40 border-purple-400 text-white shadow-[0_0_20px_rgba(168,85,247,0.4)] ring-1 ring-purple-300/50 font-semibold"
-                                    : "bg-white/[0.06] border-white/15 text-zinc-200 hover:bg-white/15 hover:text-white",
-                                )}
-                              >
-                                {opt.label}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      {/* Error Message */}
                       {errorMsg && (
                         <p className="text-xs text-rose-400 font-medium pt-1">
                           {errorMsg}
                         </p>
                       )}
 
-                      {/* Submit CTA Button */}
-                      <div className="pt-3">
+                      {/* Row 4: Continue CTA Button */}
+                      <div className="pt-2">
                         <button
                           type="submit"
                           disabled={isSubmitting}
