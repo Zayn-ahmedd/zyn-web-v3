@@ -1,7 +1,8 @@
 /**
  * Zynovax — GDPR Cookie Consent Banner
  * Accept All / Reject All / Customize with category toggles.
- * Persists choice and never shows again after decision.
+ * Pops up IMMEDIATELY (0ms delay) on page load if user hasn't made a choice.
+ * Persists choice and coordinates with Lead Modal.
  */
 
 import { useState, useEffect } from "react";
@@ -20,11 +21,9 @@ export function CookieConsent() {
   const [functional, setFunctional] = useState(true);
 
   useEffect(() => {
-    // Only show if user hasn't already made a choice
+    // Show IMMEDIATELY on mount if user hasn't already made a choice
     if (!hasConsentChoice()) {
-      // Small delay to avoid CLS on initial load
-      const timer = setTimeout(() => setVisible(true), 1500);
-      return () => clearTimeout(timer);
+      setVisible(true);
     }
   }, []);
 
@@ -72,7 +71,7 @@ export function CookieConsent() {
       aria-label="Cookie consent"
       aria-modal="false"
     >
-      <div className="pointer-events-auto mx-auto max-w-2xl rounded-2xl bg-white border border-border shadow-elegant p-6">
+      <div className="pointer-events-auto mx-auto max-w-2xl rounded-2xl bg-white border border-border shadow-[0_20px_60px_rgba(0,0,0,0.18)] p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
             <h3 className="text-base font-semibold text-ink">
@@ -85,7 +84,7 @@ export function CookieConsent() {
           </div>
           <button
             onClick={handleRejectAll}
-            className="shrink-0 text-ink-soft hover:text-ink transition-colors"
+            className="shrink-0 text-ink-soft hover:text-ink transition-colors cursor-pointer"
             aria-label="Close cookie consent"
           >
             <X className="size-4" />
@@ -95,9 +94,9 @@ export function CookieConsent() {
         {showCustomize && (
           <div className="mt-4 space-y-3 border-t border-border pt-4">
             <label className="flex items-center justify-between">
-              <span className="text-sm text-ink">
+              <span className="text-sm text-ink font-medium">
                 Necessary{" "}
-                <span className="text-ink-soft">(always on)</span>
+                <span className="text-ink-soft font-normal">(always on)</span>
               </span>
               <input
                 type="checkbox"
@@ -107,7 +106,7 @@ export function CookieConsent() {
               />
             </label>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm text-ink">Analytics</span>
+              <span className="text-sm text-ink font-medium">Analytics</span>
               <input
                 type="checkbox"
                 checked={analytics}
@@ -116,7 +115,7 @@ export function CookieConsent() {
               />
             </label>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm text-ink">Marketing</span>
+              <span className="text-sm text-ink font-medium">Marketing</span>
               <input
                 type="checkbox"
                 checked={marketing}
@@ -125,7 +124,7 @@ export function CookieConsent() {
               />
             </label>
             <label className="flex items-center justify-between cursor-pointer">
-              <span className="text-sm text-ink">Functional</span>
+              <span className="text-sm text-ink font-medium">Functional</span>
               <input
                 type="checkbox"
                 checked={functional}
@@ -139,7 +138,7 @@ export function CookieConsent() {
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <button
             onClick={handleAcceptAll}
-            className="rounded-full bg-ink text-white px-5 py-2 text-sm font-medium hover:bg-ink/90 transition-colors cursor-pointer"
+            className="rounded-full bg-ink text-white px-5 py-2 text-sm font-medium hover:bg-ink/90 transition-colors cursor-pointer shadow-sm"
           >
             Accept All
           </button>
@@ -152,14 +151,14 @@ export function CookieConsent() {
           {!showCustomize ? (
             <button
               onClick={() => setShowCustomize(true)}
-              className="text-sm text-ink-soft hover:text-ink transition-colors cursor-pointer"
+              className="text-sm text-ink-soft hover:text-ink transition-colors cursor-pointer ml-auto font-medium"
             >
               Customize
             </button>
           ) : (
             <button
               onClick={handleSaveCustom}
-              className="rounded-full border border-border text-ink px-5 py-2 text-sm font-medium hover:bg-surface transition-colors cursor-pointer"
+              className="rounded-full border border-border text-ink px-5 py-2 text-sm font-medium hover:bg-surface transition-colors cursor-pointer ml-auto"
             >
               Save Preferences
             </button>
