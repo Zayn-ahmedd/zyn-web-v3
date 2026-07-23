@@ -242,218 +242,212 @@ export function ContactPage() {
               </div>
             </div>
 
-            {/* ── Right Column: Synchronized Dark Glass Form ── */}
+            {/* ── Right Column: Clean Light Theme Form Container ── */}
             <div className="lg:col-span-6">
-              <div className="relative rounded-[32px] border border-white/20 bg-slate-950/75 backdrop-blur-3xl shadow-[0_0_80px_rgba(168,85,247,0.3),0_25px_90px_rgba(0,0,0,0.95)] p-6 sm:p-8 lg:p-10 text-white overflow-hidden">
-                {/* Top Edge Specular Highlight Line */}
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-purple-400 to-transparent z-10" />
+              <div className="relative rounded-[32px] border border-slate-200/90 bg-white shadow-[0_20px_70px_rgba(0,0,0,0.12)] p-6 sm:p-8 lg:p-10 text-slate-900 overflow-hidden">
+                <SectionLabel no="·" label="Book strategy call" />
 
-                {/* Ambient Light Flares */}
-                <div className="pointer-events-none absolute -top-32 -left-32 size-72 rounded-full bg-purple-500/25 blur-[100px] z-0" />
-                <div className="pointer-events-none absolute -bottom-32 -right-32 size-72 rounded-full bg-pink-500/25 blur-[100px] z-0" />
-
-                <div className="relative z-10">
-                  <SectionLabel no="·" label="Book strategy call" />
-
-                  <div className="mt-4 mb-6">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-purple-200 font-[family-name:var(--font-display)]">
-                      Accelerate Your Brand Growth 🚀
-                    </h2>
-                    <p className="text-xs sm:text-sm text-zinc-300 mt-1 leading-relaxed">
-                      Tell us about your project to unlock a custom growth roadmap.
-                    </p>
-                  </div>
-
-                  {submitted ? (
-                    <div className="py-10 text-center space-y-4">
-                      <div className="size-16 rounded-full bg-purple-500/20 border border-purple-400/40 mx-auto flex items-center justify-center text-purple-300 shadow-lg backdrop-blur-md">
-                        <CheckCircle2 className="size-8" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-white">
-                        Details Saved & Sent! 🚀
-                      </h3>
-                      <p className="text-sm text-zinc-300 max-w-sm mx-auto leading-relaxed">
-                        We've dispatched your details to our team. Click below to launch your pre-filled Cal.com strategy call calendar.
-                      </p>
-                      <div className="pt-3">
-                        <button
-                          type="button"
-                          onClick={() => launchCalModal(fullName, phone, email, service, budget)}
-                          className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 text-white px-7 py-3.5 text-sm font-semibold shadow-lg hover:shadow-purple-500/30 transition-all cursor-pointer"
-                        >
-                          <Sparkles className="size-4 text-purple-200 animate-pulse" />
-                          <span>Launch Cal.com Calendar</span>
-                          <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-3">
-                      {/* 1. Name Field */}
-                      <div className="space-y-1">
-                        <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
-                          Name
-                        </label>
-                        <div className="relative flex items-center">
-                          <User className="absolute left-3.5 size-4 text-purple-300/80 pointer-events-none" />
-                          <input
-                            required
-                            type="text"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
-                            placeholder="e.g. Sarah Jenkins"
-                            className={cn(
-                              "w-full pl-10 pr-4 h-10 rounded-xl bg-slate-950/60 backdrop-blur-xl border border-white/20 text-white text-xs placeholder:text-zinc-400 font-medium",
-                              "focus:border-purple-400 focus:bg-slate-950/90 focus:shadow-[0_0_25px_rgba(168,85,247,0.4)] focus:ring-1 focus:ring-purple-400/50 transition-all duration-200",
-                            )}
-                          />
-                        </div>
-                      </div>
-
-                      {/* 2. Phone Field */}
-                      <div className="space-y-1">
-                        <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
-                          Phone
-                        </label>
-                        <div className="relative flex items-center">
-                          <Phone className="absolute left-3.5 size-4 text-purple-300/80 pointer-events-none" />
-                          <input
-                            required
-                            type="tel"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            placeholder="+1 (555) 000-0000"
-                            className={cn(
-                              "w-full pl-10 pr-4 h-10 rounded-xl bg-slate-950/60 backdrop-blur-xl border border-white/20 text-white text-xs placeholder:text-zinc-400 font-medium",
-                              "focus:border-purple-400 focus:bg-slate-950/90 focus:shadow-[0_0_25px_rgba(168,85,247,0.4)] focus:ring-1 focus:ring-purple-400/50 transition-all duration-200",
-                            )}
-                          />
-                        </div>
-                      </div>
-
-                      {/* 3. Email Field */}
-                      <div className="space-y-1">
-                        <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
-                          Email
-                        </label>
-                        <div className="relative flex items-center">
-                          <Mail className="absolute left-3.5 size-4 text-purple-300/80 pointer-events-none" />
-                          <input
-                            required
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="sarah@company.com"
-                            className={cn(
-                              "w-full pl-10 pr-4 h-10 rounded-xl bg-slate-950/60 backdrop-blur-xl border border-white/20 text-white text-xs placeholder:text-zinc-400 font-medium",
-                              "focus:border-purple-400 focus:bg-slate-950/90 focus:shadow-[0_0_25px_rgba(168,85,247,0.4)] focus:ring-1 focus:ring-purple-400/50 transition-all duration-200",
-                            )}
-                          />
-                        </div>
-                      </div>
-
-                      {/* 4. Service Required Dropdown */}
-                      <div className="space-y-1">
-                        <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
-                          Service Required
-                        </label>
-                        <div className="relative flex items-center">
-                          <Sparkles className="absolute left-3.5 size-4 text-purple-300/80 pointer-events-none" />
-                          <select
-                            required
-                            value={service}
-                            onChange={(e) => setService(e.target.value)}
-                            className={cn(
-                              "w-full pl-10 pr-8 h-10 rounded-xl bg-slate-950/80 backdrop-blur-xl border border-white/20 text-white text-xs font-medium focus:border-purple-400 focus:bg-slate-950 focus:shadow-[0_0_25px_rgba(168,85,247,0.4)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer",
-                            )}
-                          >
-                            <option value="" disabled className="bg-slate-950 text-zinc-400">
-                              Select service required
-                            </option>
-                            {SERVICES_OPTIONS.map((opt) => (
-                              <option key={opt} value={opt} className="bg-slate-950 text-white">
-                                {opt}
-                              </option>
-                            ))}
-                          </select>
-                          <ChevronDown className="absolute right-3 size-4 text-zinc-400 pointer-events-none" />
-                        </div>
-                      </div>
-
-                      {/* 5. Avg Budget Dropdown */}
-                      <div className="space-y-1">
-                        <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
-                          Avg Budget
-                        </label>
-                        <div className="relative flex items-center">
-                          <DollarSign className="absolute left-3.5 size-4 text-purple-300/80 pointer-events-none" />
-                          <select
-                            required
-                            value={budget}
-                            onChange={(e) => setBudget(e.target.value)}
-                            className={cn(
-                              "w-full pl-10 pr-8 h-10 rounded-xl bg-slate-950/80 backdrop-blur-xl border border-white/20 text-white text-xs font-medium focus:border-purple-400 focus:bg-slate-950 focus:shadow-[0_0_25px_rgba(168,85,247,0.4)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer",
-                            )}
-                          >
-                            <option value="" disabled className="bg-slate-950 text-zinc-400">
-                              Select average budget
-                            </option>
-                            {BUDGET_OPTIONS.map((opt) => (
-                              <option key={opt} value={opt} className="bg-slate-950 text-white">
-                                {opt}
-                              </option>
-                            ))}
-                          </select>
-                          <ChevronDown className="absolute right-3 size-4 text-zinc-400 pointer-events-none" />
-                        </div>
-                      </div>
-
-                      {errorMsg && (
-                        <p className="text-xs text-rose-400 font-medium pt-1">
-                          {errorMsg}
-                        </p>
-                      )}
-
-                      {/* 6. Accent Liquid Gradient CTA Button */}
-                      <div className="pt-2">
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className={cn(
-                            "group relative w-full h-11.5 rounded-xl font-bold text-xs sm:text-sm text-white cursor-pointer",
-                            "bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500",
-                            "border border-white/30 shadow-[0_0_35px_rgba(168,85,247,0.5)] hover:shadow-[0_0_60px_rgba(168,85,247,0.75)]",
-                            "transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden",
-                          )}
-                        >
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
-                          <span className="relative flex items-center justify-center gap-2">
-                            {isSubmitting ? (
-                              <>
-                                <Loader2 className="size-4 animate-spin" />
-                                Submitting Request…
-                              </>
-                            ) : (
-                              <>
-                                Continue to Book Strategy Call
-                                <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1.5" />
-                              </>
-                            )}
-                          </span>
-                        </button>
-                      </div>
-
-                      <p className="text-xs text-zinc-400 text-center pt-1">
-                        No commitment. No sales pitch. Just a real growth audit.
-                      </p>
-                    </form>
-                  )}
+                <div className="mt-4 mb-6">
+                  <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 font-[family-name:var(--font-display)]">
+                    Accelerate Your{" "}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600">
+                      Brand Growth
+                    </span>{" "}
+                    🚀
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed font-medium">
+                    Tell us about your project to unlock a custom growth roadmap.
+                  </p>
                 </div>
 
+                {submitted ? (
+                  <div className="py-10 text-center space-y-4">
+                    <div className="size-16 rounded-full bg-purple-50 border border-purple-200 mx-auto flex items-center justify-center text-purple-600 shadow-sm">
+                      <CheckCircle2 className="size-8" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-slate-900">
+                      Details Saved & Sent! 🚀
+                    </h3>
+                    <p className="text-sm text-slate-600 max-w-sm mx-auto leading-relaxed font-medium">
+                      We've dispatched your details to our team. Click below to launch your pre-filled Cal.com strategy call calendar.
+                    </p>
+                    <div className="pt-3">
+                      <button
+                        type="button"
+                        onClick={() => launchCalModal(fullName, phone, email, service, budget)}
+                        className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 text-white px-7 py-3.5 text-sm font-semibold shadow-lg hover:shadow-purple-500/30 transition-all cursor-pointer"
+                      >
+                        <Sparkles className="size-4 text-purple-200 animate-pulse" />
+                        <span>Launch Cal.com Calendar</span>
+                        <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-3">
+                    {/* 1. Name Field */}
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block">
+                        NAME
+                      </label>
+                      <div className="relative flex items-center">
+                        <User className="absolute left-3.5 size-4 text-slate-400 pointer-events-none" />
+                        <input
+                          required
+                          type="text"
+                          value={fullName}
+                          onChange={(e) => setFullName(e.target.value)}
+                          placeholder="e.g. Sarah Jenkins"
+                          className={cn(
+                            "w-full pl-10 pr-4 h-10 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-xs placeholder:text-slate-400 font-medium",
+                            "focus:border-purple-600 focus:bg-white focus:ring-1 focus:ring-purple-600/30 transition-all duration-200",
+                          )}
+                        />
+                      </div>
+                    </div>
+
+                    {/* 2. Phone Field */}
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block">
+                        PHONE
+                      </label>
+                      <div className="relative flex items-center">
+                        <Phone className="absolute left-3.5 size-4 text-slate-400 pointer-events-none" />
+                        <input
+                          required
+                          type="tel"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          placeholder="+1 (555) 000-0000"
+                          className={cn(
+                            "w-full pl-10 pr-4 h-10 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-xs placeholder:text-slate-400 font-medium",
+                            "focus:border-purple-600 focus:bg-white focus:ring-1 focus:ring-purple-600/30 transition-all duration-200",
+                          )}
+                        />
+                      </div>
+                    </div>
+
+                    {/* 3. Email Field */}
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block">
+                        EMAIL
+                      </label>
+                      <div className="relative flex items-center">
+                        <Mail className="absolute left-3.5 size-4 text-slate-400 pointer-events-none" />
+                        <input
+                          required
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="sarah@company.com"
+                          className={cn(
+                            "w-full pl-10 pr-4 h-10 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-xs placeholder:text-slate-400 font-medium",
+                            "focus:border-purple-600 focus:bg-white focus:ring-1 focus:ring-purple-600/30 transition-all duration-200",
+                          )}
+                        />
+                      </div>
+                    </div>
+
+                    {/* 4. Service Required Dropdown */}
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block">
+                        SERVICE REQUIRED
+                      </label>
+                      <div className="relative flex items-center">
+                        <Sparkles className="absolute left-3.5 size-4 text-slate-400 pointer-events-none" />
+                        <select
+                          required
+                          value={service}
+                          onChange={(e) => setService(e.target.value)}
+                          className={cn(
+                            "w-full pl-10 pr-8 h-10 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-xs font-medium focus:border-purple-600 focus:bg-white focus:ring-1 focus:ring-purple-600/30 focus:outline-none transition-all duration-200 appearance-none cursor-pointer",
+                          )}
+                        >
+                          <option value="" disabled className="bg-white text-slate-400">
+                            Select service required
+                          </option>
+                          {SERVICES_OPTIONS.map((opt) => (
+                            <option key={opt} value={opt} className="bg-white text-slate-900">
+                              {opt}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="absolute right-3 size-4 text-slate-400 pointer-events-none" />
+                      </div>
+                    </div>
+
+                    {/* 5. Avg Budget Dropdown */}
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block">
+                        AVG BUDGET
+                      </label>
+                      <div className="relative flex items-center">
+                        <DollarSign className="absolute left-3.5 size-4 text-slate-400 pointer-events-none" />
+                        <select
+                          required
+                          value={budget}
+                          onChange={(e) => setBudget(e.target.value)}
+                          className={cn(
+                            "w-full pl-10 pr-8 h-10 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-xs font-medium focus:border-purple-600 focus:bg-white focus:ring-1 focus:ring-purple-600/30 focus:outline-none transition-all duration-200 appearance-none cursor-pointer",
+                          )}
+                        >
+                          <option value="" disabled className="bg-white text-slate-400">
+                            Select average budget
+                          </option>
+                          {BUDGET_OPTIONS.map((opt) => (
+                            <option key={opt} value={opt} className="bg-white text-slate-900">
+                              {opt}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="absolute right-3 size-4 text-slate-400 pointer-events-none" />
+                      </div>
+                    </div>
+
+                    {errorMsg && (
+                      <p className="text-xs text-rose-600 font-medium pt-1">
+                        {errorMsg}
+                      </p>
+                    )}
+
+                    {/* 6. Accent Liquid Gradient CTA Button */}
+                    <div className="pt-2">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className={cn(
+                          "group relative w-full h-12 rounded-xl font-bold text-xs sm:text-sm text-white cursor-pointer",
+                          "bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700",
+                          "shadow-[0_8px_30px_rgba(168,85,247,0.35)] hover:shadow-[0_12px_40px_rgba(168,85,247,0.5)] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden",
+                        )}
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/35 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+                        <span className="relative flex items-center justify-center gap-2">
+                          {isSubmitting ? (
+                            <>
+                              <Loader2 className="size-4 animate-spin" />
+                              Submitting Request…
+                            </>
+                          ) : (
+                            <>
+                              Continue to Book Strategy Call
+                              <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1.5" />
+                            </>
+                          )}
+                        </span>
+                      </button>
+                    </div>
+
+                    <p className="text-xs text-slate-500 text-center pt-1 font-medium">
+                      No commitment. No sales pitch. Just a real growth audit.
+                    </p>
+                  </form>
+                )}
+
                 {/* Footer Note */}
-                <div className="pt-2 flex items-center justify-center text-xs text-zinc-400 border-t border-white/15">
-                  <div className="flex items-center gap-1">
-                    <Lock className="size-3 text-zinc-400" />
+                <div className="pt-3 flex items-center justify-center text-xs text-slate-500 border-t border-slate-200 mt-2">
+                  <div className="flex items-center gap-1 font-medium">
+                    <Lock className="size-3 text-slate-400" />
                     <span>100% Confidential</span>
                   </div>
                 </div>

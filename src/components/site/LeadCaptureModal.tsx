@@ -1,8 +1,8 @@
 /**
- * LeadCaptureModal — Clean 2-Column Split Layout Lead Capture Modal
- * Left Side: Partner with Zynovax Quote Graphic Asset (/Lead popup image 2.png) + Social Media Icons at Bottom (Instagram, Facebook, LinkedIn, YouTube, WhatsApp)
- * Right Side: Clean Vertical Single-Column Form (Name, Phone, Email, Service Required, Avg Budget)
- * On Submit: Saves lead details via Resend API (submitLead) and launches pre-filled Cal.com modal
+ * LeadCaptureModal — Clean Light Theme Split Lead Modal
+ * Exactly matches the reference design screenshots:
+ * Left: Quote graphic asset (/Lead popup image 2.png) + Social Icons Pill (Instagram, Facebook, LinkedIn, YouTube, WhatsApp)
+ * Right: Clean Light Single-Column Form (NAME, PHONE, EMAIL, SERVICE REQUIRED, AVG BUDGET) + Continue CTA Button
  */
 
 import { useState } from "react";
@@ -139,7 +139,7 @@ export function LeadCaptureModal() {
           email: data.email,
           services: [data.service],
           budget: data.budget,
-          source: "lead-modal-social-links",
+          source: "lead-modal-clean-light",
           submittedAt: new Date().toISOString(),
         },
       });
@@ -181,7 +181,7 @@ export function LeadCaptureModal() {
       <DialogContent
         className={cn(
           "fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]",
-          "w-[94vw] max-w-4xl max-h-[92vh] overflow-y-auto md:overflow-hidden rounded-3xl border border-slate-200/80",
+          "w-[94vw] max-w-4xl max-h-[92vh] overflow-y-auto md:overflow-hidden rounded-[32px] border border-slate-200/90",
           "bg-white shadow-[0_25px_90px_rgba(0,0,0,0.25)]",
           "p-0 border-0 text-slate-900 font-sans transition-all duration-300",
         )}
@@ -189,9 +189,9 @@ export function LeadCaptureModal() {
       >
         <div className="relative flex flex-col md:flex-row w-full h-full min-h-[540px]">
           {/* ══════════════════════════════════════════════════════════════════
-              LEFT SIDE: Image Asset Showcase + Down Social Media Icons
+              LEFT SIDE: Image Asset Showcase + Social Media Icons at Bottom
              ══════════════════════════════════════════════════════════════════ */}
-          <div className="relative w-full md:w-1/2 bg-slate-100 flex items-center justify-center overflow-hidden min-h-[260px] md:min-h-[520px] border-b md:border-b-0 md:border-r border-slate-200">
+          <div className="relative w-full md:w-1/2 bg-slate-50 flex items-center justify-center overflow-hidden min-h-[260px] md:min-h-[520px] border-b md:border-b-0 md:border-r border-slate-200">
             {/* Quote Graphic Image */}
             <img
               src="/Lead popup image 2.png"
@@ -203,7 +203,7 @@ export function LeadCaptureModal() {
             />
 
             {/* Bottom Dark Glass Overlay Pill with Social Media Icons */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-2 p-2 rounded-full bg-slate-950/80 border border-white/20 backdrop-blur-xl shadow-lg">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-2 p-2 rounded-full bg-slate-950/85 border border-white/20 backdrop-blur-xl shadow-lg">
               {SOCIAL_LINKS.map((social) => {
                 const Icon = social.icon;
                 return (
@@ -224,7 +224,7 @@ export function LeadCaptureModal() {
           </div>
 
           {/* ══════════════════════════════════════════════════════════════════
-              RIGHT SIDE: Clean Vertical Form Container (Stacked 1-Column)
+              RIGHT SIDE: Clean Light Single-Column Form
              ══════════════════════════════════════════════════════════════════ */}
           <div className="w-full md:w-1/2 p-6 sm:p-8 flex flex-col justify-between bg-white">
             {/* Header */}
@@ -257,7 +257,7 @@ export function LeadCaptureModal() {
                 {step === 1 ? (
                   <>
                     Accelerate Your{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600">
                       Brand Growth
                     </span>{" "}
                     🚀
@@ -296,7 +296,7 @@ export function LeadCaptureModal() {
                           htmlFor="modal-fullName"
                           className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block"
                         >
-                          Name
+                          NAME
                         </Label>
                         <div className="relative flex items-center">
                           <User className="absolute left-3.5 size-4 text-slate-400 pointer-events-none" />
@@ -325,7 +325,7 @@ export function LeadCaptureModal() {
                           htmlFor="modal-phone"
                           className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block"
                         >
-                          Phone
+                          PHONE
                         </Label>
                         <div className="relative flex items-center">
                           <Phone className="absolute left-3.5 size-4 text-slate-400 pointer-events-none" />
@@ -354,7 +354,7 @@ export function LeadCaptureModal() {
                           htmlFor="modal-email"
                           className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block"
                         >
-                          Email
+                          EMAIL
                         </Label>
                         <div className="relative flex items-center">
                           <Mail className="absolute left-3.5 size-4 text-slate-400 pointer-events-none" />
@@ -383,7 +383,7 @@ export function LeadCaptureModal() {
                           htmlFor="modal-service"
                           className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block"
                         >
-                          Service Required
+                          SERVICE REQUIRED
                         </Label>
                         <div className="relative flex items-center">
                           <Sparkles className="absolute left-3.5 size-4 text-slate-400 pointer-events-none" />
@@ -419,7 +419,7 @@ export function LeadCaptureModal() {
                           htmlFor="modal-budget"
                           className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block"
                         >
-                          Avg Budget
+                          AVG BUDGET
                         </Label>
                         <div className="relative flex items-center">
                           <DollarSign className="absolute left-3.5 size-4 text-slate-400 pointer-events-none" />
@@ -431,7 +431,7 @@ export function LeadCaptureModal() {
                               errors.budget && "border-rose-500",
                             )}
                           >
-                            <option value="" disabled className="bg-white text-slate-400">
+                            <option value="" disabled className="bg-slate-400">
                               Select average budget
                             </option>
                             {BUDGET_OPTIONS.map((opt) => (
@@ -455,11 +455,12 @@ export function LeadCaptureModal() {
                           type="submit"
                           disabled={isSubmitting}
                           className={cn(
-                            "group relative w-full h-11.5 rounded-xl font-bold text-xs sm:text-sm text-white cursor-pointer",
+                            "group relative w-full h-12 rounded-xl font-bold text-xs sm:text-sm text-white cursor-pointer",
                             "bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700",
-                            "shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden",
+                            "shadow-[0_8px_30px_rgba(168,85,247,0.35)] hover:shadow-[0_12px_40px_rgba(168,85,247,0.5)] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden",
                           )}
                         >
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/35 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
                           <span className="relative flex items-center justify-center gap-2">
                             {isSubmitting ? (
                               <>
