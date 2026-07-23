@@ -1,11 +1,12 @@
 /**
- * LeadCaptureModal — Ultra-Premium White Theme Transparent Glassy Modal
+ * LeadCaptureModal — Navbar-Inspired Ultra-Translucent Glassmorphic Modal
+ * Inspired by the Zynovax Floating Glass Navbar Aesthetic
  * Features:
- * - Unified Luminous White Frosted Glass Canvas (bg-white/80 backdrop-blur-3xl)
- * - White Glass Poster Showcase featuring quote & graphic (/Lead popup image 2.png)
- * - Soft Purple & Pink Ambient Mesh Light Flares
- * - Premium White Glass Form Inputs with Purple Focus Glow
- * - Liquid Metal Gradient CTA Button
+ * - Ultra-sleek Translucent Frosted Glass Capsule Canvas (bg-slate-900/65 backdrop-blur-3xl border border-white/20)
+ * - Navbar-Style Metallic Glass Pills & Badges (bg-slate-950/80 border border-white/20)
+ * - Frosted Glass Poster Container (/Lead popup image 2.png)
+ * - Translucent Glass Inputs with Purple Focus Glow
+ * - Liquid Metal Gradient CTA Button matching Navbar "Book Strategy Call" Pill
  */
 
 import { useState } from "react";
@@ -136,7 +137,7 @@ export function LeadCaptureModal() {
           phone: data.phone,
           services: [data.service],
           budget: data.budget,
-          source: "lead-modal-white-glass",
+          source: "lead-modal-navbar-glass",
           submittedAt: new Date().toISOString(),
         },
       });
@@ -178,59 +179,59 @@ export function LeadCaptureModal() {
       <DialogContent
         className={cn(
           "fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]",
-          "w-[94vw] max-w-4xl max-h-[92vh] overflow-y-auto md:overflow-hidden rounded-[32px] border border-white/80",
-          "bg-white/80 backdrop-blur-3xl shadow-[0_20px_80px_rgba(0,0,0,0.15),0_0_60px_rgba(168,85,247,0.15)]",
-          "p-0 border-0 text-slate-900 font-sans transition-all duration-300",
+          "w-[94vw] max-w-4xl max-h-[92vh] overflow-y-auto md:overflow-hidden rounded-[36px] border border-white/20",
+          "bg-slate-900/65 backdrop-blur-3xl shadow-[0_20px_90px_rgba(0,0,0,0.8),0_0_80px_rgba(168,85,247,0.25)]",
+          "p-0 border-0 text-white font-sans transition-all duration-300",
         )}
         aria-label="Accelerate Your Brand Growth"
       >
-        {/* ── Top Edge Specular Reflection Line ── */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-purple-400/60 to-transparent z-30" />
+        {/* ── Top Edge Specular Metallic Highlight Line (Navbar Glass Flare) ── */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/70 to-transparent z-30" />
 
-        {/* ── Floating Soft Purple & Pink Ambient Flares ── */}
+        {/* ── Ambient Floating Mesh Flares ── */}
         <motion.div
-          animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.25, 0.4, 0.25] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="pointer-events-none absolute -top-32 -left-32 size-96 rounded-full bg-purple-300/35 blur-[120px] z-0"
+          className="pointer-events-none absolute -top-32 -left-32 size-96 rounded-full bg-purple-500/25 blur-[120px] z-0"
         />
         <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.25, 0.45, 0.25] }}
+          animate={{ scale: [1, 1.25, 1], opacity: [0.2, 0.35, 0.2] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="pointer-events-none absolute -bottom-32 -right-32 size-96 rounded-full bg-pink-300/35 blur-[120px] z-0"
+          className="pointer-events-none absolute -bottom-32 -right-32 size-96 rounded-full bg-pink-500/25 blur-[120px] z-0"
         />
 
         <div className="relative z-10 flex flex-col md:flex-row w-full h-full min-h-[560px]">
           {/* ══════════════════════════════════════════════════════════════════
-              LEFT SIDE: White Glass Poster Showcase (~44% Width Desktop)
+              LEFT SIDE: Navbar-Inspired Translucent Glass Poster Card (~44% Width)
              ══════════════════════════════════════════════════════════════════ */}
-          <div className="relative w-full md:w-[44%] flex flex-col justify-between p-6 sm:p-7 bg-slate-50/70 backdrop-blur-xl border-b md:border-b-0 md:border-r border-slate-200/80 text-slate-900 overflow-hidden">
-            {/* Top Brand Badge & Rating */}
+          <div className="relative w-full md:w-[44%] flex flex-col justify-between p-6 sm:p-7 bg-white/[0.04] backdrop-blur-2xl border-b md:border-b-0 md:border-r border-white/15 text-white overflow-hidden">
+            {/* Top Brand Header Pill (Matches Navbar Style) */}
             <div className="relative z-10 flex items-center justify-between">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-950 text-white border border-purple-500/30 shadow-md backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-950/80 border border-white/20 shadow-md backdrop-blur-xl">
                 <span className="size-2 rounded-full bg-purple-400 animate-ping" />
-                <span className="text-[11px] font-extrabold tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-white to-pink-300">
+                <span className="text-[11px] font-extrabold tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-purple-300">
                   Zynovax Studio
                 </span>
               </div>
 
-              <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-700 bg-white/90 px-3 py-1 rounded-full border border-slate-200 shadow-sm">
-                <Star className="size-3 text-amber-500 fill-amber-500" />
+              <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-white bg-slate-950/80 px-3 py-1 rounded-full border border-white/20 shadow-md backdrop-blur-xl">
+                <Star className="size-3 text-amber-400 fill-amber-400" />
                 <span>4.9 / 5.0</span>
               </div>
             </div>
 
-            {/* Middle Poster Image Showcase */}
+            {/* Middle Poster Image Showcase (Frosted Glass Container) */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="relative z-10 my-4 flex items-center justify-center"
             >
-              <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border border-slate-200/90 bg-white group">
+              <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-white/20 bg-white/90 group">
                 <img
                   src="/Lead popup image 2.png"
                   alt="Those who trust us are family to us - Zynovax"
-                  className="w-full h-full object-contain p-2 group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+                  className="w-full h-full object-contain p-2 group-hover:scale-[1.03] transition-transform duration-500 ease-out filter brightness-[1.02]"
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).src = "/lead-popup-image-2.png";
                   }}
@@ -240,18 +241,18 @@ export function LeadCaptureModal() {
 
             {/* Bottom Verification & Social Icons */}
             <div className="relative z-10 space-y-3 pt-1">
-              <div className="flex items-center justify-between gap-2 text-[11px] font-medium text-slate-600 border-t border-slate-200/90 pt-3">
+              <div className="flex items-center justify-between gap-2 text-[11px] font-medium text-zinc-300 border-t border-white/15 pt-3">
                 <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="size-4 text-purple-600 shrink-0" />
+                  <ShieldCheck className="size-4 text-purple-400 shrink-0" />
                   <span>Verified Growth Partner</span>
                 </div>
-                <div className="flex items-center gap-1 text-slate-500">
+                <div className="flex items-center gap-1 text-zinc-400">
                   <Lock className="size-3" />
                   <span>100% Confidential</span>
                 </div>
               </div>
 
-              {/* Social Links */}
+              {/* Social Links (Navbar Metallic Pills) */}
               <div className="flex items-center gap-2 justify-center pt-1">
                 {SOCIAL_LINKS.map((social) => {
                   const Icon = social.icon;
@@ -263,7 +264,7 @@ export function LeadCaptureModal() {
                       rel="noopener noreferrer"
                       title={social.name}
                       aria-label={`Zynovax on ${social.name}`}
-                      className="p-2 rounded-full bg-slate-900 text-white hover:bg-purple-600 shadow-md transition-all duration-200 cursor-pointer hover:scale-110 active:scale-95"
+                      className="p-2.5 rounded-full bg-slate-950/80 hover:bg-purple-600/80 text-white border border-white/20 shadow-md backdrop-blur-xl transition-all duration-200 cursor-pointer hover:scale-110 active:scale-95"
                     >
                       <Icon className="size-3.5" />
                     </a>
@@ -274,9 +275,9 @@ export function LeadCaptureModal() {
           </div>
 
           {/* ══════════════════════════════════════════════════════════════════
-              RIGHT SIDE: White Theme Transparent Glassy Form (~56% Width)
+              RIGHT SIDE: Translucent Glass Form Body (~56% Width)
              ══════════════════════════════════════════════════════════════════ */}
-          <div className="w-full md:w-[56%] flex flex-col justify-between p-6 sm:p-8 bg-white/70 backdrop-blur-2xl">
+          <div className="w-full md:w-[56%] flex flex-col justify-between p-6 sm:p-8 bg-slate-950/50 backdrop-blur-2xl">
             {/* Header */}
             <div>
               <div className="flex items-center justify-between mb-3">
@@ -285,38 +286,32 @@ export function LeadCaptureModal() {
                     className={cn(
                       "h-1 rounded-full transition-all duration-500",
                       step === 1
-                        ? "w-8 bg-gradient-to-r from-purple-600 to-pink-600 shadow-[0_0_10px_rgba(168,85,247,0.4)]"
-                        : "w-2 bg-slate-300",
+                        ? "w-8 bg-gradient-to-r from-purple-400 to-pink-400 shadow-[0_0_10px_rgba(192,38,211,0.6)]"
+                        : "w-2 bg-white/20",
                     )}
                   />
                   <div
                     className={cn(
                       "h-1 rounded-full transition-all duration-500",
                       step === 2
-                        ? "w-8 bg-gradient-to-r from-purple-600 to-pink-600 shadow-[0_0_10px_rgba(168,85,247,0.4)]"
-                        : "w-2 bg-slate-300",
+                        ? "w-8 bg-gradient-to-r from-purple-400 to-pink-400 shadow-[0_0_10px_rgba(192,38,211,0.6)]"
+                        : "w-2 bg-white/20",
                     )}
                   />
                 </div>
-                <span className="text-[10px] font-bold tracking-widest text-purple-700 uppercase">
+                <span className="text-[10px] font-bold tracking-widest text-purple-300 uppercase">
                   Step 0{step} / 02
                 </span>
               </div>
 
-              <DialogTitle className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 font-[family-name:var(--font-display)]">
+              <DialogTitle className="text-2xl sm:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-purple-200 font-[family-name:var(--font-display)]">
                 {step === 1 ? (
-                  <>
-                    Accelerate Your{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
-                      Brand Growth
-                    </span>{" "}
-                    🚀
-                  </>
+                  <>Accelerate Your Brand Growth 🚀</>
                 ) : (
                   <>Claim Your 1-on-1 Strategy Call</>
                 )}
               </DialogTitle>
-              <DialogDescription className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed font-medium">
+              <DialogDescription className="text-xs sm:text-sm text-zinc-300 mt-1.5 leading-relaxed font-medium">
                 {step === 1
                   ? "Tell us about your project to unlock a custom growth roadmap."
                   : "Pick a time that works best for your team below."}
@@ -327,7 +322,7 @@ export function LeadCaptureModal() {
             <div className="my-4 flex-1">
               <AnimatePresence mode="wait">
                 {step === 1 ? (
-                  /* ─── STEP 1: White Glass Form Inputs ─── */
+                  /* ─── STEP 1: Translucent Glass Inputs ─── */
                   <motion.div
                     key="step-1"
                     initial={{ opacity: 0, x: 20 }}
@@ -346,25 +341,25 @@ export function LeadCaptureModal() {
                         <div className="col-span-2 space-y-1">
                           <Label
                             htmlFor="modal-fullName"
-                            className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block"
+                            className="text-[11px] font-medium text-zinc-200 tracking-wide block"
                           >
                             Full Name
                           </Label>
                           <div className="relative flex items-center">
-                            <User className="absolute left-3.5 size-4 text-purple-600 pointer-events-none" />
+                            <User className="absolute left-3.5 size-4 text-purple-300/80 pointer-events-none" />
                             <Input
                               id="modal-fullName"
                               placeholder="e.g. Sarah Jenkins"
                               {...form.register("fullName")}
                               className={cn(
-                                "pl-10 pr-4 h-11 md:h-10 rounded-xl bg-white/80 backdrop-blur-md border border-slate-200 text-slate-900 text-xs sm:text-xs placeholder:text-slate-400 font-medium",
-                                "focus:border-purple-600 focus:bg-white focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] focus:ring-1 focus:ring-purple-600/30 transition-all duration-200",
-                                errors.fullName && "border-rose-500 focus:ring-rose-500/30",
+                                "pl-10 pr-4 h-11 md:h-10 rounded-xl bg-slate-950/60 backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs placeholder:text-zinc-400 font-medium",
+                                "focus:border-purple-400 focus:bg-slate-950/90 focus:shadow-[0_0_25px_rgba(168,85,247,0.4)] focus:ring-1 focus:ring-purple-400/50 transition-all duration-200",
+                                errors.fullName && "border-rose-400/80 focus:ring-rose-400/30",
                               )}
                             />
                           </div>
                           {errors.fullName && (
-                            <p className="text-[10px] text-rose-600 font-medium">
+                            <p className="text-[10px] text-rose-300 font-medium">
                               {errors.fullName.message}
                             </p>
                           )}
@@ -374,26 +369,26 @@ export function LeadCaptureModal() {
                         <div className="col-span-1 space-y-1">
                           <Label
                             htmlFor="modal-email"
-                            className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block truncate"
+                            className="text-[11px] font-medium text-zinc-200 tracking-wide block truncate"
                           >
                             Business Email
                           </Label>
                           <div className="relative flex items-center">
-                            <Mail className="absolute left-3.5 size-4 text-purple-600 pointer-events-none" />
+                            <Mail className="absolute left-3.5 size-4 text-purple-300/80 pointer-events-none" />
                             <Input
                               id="modal-email"
                               type="email"
                               placeholder="sarah@company.com"
                               {...form.register("email")}
                               className={cn(
-                                "pl-10 pr-4 h-11 md:h-10 rounded-xl bg-white/80 backdrop-blur-md border border-slate-200 text-slate-900 text-xs sm:text-xs placeholder:text-slate-400 font-medium",
-                                "focus:border-purple-600 focus:bg-white focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] focus:ring-1 focus:ring-purple-600/30 transition-all duration-200",
-                                errors.email && "border-rose-500 focus:ring-rose-500/30",
+                                "pl-10 pr-4 h-11 md:h-10 rounded-xl bg-slate-950/60 backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs placeholder:text-zinc-400 font-medium",
+                                "focus:border-purple-400 focus:bg-slate-950/90 focus:shadow-[0_0_25px_rgba(168,85,247,0.4)] focus:ring-1 focus:ring-purple-400/50 transition-all duration-200",
+                                errors.email && "border-rose-400/80 focus:ring-rose-400/30",
                               )}
                             />
                           </div>
                           {errors.email && (
-                            <p className="text-[10px] text-rose-600 font-medium">
+                            <p className="text-[10px] text-rose-300 font-medium">
                               {errors.email.message}
                             </p>
                           )}
@@ -403,26 +398,26 @@ export function LeadCaptureModal() {
                         <div className="col-span-1 space-y-1">
                           <Label
                             htmlFor="modal-phone"
-                            className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block truncate"
+                            className="text-[11px] font-medium text-zinc-200 tracking-wide block truncate"
                           >
                             WhatsApp / Phone
                           </Label>
                           <div className="relative flex items-center">
-                            <Phone className="absolute left-3.5 size-4 text-purple-600 pointer-events-none" />
+                            <Phone className="absolute left-3.5 size-4 text-purple-300/80 pointer-events-none" />
                             <Input
                               id="modal-phone"
                               type="tel"
                               placeholder="+1 (555) 000-0000"
                               {...form.register("phone")}
                               className={cn(
-                                "pl-10 pr-4 h-11 md:h-10 rounded-xl bg-white/80 backdrop-blur-md border border-slate-200 text-slate-900 text-xs sm:text-xs placeholder:text-slate-400 font-medium",
-                                "focus:border-purple-600 focus:bg-white focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] focus:ring-1 focus:ring-purple-600/30 transition-all duration-200",
-                                errors.phone && "border-rose-500 focus:ring-rose-500/30",
+                                "pl-10 pr-4 h-11 md:h-10 rounded-xl bg-slate-950/60 backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs placeholder:text-zinc-400 font-medium",
+                                "focus:border-purple-400 focus:bg-slate-950/90 focus:shadow-[0_0_25px_rgba(168,85,247,0.4)] focus:ring-1 focus:ring-purple-400/50 transition-all duration-200",
+                                errors.phone && "border-rose-400/80 focus:ring-rose-400/30",
                               )}
                             />
                           </div>
                           {errors.phone && (
-                            <p className="text-[10px] text-rose-600 font-medium">
+                            <p className="text-[10px] text-rose-300 font-medium">
                               {errors.phone.message}
                             </p>
                           )}
@@ -432,33 +427,33 @@ export function LeadCaptureModal() {
                         <div className="col-span-1 space-y-1">
                           <Label
                             htmlFor="modal-service"
-                            className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block truncate"
+                            className="text-[11px] font-medium text-zinc-200 tracking-wide block truncate"
                           >
                             Service Required
                           </Label>
                           <div className="relative flex items-center">
-                            <Sparkles className="absolute left-3.5 size-4 text-purple-600 pointer-events-none" />
+                            <Sparkles className="absolute left-3.5 size-4 text-purple-300/80 pointer-events-none" />
                             <select
                               id="modal-service"
                               {...form.register("service")}
                               className={cn(
-                                "w-full pl-10 pr-8 h-11 md:h-10 rounded-xl bg-white/80 backdrop-blur-md border border-slate-200 text-slate-900 text-xs sm:text-xs font-medium focus:border-purple-600 focus:bg-white focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer truncate",
-                                errors.service && "border-rose-500",
+                                "w-full pl-10 pr-8 h-11 md:h-10 rounded-xl bg-slate-950/80 backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs font-medium focus:border-purple-400 focus:bg-slate-950 focus:shadow-[0_0_25px_rgba(168,85,247,0.4)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer truncate",
+                                errors.service && "border-rose-400/80",
                               )}
                             >
-                              <option value="" disabled className="bg-white text-slate-400">
+                              <option value="" disabled className="bg-slate-950 text-zinc-400">
                                 Select service
                               </option>
                               {SERVICES_OPTIONS.map((opt) => (
-                                <option key={opt} value={opt} className="bg-white text-slate-900">
+                                <option key={opt} value={opt} className="bg-slate-950 text-white">
                                   {opt}
                                 </option>
                               ))}
                             </select>
-                            <ChevronDown className="absolute right-3 size-4 text-slate-400 pointer-events-none" />
+                            <ChevronDown className="absolute right-3 size-4 text-zinc-400 pointer-events-none" />
                           </div>
                           {errors.service && (
-                            <p className="text-[10px] text-rose-600 font-medium">
+                            <p className="text-[10px] text-rose-300 font-medium">
                               {errors.service.message}
                             </p>
                           )}
@@ -468,40 +463,40 @@ export function LeadCaptureModal() {
                         <div className="col-span-1 space-y-1">
                           <Label
                             htmlFor="modal-budget"
-                            className="text-[11px] font-bold uppercase tracking-wider text-slate-700 block truncate"
+                            className="text-[11px] font-medium text-zinc-200 tracking-wide block truncate"
                           >
                             Monthly Budget Range
                           </Label>
                           <div className="relative flex items-center">
-                            <DollarSign className="absolute left-3.5 size-4 text-purple-600 pointer-events-none" />
+                            <DollarSign className="absolute left-3.5 size-4 text-purple-300/80 pointer-events-none" />
                             <select
                               id="modal-budget"
                               {...form.register("budget")}
                               className={cn(
-                                "w-full pl-10 pr-8 h-11 md:h-10 rounded-xl bg-white/80 backdrop-blur-md border border-slate-200 text-slate-900 text-xs sm:text-xs font-medium focus:border-purple-600 focus:bg-white focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer truncate",
-                                errors.budget && "border-rose-500",
+                                "w-full pl-10 pr-8 h-11 md:h-10 rounded-xl bg-slate-950/80 backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs font-medium focus:border-purple-400 focus:bg-slate-950 focus:shadow-[0_0_25px_rgba(168,85,247,0.4)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer truncate",
+                                errors.budget && "border-rose-400/80",
                               )}
                             >
-                              <option value="" disabled className="bg-white text-slate-400">
+                              <option value="" disabled className="bg-slate-950 text-zinc-400">
                                 Select budget
                               </option>
                               {BUDGET_OPTIONS.map((opt) => (
-                                <option key={opt} value={opt} className="bg-white text-slate-900">
+                                <option key={opt} value={opt} className="bg-slate-950 text-white">
                                   {opt}
                                 </option>
                               ))}
                             </select>
-                            <ChevronDown className="absolute right-3 size-4 text-slate-400 pointer-events-none" />
+                            <ChevronDown className="absolute right-3 size-4 text-zinc-400 pointer-events-none" />
                           </div>
                           {errors.budget && (
-                            <p className="text-[10px] text-rose-600 font-medium">
+                            <p className="text-[10px] text-rose-300 font-medium">
                               {errors.budget.message}
                             </p>
                           )}
                         </div>
                       </div>
 
-                      {/* Row 4: Radiant Liquid Gradient CTA Button (col-span-2 / 100%) */}
+                      {/* Row 4: Navbar-Inspired Liquid Metal Gradient CTA Button */}
                       <div className="pt-2">
                         <motion.button
                           whileHover={{ scale: 1.015 }}
@@ -510,12 +505,13 @@ export function LeadCaptureModal() {
                           disabled={isSubmitting}
                           className={cn(
                             "group relative w-full h-12 rounded-xl font-bold text-xs sm:text-sm text-white cursor-pointer",
-                            "bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700",
-                            "border border-purple-400/30 shadow-[0_8px_30px_rgba(168,85,247,0.35)] hover:shadow-[0_12px_40px_rgba(168,85,247,0.5)]",
+                            "bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500",
+                            "border border-white/30 shadow-[0_0_35px_rgba(168,85,247,0.5)] hover:shadow-[0_0_60px_rgba(168,85,247,0.75)]",
                             "transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden",
                           )}
                         >
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/35 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+                          {/* Liquid Shimmer Flare */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
                           <span className="relative flex items-center justify-center gap-2">
                             {isSubmitting ? (
                               <>
@@ -543,14 +539,14 @@ export function LeadCaptureModal() {
                     transition={{ duration: 0.3 }}
                     className="space-y-3"
                   >
-                    <div className="flex items-center gap-2 rounded-xl bg-purple-50 border border-purple-200 p-3 text-purple-900 text-xs backdrop-blur-md shadow-sm font-medium">
-                      <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
+                    <div className="flex items-center gap-2 rounded-xl bg-purple-500/20 border border-purple-400/40 p-3 text-purple-200 text-xs backdrop-blur-md shadow-lg">
+                      <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
                       <p>
                         Your details were recorded! Pick a time for your 1-on-1 strategy call below.
                       </p>
                     </div>
 
-                    <div className="w-full rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-md">
+                    <div className="w-full rounded-2xl overflow-hidden border border-white/20 bg-slate-950/40 backdrop-blur-xl">
                       <iframe
                         src={CAL_EMBED_URL}
                         title="Book a strategy call"
@@ -566,11 +562,11 @@ export function LeadCaptureModal() {
             </div>
 
             {/* Footer Dismiss Link */}
-            <div className="pt-2 text-center border-t border-slate-200/80">
+            <div className="pt-2 text-center border-t border-white/15">
               <button
                 type="button"
                 onClick={handleSkip}
-                className="text-xs text-slate-500 hover:text-slate-900 font-medium transition-colors cursor-pointer"
+                className="text-xs text-zinc-400 hover:text-white font-medium transition-colors cursor-pointer"
               >
                 {step === 1 ? "I'll explore the site first" : "I'll book later, show me the site"}
               </button>
