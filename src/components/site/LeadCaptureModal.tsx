@@ -1,8 +1,7 @@
 /**
  * LeadCaptureModal — Clean 2-Column Split Layout Lead Capture Modal
- *
- * Left Side: Partner with Zynovax Quote Graphic Asset (/Lead popup image 2.png)
- * Right Side: Clean Vertical Single-Column Form (Name, Phone, Email, Service, Avg Budget)
+ * Left Side: Partner with Zynovax Quote Graphic Asset (/Lead popup image 2.png) + Social Media Icons at Bottom (Instagram, Facebook, LinkedIn, YouTube, WhatsApp)
+ * Right Side: Clean Vertical Single-Column Form (Name, Phone, Email, Service Required, Avg Budget)
  * On Submit: Saves lead details via Resend API (submitLead) and launches pre-filled Cal.com modal
  */
 
@@ -22,6 +21,11 @@ import {
   ChevronDown,
   CheckCircle2,
   Lock,
+  Instagram,
+  Facebook,
+  Linkedin,
+  Youtube,
+  MessageCircle,
 } from "lucide-react";
 
 import {
@@ -35,6 +39,7 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { useLeadModal } from "@/hooks/useLeadModal";
 import { submitLead } from "@/lib/api/lead.functions";
+import { SITE_CONFIG } from "@/lib/seo/seo-config";
 import { getCalApi } from "@calcom/embed-react";
 
 // ─── Form Schema ──────────────────────────────────────────────────────────────
@@ -64,6 +69,36 @@ const BUDGET_OPTIONS = [
   "$1k – $3k",
   "$3k – $5k",
   "$5k+",
+] as const;
+
+// ─── Social Media Links ───────────────────────────────────────────────────────
+
+const SOCIAL_LINKS = [
+  {
+    name: "Instagram",
+    icon: Instagram,
+    href: SITE_CONFIG.social.instagram || "https://instagram.com/zynovax",
+  },
+  {
+    name: "Facebook",
+    icon: Facebook,
+    href: SITE_CONFIG.social.facebook || "https://facebook.com/zynovax",
+  },
+  {
+    name: "LinkedIn",
+    icon: Linkedin,
+    href: SITE_CONFIG.social.linkedin || "https://linkedin.com/company/zynovax",
+  },
+  {
+    name: "YouTube",
+    icon: Youtube,
+    href: "https://youtube.com/@zynovax",
+  },
+  {
+    name: "WhatsApp",
+    icon: MessageCircle,
+    href: "https://wa.me/917338898638?text=Hi%20Zynovax%20team%2C%20I%27d%20like%20to%20discuss%20a%20potential%20project.",
+  },
 ] as const;
 
 // ─── Config ───────────────────────────────────────────────────────────────────
@@ -104,7 +139,7 @@ export function LeadCaptureModal() {
           email: data.email,
           services: [data.service],
           budget: data.budget,
-          source: "lead-modal-2col-clean",
+          source: "lead-modal-social-links",
           submittedAt: new Date().toISOString(),
         },
       });
@@ -154,9 +189,10 @@ export function LeadCaptureModal() {
       >
         <div className="relative flex flex-col md:flex-row w-full h-full min-h-[540px]">
           {/* ══════════════════════════════════════════════════════════════════
-              LEFT SIDE: Image Asset Showcase (Quote Graphic / object-cover center)
+              LEFT SIDE: Image Asset Showcase + Down Social Media Icons
              ══════════════════════════════════════════════════════════════════ */}
-          <div className="relative w-full md:w-1/2 bg-slate-100 flex items-center justify-center overflow-hidden min-h-[220px] md:min-h-[520px] border-b md:border-b-0 md:border-r border-slate-200">
+          <div className="relative w-full md:w-1/2 bg-slate-100 flex items-center justify-center overflow-hidden min-h-[260px] md:min-h-[520px] border-b md:border-b-0 md:border-r border-slate-200">
+            {/* Quote Graphic Image */}
             <img
               src="/Lead popup image 2.png"
               alt="Those who trust us are family to us. And we are always with them. - Zynovax"
@@ -165,6 +201,26 @@ export function LeadCaptureModal() {
                 (e.currentTarget as HTMLImageElement).src = "/lead-popup-image-2.png";
               }}
             />
+
+            {/* Bottom Dark Glass Overlay Pill with Social Media Icons */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-2 p-2 rounded-full bg-slate-950/80 border border-white/20 backdrop-blur-xl shadow-lg">
+              {SOCIAL_LINKS.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={social.name}
+                    aria-label={`Zynovax on ${social.name}`}
+                    className="p-2 rounded-full bg-white/10 hover:bg-purple-600 text-white border border-white/20 hover:border-white/40 shadow-sm backdrop-blur-md transition-all duration-200 cursor-pointer hover:scale-110 active:scale-95"
+                  >
+                    <Icon className="size-4" />
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
           {/* ══════════════════════════════════════════════════════════════════
