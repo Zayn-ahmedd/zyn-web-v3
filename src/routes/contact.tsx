@@ -1,17 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
-import { getCalApi } from "@calcom/embed-react";
-import { ArrowRight, Mail, MessageCircle, Calendar, MapPin, CheckCircle2 } from "lucide-react";
+import { useEffect } from "react";
+import Cal, { getCalApi } from "@calcom/embed-react";
+import { Mail, MessageCircle, Calendar, MapPin } from "lucide-react";
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
-import { Container, Eyebrow, SectionLabel } from "@/components/site/primitives";
-import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
+import { Container, Eyebrow } from "@/components/site/primitives";
 import { generatePageHead } from "@/lib/seo/metadata";
 import { localBusinessSchema, webPageSchema } from "@/lib/seo/schemas";
 import { JsonLd } from "@/lib/seo/JsonLd";
 import { Breadcrumbs } from "@/lib/seo/Breadcrumbs";
-import { trackContactFormSubmit, trackBookStrategyCall } from "@/lib/analytics/events";
-import { submitLead } from "@/lib/api/lead.functions";
 
 export const Route = createFileRoute("/contact")({
   head: () =>
@@ -25,16 +22,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 export function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    workEmail: "",
-    company: "",
-    revenue: "$1M – $10M ARR",
-    growthQuestion: "",
-  });
-
-  // Initialize Cal.com Embed API on component mount
+  // Initialize Cal.com Embed API & dark theme styling
   useEffect(() => {
     (async function () {
       try {
@@ -46,59 +34,10 @@ export function ContactPage() {
           layout: "month_view",
         });
       } catch (err) {
-        console.warn("[Cal.com Embed] Failed to initialize:", err);
+        console.warn("[Cal.com Embed] Initialization warning:", err);
       }
     })();
   }, []);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Track Analytics Events
-    trackContactFormSubmit("contact_strategy_call");
-    trackBookStrategyCall("contact_page");
-
-    // Trigger Cal.com Popup Modal Widget with Pre-filled Parameters
-    try {
-      const cal = await getCalApi({ namespace: "book-strategy-call" });
-      cal("modal", {
-        calLink: "zynovax/book-strategy-call",
-        config: {
-          name: formData.fullName,
-          email: formData.workEmail,
-          notes: `Company: ${formData.company || "N/A"} | Revenue: ${formData.revenue} | Focus: ${formData.growthQuestion || "N/A"}`,
-        },
-      });
-    } catch (err) {
-      console.warn("[Cal.com Modal] Failed to open modal widget:", err);
-    }
-
-    // Server-side Resend Email Notification Backup
-    try {
-      await submitLead({
-        data: {
-          fullName: formData.fullName,
-          email: formData.workEmail,
-          phone: "+91 7338898638",
-          services: [formData.growthQuestion || "Strategy Call"],
-          budget: formData.revenue,
-          source: "contact-page-form",
-          submittedAt: new Date().toISOString(),
-        },
-      });
-    } catch {
-      // Fail silently if email service warning occurs — Cal.com widget handles booking
-    }
-
-    setSubmitted(true);
-  };
 
   return (
     <main className="bg-white" id="main-content">
@@ -125,7 +64,8 @@ export function ContactPage() {
             ]}
             className="mb-8"
           />
-          <div className="grid lg:grid-cols-12 gap-12">
+          <div className="grid lg:grid-cols-12 gap-12 items-start">
+            {/* ── Left Column: Heading & Contact Info Cards ── */}
             <div className="lg:col-span-6">
               <Eyebrow>Start the conversation</Eyebrow>
               <h1 className="mt-7 text-4xl sm:text-5xl lg:text-[72px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink text-balance">
@@ -162,7 +102,7 @@ export function ContactPage() {
                   </a>
                 </div>
 
-                {/* WhatsApp Card (Updated to +91 7338898638) */}
+                {/* WhatsApp Card */}
                 <div className="rounded-2xl border border-border p-5 bg-white hover:border-ink/20 transition-colors">
                   <MessageCircle className="size-5 text-emerald-600" />
                   <div className="mt-3 text-sm font-medium text-ink">WhatsApp the Team</div>
@@ -188,120 +128,18 @@ export function ContactPage() {
               </div>
             </div>
 
-            {/* ── Form Column ── */}
+            {/* ── Right Column: Official Cal.com Inline React Embed ── */}
             <div className="lg:col-span-6">
-              <div className="rounded-[28px] border border-border bg-white shadow-elegant p-8 lg:p-10">
-                <SectionLabel no="·" label="Book strategy call" />
-                {submitted ? (
-                  <div className="mt-10 py-12 text-center space-y-4">
-                    <div className="size-14 rounded-full bg-emerald-500/10 border border-emerald-500/30 mx-auto flex items-center justify-center text-emerald-600">
-                      <CheckCircle2 className="size-7" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-ink">
-                      Strategy Call Booking Opened!
-                    </h3>
-                    <p className="text-sm text-ink-soft max-w-sm mx-auto leading-relaxed">
-                      Your form details have been pre-filled into our scheduling calendar widget. If the window did not open, click below to launch it manually.
-                    </p>
-                    <div className="pt-2">
-                      <button
-                        type="button"
-                        onClick={async () => {
-                          const cal = await getCalApi({ namespace: "book-strategy-call" });
-                          cal("modal", {
-                            calLink: "zynovax/book-strategy-call",
-                            config: {
-                              name: formData.fullName,
-                              email: formData.workEmail,
-                              notes: `Company: ${formData.company || "N/A"} | Revenue: ${formData.revenue} | Focus: ${formData.growthQuestion || "N/A"}`,
-                            },
-                          });
-                        }}
-                        className="inline-flex items-center gap-2 rounded-xl bg-ink text-white px-5 py-2.5 text-sm font-medium hover:bg-ink/90 transition-all cursor-pointer"
-                      >
-                        Open Calendar Widget
-                        <ArrowRight className="size-4" />
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <form onSubmit={handleFormSubmit} className="mt-8 space-y-5" id="contact-page-form">
-                    <Field label="Full name">
-                      <input
-                        required
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        className="input"
-                        placeholder="Jane Doe"
-                      />
-                    </Field>
-                    <Field label="Work email">
-                      <input
-                        required
-                        type="email"
-                        name="workEmail"
-                        value={formData.workEmail}
-                        onChange={handleChange}
-                        className="input"
-                        placeholder="jane@company.com"
-                      />
-                    </Field>
-                    <Field label="Company">
-                      <input
-                        required
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        className="input"
-                        placeholder="Acme Inc."
-                      />
-                    </Field>
-                    <Field label="Revenue range">
-                      <select
-                        name="revenue"
-                        value={formData.revenue}
-                        onChange={handleChange}
-                        className="input cursor-pointer"
-                      >
-                        <option>$1M – $10M ARR</option>
-                        <option>$10M – $50M ARR</option>
-                        <option>$50M – $200M ARR</option>
-                        <option>$200M+ ARR</option>
-                      </select>
-                    </Field>
-                    <Field label="What's the highest-leverage growth question on your mind?">
-                      <textarea
-                        required
-                        rows={4}
-                        name="growthQuestion"
-                        value={formData.growthQuestion}
-                        onChange={handleChange}
-                        className="input resize-none"
-                        placeholder="Visual identity, social media management, performance marketing, conversion optimization…"
-                      />
-                    </Field>
-                    {/* Full-width premium liquid metal submit button */}
-                    <div className="flex justify-center pt-2">
-                      <LiquidMetalButton
-                        label="Request strategy call"
-                        width={210}
-                        onClick={() => {
-                          const form = document.getElementById("contact-page-form") as HTMLFormElement;
-                          if (form && form.checkValidity()) {
-                            // Valid — trigger form submit event
-                            form.requestSubmit();
-                          } else if (form) {
-                            form.reportValidity();
-                          }
-                        }}
-                      />
-                    </div>
-                    <p className="text-xs text-ink-soft text-center">
-                      No commitment. No sales pitch. Just a real audit.
-                    </p>
-                  </form>
-                )}
+              <div className="rounded-[28px] border border-border bg-slate-950 shadow-elegant overflow-hidden p-2 sm:p-4 min-h-[660px] w-full flex flex-col">
+                <Cal
+                  namespace="book-strategy-call"
+                  calLink="zynovax/book-strategy-call"
+                  style={{ width: "100%", height: "100%", minHeight: "640px" }}
+                  config={{
+                    layout: "month_view",
+                    theme: "dark",
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -309,32 +147,6 @@ export function ContactPage() {
       </section>
 
       <SiteFooter />
-
-      <style>{`
-        .input {
-          width: 100%;
-          background: var(--surface);
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          padding: 12px 14px;
-          font-size: 14px;
-          color: var(--ink);
-          outline: none;
-          transition: border-color 0.2s, background 0.2s;
-        }
-        .input:focus { border-color: var(--ink); background: white; }
-      `}</style>
     </main>
-  );
-}
-
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <label className="block">
-      <span className="text-[11px] font-medium uppercase tracking-[0.16em] text-ink-soft">
-        {label}
-      </span>
-      <div className="mt-2">{children}</div>
-    </label>
   );
 }
