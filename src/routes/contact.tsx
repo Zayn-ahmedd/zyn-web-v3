@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
-import { getCalApi } from "@calcom/embed-react";
+import { useState } from "react";
 import {
   ArrowRight,
   Mail,
@@ -65,44 +64,14 @@ export function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // Initialize Cal.com Embed API on mount
-  useEffect(() => {
-    (async function () {
-      try {
-        const cal = await getCalApi({ namespace: "book-strategy-call" });
-        cal("ui", {
-          theme: "dark",
-          styles: { branding: { brandColor: "#000000" } },
-          hideEventTypeDetails: false,
-          layout: "month_view",
-        });
-      } catch (err) {
-        console.warn("[Cal.com Embed] Initialization warning:", err);
-      }
-    })();
-  }, []);
-
-  const launchCalModal = async (nameVal: string, phoneVal: string, emailVal: string, serviceVal: string, budgetVal: string) => {
+  const openCalNewTab = (nameVal: string, phoneVal: string, emailVal: string, serviceVal: string, budgetVal: string) => {
+    const calUrl = new URL("https://cal.com/zynovax/book-strategy-call");
+    calUrl.searchParams.append("name", nameVal);
+    calUrl.searchParams.append("email", emailVal);
     const notesStr = `WhatsApp: ${phoneVal} | Service: ${serviceVal} | Avg Budget: ${budgetVal}`;
+    calUrl.searchParams.append("notes", notesStr);
 
-    try {
-      const cal = await getCalApi({ namespace: "book-strategy-call" });
-      cal("modal", {
-        calLink: "zynovax/book-strategy-call",
-        config: {
-          name: nameVal,
-          email: emailVal,
-          notes: notesStr,
-        },
-      });
-    } catch (err) {
-      console.warn("[Cal.com Modal] Launching fallback URL:", err);
-      const calUrl = new URL("https://cal.com/zynovax/book-strategy-call");
-      calUrl.searchParams.append("name", nameVal);
-      calUrl.searchParams.append("email", emailVal);
-      calUrl.searchParams.append("notes", notesStr);
-      window.location.href = calUrl.toString();
-    }
+    window.open(calUrl.toString(), "_blank", "noopener,noreferrer");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -149,8 +118,8 @@ export function ContactPage() {
       setSubmitted(true);
     }
 
-    // 2. Open Cal.com Modal Widget Pre-filled with User Data
-    await launchCalModal(fullName, phone, email, service, budget);
+    // 2. Open Cal.com URL in a NEW TAB to reduce page load & speed up UI
+    openCalNewTab(fullName, phone, email, service, budget);
   };
 
   return (
@@ -269,16 +238,16 @@ export function ContactPage() {
                       Details Saved & Sent! 🚀
                     </h3>
                     <p className="text-sm text-slate-600 max-w-sm mx-auto leading-relaxed font-medium">
-                      We've dispatched your details to our team. Click below to launch your pre-filled Cal.com strategy call calendar.
+                      We've dispatched your details to our team. Opening your pre-filled Cal.com scheduling page in a new tab...
                     </p>
                     <div className="pt-3">
                       <button
                         type="button"
-                        onClick={() => launchCalModal(fullName, phone, email, service, budget)}
+                        onClick={() => openCalNewTab(fullName, phone, email, service, budget)}
                         className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 text-white px-7 py-3.5 text-sm font-semibold shadow-lg hover:shadow-purple-500/30 transition-all cursor-pointer"
                       >
                         <Sparkles className="size-4 text-purple-200 animate-pulse" />
-                        <span>Launch Cal.com Calendar</span>
+                        <span>Re-open Cal.com in New Tab</span>
                         <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </button>
                     </div>
