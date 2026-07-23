@@ -62,6 +62,7 @@ export const SITE_CONFIG = {
     linkedin: "https://www.linkedin.com/company/zynovax",
     instagram: "https://www.instagram.com/zynovax",
     facebook: "https://www.facebook.com/zynovax",
+    youtube: "https://www.youtube.com/@zynovax",
     twitter: "https://x.com/zynovax",
   },
 

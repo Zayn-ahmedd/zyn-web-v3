@@ -2,7 +2,8 @@ import { Link } from "@tanstack/react-router";
 import logo from "@/assets/zynovax-logo.png";
 import { Container } from "./primitives";
 import { useState, useEffect } from "react";
-import { Facebook, Instagram, Linkedin, ChevronDown, Mail } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube, ChevronDown, Mail } from "lucide-react";
+import { SITE_CONFIG } from "@/lib/seo/seo-config";
 
 // WhatsApp Premium Custom SVG Brand Icon
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -197,10 +198,10 @@ export function SiteFooter() {
         <div className="mt-14 pt-8 border-t border-border flex flex-col items-center text-center justify-center md:flex-row md:items-center md:justify-between md:text-left gap-6 text-xs text-ink-soft w-full">
           <div>© 2025-{new Date().getFullYear()} Zynovax. All rights reserved.</div>
 
-          {/* Social Profiles List (Instagram, Facebook, LinkedIn, WhatsApp Exclusively) */}
+          {/* Social Profiles List (Instagram, Facebook, LinkedIn, YouTube, WhatsApp) */}
           <div className="flex items-center justify-center md:justify-start gap-4">
             <a
-              href="https://instagram.com"
+              href={SITE_CONFIG.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:opacity-75 transition-opacity"
@@ -209,7 +210,7 @@ export function SiteFooter() {
               <Instagram className="size-4" />
             </a>
             <a
-              href="https://facebook.com"
+              href={SITE_CONFIG.social.facebook}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:opacity-75 transition-opacity"
@@ -218,13 +219,22 @@ export function SiteFooter() {
               <Facebook className="size-4" />
             </a>
             <a
-              href="https://www.linkedin.com/company/zynovax/"
+              href={SITE_CONFIG.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:opacity-75 transition-opacity"
               aria-label="LinkedIn"
             >
               <Linkedin className="size-4" />
+            </a>
+            <a
+              href={SITE_CONFIG.social.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-75 transition-opacity"
+              aria-label="YouTube"
+            >
+              <Youtube className="size-4" />
             </a>
             <a
               href="https://wa.me/917338898638"
