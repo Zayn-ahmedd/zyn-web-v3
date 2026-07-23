@@ -67,12 +67,12 @@ export function CookieConsent() {
 
   return (
     <div
-      className="fixed bottom-0 inset-x-0 z-[9999] p-4 md:p-6"
+      className="fixed bottom-0 inset-x-0 z-[9999] p-4 md:p-6 pointer-events-none"
       role="dialog"
       aria-label="Cookie consent"
       aria-modal="false"
     >
-      <div className="mx-auto max-w-2xl rounded-2xl bg-white border border-border shadow-elegant p-6">
+      <div className="pointer-events-auto mx-auto max-w-2xl rounded-2xl bg-white border border-border shadow-elegant p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
             <h3 className="text-base font-semibold text-ink">

@@ -20,6 +20,7 @@ import { initGA4 } from "@/lib/analytics/ga4";
 import { setDefaultConsent } from "@/lib/analytics/consent";
 import { useRouteTracking } from "@/hooks/useRouteTracking";
 import { CookieConsent } from "@/components/site/CookieConsent";
+import { LeadCaptureModal } from "@/components/site/LeadCaptureModal";
 
 function NotFoundComponent() {
   return (
@@ -186,6 +187,8 @@ function RootComponent() {
       <JsonLd data={[organizationSchema(), websiteSchema(), localBusinessSchema()]} />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      {/* 2-Step Lead Generation Modal — auto-triggers on timer / scroll */}
+      <LeadCaptureModal />
       {/* GDPR Cookie Consent Banner */}
       <CookieConsent />
     </QueryClientProvider>
