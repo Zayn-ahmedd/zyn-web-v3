@@ -1,12 +1,14 @@
 /**
- * LeadCaptureModal — Compact Dark Glass Lead & Booking Modal
- * Row 1: Full Name (100%)
- * Row 2: Email (50%) | Phone (50%)
- * Row 3: Service Dropdown (50%) | Budget Dropdown (50%)
- * Row 4: Continue to Book Strategy Call CTA
+ * LeadCaptureModal — Mobile-Optimized 2-Column Grid Lead Capture Modal
+ *
+ * 2-Column Mobile Grid:
+ * Row 1: Full Name (col-span-2 / 100%)
+ * Row 2: Business Email (col-span-1 / 50%) | WhatsApp / Phone (col-span-1 / 50%)
+ * Row 3: Service Required (col-span-1 / 50%) | Monthly Budget Range (col-span-1 / 50%)
+ * Row 4: Continue CTA Button (col-span-2 / 100%)
  */
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -165,7 +167,7 @@ export function LeadCaptureModal() {
           phone: data.phone,
           services: [data.service],
           budget: data.budget,
-          source: "lead-modal-dropdowns",
+          source: "lead-modal-2col-grid",
           submittedAt: new Date().toISOString(),
         },
       });
@@ -235,13 +237,14 @@ export function LeadCaptureModal() {
 
           {/* ══════════════════════════════════════════════════════════════════
               DESKTOP LEFT SIDE: Poster Presentation (4:5 Ratio, ~42% Desktop)
+              Scaled cleanly using object-cover and object-top
              ══════════════════════════════════════════════════════════════════ */}
           <div className="relative hidden md:flex md:w-[42%] flex-col justify-between p-6 overflow-hidden border-r border-white/15 bg-white/[0.02] backdrop-blur-md">
             <div className="absolute inset-0 z-0">
               <img
                 src="/Lead popup image 2.png"
                 alt="Partner with Zynovax"
-                className="w-full h-full object-cover object-center filter brightness-[1.03] contrast-[1.02]"
+                className="w-full h-full object-cover object-top filter brightness-[1.03] contrast-[1.02]"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = "/lead-popup-image-2.png";
                 }}
@@ -289,7 +292,7 @@ export function LeadCaptureModal() {
           {/* ══════════════════════════════════════════════════════════════════
               RIGHT SIDE / MAIN FORM CONTENT (~58% Desktop)
              ══════════════════════════════════════════════════════════════════ */}
-          <div className="w-full md:w-[58%] flex flex-col justify-between p-6 sm:p-8 bg-white/[0.03] backdrop-blur-2xl">
+          <div className="w-full md:w-[58%] flex flex-col justify-between p-5 sm:p-8 bg-white/[0.03] backdrop-blur-2xl">
             <div>
               <div className="flex items-center justify-between mb-2 sm:mb-3">
                 <div className="flex items-center gap-1.5">
@@ -329,10 +332,10 @@ export function LeadCaptureModal() {
               </DialogDescription>
             </div>
 
-            <div className="my-4 flex-1">
+            <div className="my-3 sm:my-4 flex-1">
               <AnimatePresence mode="wait" custom={direction}>
                 {step === 1 ? (
-                  /* ─── STEP 1: Compact Grid Layout Form with Dropdowns ─── */
+                  /* ─── STEP 1: 2-Column Mobile-Optimized Grid Layout Form ─── */
                   <motion.div
                     key="step-1"
                     custom={direction}
@@ -341,29 +344,30 @@ export function LeadCaptureModal() {
                     animate="center"
                     exit="exit"
                     transition={{ duration: 0.25, ease: "easeInOut" }}
-                    className="space-y-4"
+                    className="space-y-3.5"
                   >
                     <form
                       onSubmit={form.handleSubmit(onSubmit)}
                       className="space-y-3.5"
                     >
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {/* Row 1: Full Name (100% / sm:col-span-2) */}
-                        <div className="space-y-1 sm:col-span-2">
+                      {/* 2-Column Mobile Grid Container */}
+                      <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+                        {/* Row 1: Full Name (col-span-2 / 100% full width) */}
+                        <div className="col-span-2 space-y-1">
                           <Label
                             htmlFor="modal-fullName"
-                            className="text-[11px] font-medium text-zinc-200 tracking-wide"
+                            className="text-[10px] sm:text-[11px] font-medium text-zinc-200 tracking-wide block leading-none"
                           >
                             Full Name
                           </Label>
                           <div className="relative flex items-center">
-                            <User className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <User className="absolute left-2.5 sm:left-3.5 size-3.5 sm:size-4 text-purple-300/70 pointer-events-none" />
                             <Input
                               id="modal-fullName"
                               placeholder="e.g. Sarah Jenkins"
                               {...form.register("fullName")}
                               className={cn(
-                                "pl-10 h-11 md:h-9.5 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-base md:text-xs placeholder:text-zinc-400",
+                                "pl-8 sm:pl-10 pr-2.5 sm:pr-4 h-10 md:h-9.5 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs placeholder:text-zinc-400",
                                 "focus:border-purple-400 focus:bg-white/[0.09] focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:ring-1 focus:ring-purple-400/50 transition-all duration-200",
                                 errors.fullName && "border-rose-400/80 focus:ring-rose-400/30",
                               )}
@@ -376,23 +380,23 @@ export function LeadCaptureModal() {
                           )}
                         </div>
 
-                        {/* Row 2: Business Email (50%) */}
-                        <div className="space-y-1">
+                        {/* Row 2: Business Email (col-span-1 / 50%) */}
+                        <div className="col-span-1 space-y-1">
                           <Label
                             htmlFor="modal-email"
-                            className="text-[11px] font-medium text-zinc-200 tracking-wide"
+                            className="text-[10px] sm:text-[11px] font-medium text-zinc-200 tracking-wide block leading-none truncate"
                           >
                             Business Email
                           </Label>
                           <div className="relative flex items-center">
-                            <Mail className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <Mail className="absolute left-2.5 sm:left-3.5 size-3.5 sm:size-4 text-purple-300/70 pointer-events-none" />
                             <Input
                               id="modal-email"
                               type="email"
                               placeholder="sarah@company.com"
                               {...form.register("email")}
                               className={cn(
-                                "pl-10 h-11 md:h-9.5 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-base md:text-xs placeholder:text-zinc-400",
+                                "pl-8 sm:pl-10 pr-2.5 sm:pr-4 h-10 md:h-9.5 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs placeholder:text-zinc-400",
                                 "focus:border-purple-400 focus:bg-white/[0.09] focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:ring-1 focus:ring-purple-400/50 transition-all duration-200",
                                 errors.email && "border-rose-400/80 focus:ring-rose-400/30",
                               )}
@@ -405,23 +409,23 @@ export function LeadCaptureModal() {
                           )}
                         </div>
 
-                        {/* Row 2: WhatsApp / Phone (50%) */}
-                        <div className="space-y-1">
+                        {/* Row 2: WhatsApp / Phone (col-span-1 / 50%) */}
+                        <div className="col-span-1 space-y-1">
                           <Label
                             htmlFor="modal-phone"
-                            className="text-[11px] font-medium text-zinc-200 tracking-wide"
+                            className="text-[10px] sm:text-[11px] font-medium text-zinc-200 tracking-wide block leading-none truncate"
                           >
                             WhatsApp / Phone
                           </Label>
                           <div className="relative flex items-center">
-                            <Phone className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <Phone className="absolute left-2.5 sm:left-3.5 size-3.5 sm:size-4 text-purple-300/70 pointer-events-none" />
                             <Input
                               id="modal-phone"
                               type="tel"
                               placeholder="+1 (555) 000-0000"
                               {...form.register("phone")}
                               className={cn(
-                                "pl-10 h-11 md:h-9.5 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-base md:text-xs placeholder:text-zinc-400",
+                                "pl-8 sm:pl-10 pr-2.5 sm:pr-4 h-10 md:h-9.5 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs placeholder:text-zinc-400",
                                 "focus:border-purple-400 focus:bg-white/[0.09] focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:ring-1 focus:ring-purple-400/50 transition-all duration-200",
                                 errors.phone && "border-rose-400/80 focus:ring-rose-400/30",
                               )}
@@ -434,21 +438,21 @@ export function LeadCaptureModal() {
                           )}
                         </div>
 
-                        {/* Row 3: Service Required Dropdown (50%) */}
-                        <div className="space-y-1">
+                        {/* Row 3: Service Required Dropdown (col-span-1 / 50%) */}
+                        <div className="col-span-1 space-y-1">
                           <Label
                             htmlFor="modal-service"
-                            className="text-[11px] font-medium text-zinc-200 tracking-wide"
+                            className="text-[10px] sm:text-[11px] font-medium text-zinc-200 tracking-wide block leading-none truncate"
                           >
                             Service Required
                           </Label>
                           <div className="relative flex items-center">
-                            <Sparkles className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <Sparkles className="absolute left-2.5 sm:left-3.5 size-3.5 sm:size-4 text-purple-300/70 pointer-events-none" />
                             <select
                               id="modal-service"
                               {...form.register("service")}
                               className={cn(
-                                "w-full pl-10 pr-8 h-11 md:h-9.5 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/20 text-white text-base md:text-xs focus:border-purple-400 focus:bg-slate-900 focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer",
+                                "w-full pl-8 sm:pl-10 pr-6 sm:pr-8 h-10 md:h-9.5 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs focus:border-purple-400 focus:bg-slate-900 focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer truncate",
                                 errors.service && "border-rose-400/80",
                               )}
                             >
@@ -461,7 +465,7 @@ export function LeadCaptureModal() {
                                 </option>
                               ))}
                             </select>
-                            <ChevronDown className="absolute right-3 size-4 text-zinc-400 pointer-events-none" />
+                            <ChevronDown className="absolute right-2 sm:right-3 size-3.5 sm:size-4 text-zinc-400 pointer-events-none" />
                           </div>
                           {errors.service && (
                             <p className="text-[10px] text-rose-300 font-medium">
@@ -470,21 +474,21 @@ export function LeadCaptureModal() {
                           )}
                         </div>
 
-                        {/* Row 3: Monthly Budget Dropdown (50%) */}
-                        <div className="space-y-1">
+                        {/* Row 3: Monthly Budget Dropdown (col-span-1 / 50%) */}
+                        <div className="col-span-1 space-y-1">
                           <Label
                             htmlFor="modal-budget"
-                            className="text-[11px] font-medium text-zinc-200 tracking-wide"
+                            className="text-[10px] sm:text-[11px] font-medium text-zinc-200 tracking-wide block leading-none truncate"
                           >
                             Monthly Budget Range
                           </Label>
                           <div className="relative flex items-center">
-                            <DollarSign className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <DollarSign className="absolute left-2.5 sm:left-3.5 size-3.5 sm:size-4 text-purple-300/70 pointer-events-none" />
                             <select
                               id="modal-budget"
                               {...form.register("budget")}
                               className={cn(
-                                "w-full pl-10 pr-8 h-11 md:h-9.5 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/20 text-white text-base md:text-xs focus:border-purple-400 focus:bg-slate-900 focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer",
+                                "w-full pl-8 sm:pl-10 pr-6 sm:pr-8 h-10 md:h-9.5 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs focus:border-purple-400 focus:bg-slate-900 focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer truncate",
                                 errors.budget && "border-rose-400/80",
                               )}
                             >
@@ -497,7 +501,7 @@ export function LeadCaptureModal() {
                                 </option>
                               ))}
                             </select>
-                            <ChevronDown className="absolute right-3 size-4 text-zinc-400 pointer-events-none" />
+                            <ChevronDown className="absolute right-2 sm:right-3 size-3.5 sm:size-4 text-zinc-400 pointer-events-none" />
                           </div>
                           {errors.budget && (
                             <p className="text-[10px] text-rose-300 font-medium">
@@ -507,13 +511,13 @@ export function LeadCaptureModal() {
                         </div>
                       </div>
 
-                      {/* Row 4: Submit Liquid Glass CTA Button */}
+                      {/* Row 4: Submit Liquid Glass CTA Button (col-span-2 / 100%) */}
                       <div className="pt-2">
                         <button
                           type="submit"
                           disabled={isSubmitting}
                           className={cn(
-                            "group relative w-full h-12 md:h-10.5 rounded-xl font-semibold text-xs sm:text-sm text-white cursor-pointer",
+                            "group relative w-full h-11 md:h-10.5 rounded-xl font-semibold text-xs sm:text-sm text-white cursor-pointer",
                             "bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500",
                             "border border-white/30 shadow-[0_0_35px_rgba(168,85,247,0.4)] hover:shadow-[0_0_50px_rgba(168,85,247,0.6)]",
                             "active:scale-[0.985] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden",

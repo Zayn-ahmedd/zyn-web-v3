@@ -288,14 +288,15 @@ export function ContactPage() {
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {/* Row 1: Full Name (Full width / sm:col-span-2) */}
-                        <div className="space-y-1 sm:col-span-2">
-                          <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
+                      {/* 2-Column Mobile Grid Container */}
+                      <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+                        {/* Row 1: Full Name (col-span-2 / 100% full width) */}
+                        <div className="col-span-2 space-y-1">
+                          <label className="text-[10px] sm:text-[11px] font-medium text-zinc-200 tracking-wide block leading-none">
                             Full Name
                           </label>
                           <div className="relative flex items-center">
-                            <User className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <User className="absolute left-2.5 sm:left-3.5 size-3.5 sm:size-4 text-purple-300/70 pointer-events-none" />
                             <input
                               required
                               type="text"
@@ -303,20 +304,20 @@ export function ContactPage() {
                               onChange={(e) => setFullName(e.target.value)}
                               placeholder="e.g. Sarah Jenkins"
                               className={cn(
-                                "w-full pl-10 pr-4 h-11 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-sm placeholder:text-zinc-400",
+                                "w-full pl-8 sm:pl-10 pr-2.5 sm:pr-4 h-10 md:h-9.5 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs placeholder:text-zinc-400",
                                 "focus:border-purple-400 focus:bg-white/[0.09] focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200",
                               )}
                             />
                           </div>
                         </div>
 
-                        {/* Row 2: Business Email (50%) */}
-                        <div className="space-y-1">
-                          <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
+                        {/* Row 2: Business Email (col-span-1 / 50%) */}
+                        <div className="col-span-1 space-y-1">
+                          <label className="text-[10px] sm:text-[11px] font-medium text-zinc-200 tracking-wide block leading-none truncate">
                             Business Email
                           </label>
                           <div className="relative flex items-center">
-                            <Mail className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <Mail className="absolute left-2.5 sm:left-3.5 size-3.5 sm:size-4 text-purple-300/70 pointer-events-none" />
                             <input
                               required
                               type="email"
@@ -324,20 +325,20 @@ export function ContactPage() {
                               onChange={(e) => setEmail(e.target.value)}
                               placeholder="sarah@company.com"
                               className={cn(
-                                "w-full pl-10 pr-4 h-11 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-sm placeholder:text-zinc-400",
+                                "w-full pl-8 sm:pl-10 pr-2.5 sm:pr-4 h-10 md:h-9.5 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs placeholder:text-zinc-400",
                                 "focus:border-purple-400 focus:bg-white/[0.09] focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200",
                               )}
                             />
                           </div>
                         </div>
 
-                        {/* Row 2: WhatsApp / Phone (50%) */}
-                        <div className="space-y-1">
-                          <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
+                        {/* Row 2: WhatsApp / Phone (col-span-1 / 50%) */}
+                        <div className="col-span-1 space-y-1">
+                          <label className="text-[10px] sm:text-[11px] font-medium text-zinc-200 tracking-wide block leading-none truncate">
                             WhatsApp / Phone
                           </label>
                           <div className="relative flex items-center">
-                            <Phone className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <Phone className="absolute left-2.5 sm:left-3.5 size-3.5 sm:size-4 text-purple-300/70 pointer-events-none" />
                             <input
                               required
                               type="tel"
@@ -345,26 +346,26 @@ export function ContactPage() {
                               onChange={(e) => setPhone(e.target.value)}
                               placeholder="+1 (555) 000-0000"
                               className={cn(
-                                "w-full pl-10 pr-4 h-11 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-sm placeholder:text-zinc-400",
+                                "w-full pl-8 sm:pl-10 pr-2.5 sm:pr-4 h-10 md:h-9.5 rounded-xl bg-white/[0.05] backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs placeholder:text-zinc-400",
                                 "focus:border-purple-400 focus:bg-white/[0.09] focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200",
                               )}
                             />
                           </div>
                         </div>
 
-                        {/* Row 3: Service Required Dropdown (50%) */}
-                        <div className="space-y-1">
-                          <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
+                        {/* Row 3: Service Required Dropdown (col-span-1 / 50%) */}
+                        <div className="col-span-1 space-y-1">
+                          <label className="text-[10px] sm:text-[11px] font-medium text-zinc-200 tracking-wide block leading-none truncate">
                             Service Required
                           </label>
                           <div className="relative flex items-center">
-                            <Sparkles className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <Sparkles className="absolute left-2.5 sm:left-3.5 size-3.5 sm:size-4 text-purple-300/70 pointer-events-none" />
                             <select
                               required
                               value={service}
                               onChange={(e) => setService(e.target.value)}
                               className={cn(
-                                "w-full pl-10 pr-8 h-11 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/20 text-white text-sm focus:border-purple-400 focus:bg-slate-900 focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer",
+                                "w-full pl-8 sm:pl-10 pr-6 sm:pr-8 h-10 md:h-9.5 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs focus:border-purple-400 focus:bg-slate-900 focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer truncate",
                               )}
                             >
                               <option value="" disabled className="bg-slate-900 text-zinc-400">
@@ -376,23 +377,23 @@ export function ContactPage() {
                                 </option>
                               ))}
                             </select>
-                            <ChevronDown className="absolute right-3 size-4 text-zinc-400 pointer-events-none" />
+                            <ChevronDown className="absolute right-2 sm:right-3 size-3.5 sm:size-4 text-zinc-400 pointer-events-none" />
                           </div>
                         </div>
 
-                        {/* Row 3: Monthly Budget Dropdown (50%) */}
-                        <div className="space-y-1">
-                          <label className="text-[11px] font-medium text-zinc-200 tracking-wide block">
+                        {/* Row 3: Monthly Budget Dropdown (col-span-1 / 50%) */}
+                        <div className="col-span-1 space-y-1">
+                          <label className="text-[10px] sm:text-[11px] font-medium text-zinc-200 tracking-wide block leading-none truncate">
                             Monthly Budget Range
                           </label>
                           <div className="relative flex items-center">
-                            <DollarSign className="absolute left-3.5 size-4 text-purple-300/70 pointer-events-none" />
+                            <DollarSign className="absolute left-2.5 sm:left-3.5 size-3.5 sm:size-4 text-purple-300/70 pointer-events-none" />
                             <select
                               required
                               value={budget}
                               onChange={(e) => setBudget(e.target.value)}
                               className={cn(
-                                "w-full pl-10 pr-8 h-11 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/20 text-white text-sm focus:border-purple-400 focus:bg-slate-900 focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer",
+                                "w-full pl-8 sm:pl-10 pr-6 sm:pr-8 h-10 md:h-9.5 rounded-xl bg-slate-900/90 backdrop-blur-xl border border-white/20 text-white text-xs sm:text-xs focus:border-purple-400 focus:bg-slate-900 focus:shadow-[0_0_20px_rgba(168,85,247,0.35)] focus:outline-none transition-all duration-200 appearance-none cursor-pointer truncate",
                               )}
                             >
                               <option value="" disabled className="bg-slate-900 text-zinc-400">
@@ -404,7 +405,7 @@ export function ContactPage() {
                                 </option>
                               ))}
                             </select>
-                            <ChevronDown className="absolute right-3 size-4 text-zinc-400 pointer-events-none" />
+                            <ChevronDown className="absolute right-2 sm:right-3 size-3.5 sm:size-4 text-zinc-400 pointer-events-none" />
                           </div>
                         </div>
                       </div>
@@ -415,13 +416,13 @@ export function ContactPage() {
                         </p>
                       )}
 
-                      {/* Row 4: Continue CTA Button */}
+                      {/* Row 4: Continue CTA Button (col-span-2 / 100%) */}
                       <div className="pt-2">
                         <button
                           type="submit"
                           disabled={isSubmitting}
                           className={cn(
-                            "group relative w-full h-12 rounded-xl font-semibold text-sm text-white cursor-pointer",
+                            "group relative w-full h-11 md:h-10.5 rounded-xl font-semibold text-xs sm:text-sm text-white cursor-pointer",
                             "bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500",
                             "border border-white/30 shadow-[0_0_35px_rgba(168,85,247,0.4)] hover:shadow-[0_0_50px_rgba(168,85,247,0.6)]",
                             "active:scale-[0.985] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden",
@@ -437,7 +438,7 @@ export function ContactPage() {
                             ) : (
                               <>
                                 Continue to Book Strategy Call
-                                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+                                <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1.5" />
                               </>
                             )}
                           </span>
