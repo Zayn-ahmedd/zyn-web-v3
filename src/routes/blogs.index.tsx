@@ -31,6 +31,7 @@ type PostEntry = {
   d: string;
   read: string;
   slug?: string;
+  image?: string;
 };
 
 const placeholderPosts: PostEntry[] = [
@@ -86,6 +87,7 @@ const realPosts: PostEntry[] = blogPosts.map((p) => ({
   d: p.description,
   read: p.readTime,
   slug: p.slug,
+  image: p.image,
 }));
 
 const posts: PostEntry[] = [...realPosts, ...placeholderPosts];
@@ -165,9 +167,16 @@ function BlogsPage() {
               {rest.map((p) => {
                 const cardContent = (
                   <>
-                    <div className="aspect-[16/10] rounded-xl overflow-hidden bg-gradient-brand-soft border border-border/10 mb-7">
-                      {/* Visual image zoom placeholder */}
-                      <div className="size-full bg-gradient-brand-soft scale-100 group-hover:scale-105 transition-transform duration-700 ease-out" />
+                    <div className="aspect-[16/10] rounded-xl overflow-hidden bg-surface border border-border/20 mb-7">
+                      {p.image ? (
+                        <img
+                          src={p.image}
+                          alt={p.t}
+                          className="size-full object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                        />
+                      ) : (
+                        <div className="size-full bg-gradient-brand-soft scale-100 group-hover:scale-105 transition-transform duration-700 ease-out" />
+                      )}
                     </div>
                     <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-ink-soft">
                       <span>{p.cat}</span>
@@ -229,9 +238,16 @@ function FeaturedCardInner({ hero }: { hero: PostEntry }) {
         </div>
       </div>
       <div className="lg:col-span-5">
-        <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-brand-soft border border-border/10 shadow-elegant">
-          {/* Visual image zoom placeholder */}
-          <div className="size-full bg-gradient-brand scale-100 group-hover:scale-105 transition-transform duration-700 ease-out opacity-90" />
+        <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-surface border border-border/20 shadow-elegant relative">
+          {hero.image ? (
+            <img
+              src={hero.image}
+              alt={hero.t}
+              className="size-full object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+          ) : (
+            <div className="size-full bg-gradient-brand scale-100 group-hover:scale-105 transition-transform duration-700 ease-out opacity-90" />
+          )}
         </div>
       </div>
     </div>

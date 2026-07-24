@@ -11,6 +11,7 @@ export type BlogPost = {
   date: string;
   dateISO: string;
   readTime: string;
+  image?: string;
   metaTitle: string;
   metaDescription: string;
   ogTitle: string;
@@ -43,6 +44,7 @@ export const blogPosts: BlogPost[] = [
     date: "Jul 2026",
     dateISO: "2026-07-24",
     readTime: "18 min read",
+    image: "/be-the-brand.jpg",
     metaTitle: "Brand Strategy Framework for Startups | Zynovax",
     metaDescription: "Learn the exact brand strategy framework used by high-growth startups and D2C brands to build trust, command premium pricing, and generate measurable revenue.",
     ogTitle: "How to Build a Brand Strategy That Actually Drives Revenue",

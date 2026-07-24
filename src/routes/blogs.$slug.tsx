@@ -280,6 +280,17 @@ function BlogPostPage() {
                 {post.author}
               </div>
             </div>
+
+            {/* Featured Hero Image */}
+            {post.image && (
+              <div className="mt-10 aspect-[16/9] sm:aspect-[21/9] rounded-[24px] overflow-hidden border border-border/20 shadow-elegant">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="size-full object-cover object-center"
+                />
+              </div>
+            )}
           </Container>
         </section>
 
