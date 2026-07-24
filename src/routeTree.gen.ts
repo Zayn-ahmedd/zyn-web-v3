@@ -24,7 +24,9 @@ import { Route as BlogsRouteImport } from './routes/blogs'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as BlogsIndexRouteImport } from './routes/blogs.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as BlogsSlugRouteImport } from './routes/blogs.$slug'
 
 const WorksRoute = WorksRouteImport.update({
   id: '/works',
@@ -101,16 +103,26 @@ const ServicesIndexRoute = ServicesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ServicesRoute,
 } as any)
+const BlogsIndexRoute = BlogsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogsRoute,
+} as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => ServicesRoute,
 } as any)
+const BlogsSlugRoute = BlogsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blogs': typeof BlogsRoute
+  '/blogs': typeof BlogsRouteWithChildren
   '/contact': typeof ContactRoute
   '/growth-engine': typeof GrowthEngineRoute
   '/industry': typeof IndustryRoute
@@ -122,13 +134,14 @@ export interface FileRoutesByFullPath {
   '/success-stories': typeof SuccessStoriesRoute
   '/testimonials': typeof TestimonialsRoute
   '/works': typeof WorksRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/blogs/': typeof BlogsIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blogs': typeof BlogsRoute
   '/contact': typeof ContactRoute
   '/growth-engine': typeof GrowthEngineRoute
   '/industry': typeof IndustryRoute
@@ -139,14 +152,16 @@ export interface FileRoutesByTo {
   '/success-stories': typeof SuccessStoriesRoute
   '/testimonials': typeof TestimonialsRoute
   '/works': typeof WorksRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/blogs': typeof BlogsIndexRoute
   '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blogs': typeof BlogsRoute
+  '/blogs': typeof BlogsRouteWithChildren
   '/contact': typeof ContactRoute
   '/growth-engine': typeof GrowthEngineRoute
   '/industry': typeof IndustryRoute
@@ -158,7 +173,9 @@ export interface FileRoutesById {
   '/success-stories': typeof SuccessStoriesRoute
   '/testimonials': typeof TestimonialsRoute
   '/works': typeof WorksRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/blogs/': typeof BlogsIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
@@ -178,13 +195,14 @@ export interface FileRouteTypes {
     | '/success-stories'
     | '/testimonials'
     | '/works'
+    | '/blogs/$slug'
     | '/services/$slug'
+    | '/blogs/'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/blogs'
     | '/contact'
     | '/growth-engine'
     | '/industry'
@@ -195,7 +213,9 @@ export interface FileRouteTypes {
     | '/success-stories'
     | '/testimonials'
     | '/works'
+    | '/blogs/$slug'
     | '/services/$slug'
+    | '/blogs'
     | '/services'
   id:
     | '__root__'
@@ -213,14 +233,16 @@ export interface FileRouteTypes {
     | '/success-stories'
     | '/testimonials'
     | '/works'
+    | '/blogs/$slug'
     | '/services/$slug'
+    | '/blogs/'
     | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  BlogsRoute: typeof BlogsRoute
+  BlogsRoute: typeof BlogsRouteWithChildren
   ContactRoute: typeof ContactRoute
   GrowthEngineRoute: typeof GrowthEngineRoute
   IndustryRoute: typeof IndustryRoute
@@ -341,6 +363,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesIndexRouteImport
       parentRoute: typeof ServicesRoute
     }
+    '/blogs/': {
+      id: '/blogs/'
+      path: '/'
+      fullPath: '/blogs/'
+      preLoaderRoute: typeof BlogsIndexRouteImport
+      parentRoute: typeof BlogsRoute
+    }
     '/services/$slug': {
       id: '/services/$slug'
       path: '/$slug'
@@ -348,8 +377,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof ServicesRoute
     }
+    '/blogs/$slug': {
+      id: '/blogs/$slug'
+      path: '/$slug'
+      fullPath: '/blogs/$slug'
+      preLoaderRoute: typeof BlogsSlugRouteImport
+      parentRoute: typeof BlogsRoute
+    }
   }
 }
+
+interface BlogsRouteChildren {
+  BlogsSlugRoute: typeof BlogsSlugRoute
+  BlogsIndexRoute: typeof BlogsIndexRoute
+}
+
+const BlogsRouteChildren: BlogsRouteChildren = {
+  BlogsSlugRoute: BlogsSlugRoute,
+  BlogsIndexRoute: BlogsIndexRoute,
+}
+
+const BlogsRouteWithChildren = BlogsRoute._addFileChildren(BlogsRouteChildren)
 
 interface ServicesRouteChildren {
   ServicesSlugRoute: typeof ServicesSlugRoute
@@ -368,7 +416,7 @@ const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  BlogsRoute: BlogsRoute,
+  BlogsRoute: BlogsRouteWithChildren,
   ContactRoute: ContactRoute,
   GrowthEngineRoute: GrowthEngineRoute,
   IndustryRoute: IndustryRoute,

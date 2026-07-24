@@ -69,8 +69,16 @@
   <!-- Blogs -->
   <url>
     <loc>https://www.zynovax.in/blogs</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-24</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog: Brand Strategy Framework -->
+  <url>
+    <loc>https://www.zynovax.in/blogs/brand-strategy-framework-startups-growing-businesses</loc>
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
